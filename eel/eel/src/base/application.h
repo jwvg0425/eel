@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <Windows.h>
+#include <string>
 #include "macro.h"
 
 NS_EEL_BEGIN
@@ -17,10 +19,16 @@ public:
 
 	int Run();
 
-protected:
-	bool MakeWindow(WCHAR* title, int width, int height);
+	bool Init(std::wstring title, int width, int height);
 
 private:
+	bool MakeWindow(std::wstring title, int width, int height);
+
+	READ_ONLY(std::wstring, Title);
+
+	READ_ONLY(HWND, WindowHandle);
+	READ_ONLY(HINSTANCE, InstanceHandle);
+
 	static Application* m_Instance;
 };
 
