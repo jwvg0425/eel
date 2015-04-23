@@ -25,7 +25,6 @@ private:
 	bool MakeWindow(std::wstring title, int width, int height);
 
 	READ_ONLY(std::wstring, Title);
-
 	READ_ONLY(HWND, WindowHandle);
 	READ_ONLY(HINSTANCE, InstanceHandle);
 
