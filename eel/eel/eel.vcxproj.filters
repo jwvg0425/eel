@@ -9,9 +9,12 @@
     <ClInclude Include="src\base\director.h" />
     <ClInclude Include="src\utility\singleton.h" />
     <ClInclude Include="src\eel.h" />
+    <ClInclude Include="src\utility\makeCreate.h" />
+    <ClInclude Include="src\component\object.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
+    <ClCompile Include="src\component\object.cpp" />
   </ItemGroup>
 </Project>
