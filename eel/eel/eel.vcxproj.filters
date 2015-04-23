@@ -11,6 +11,7 @@
     <ClInclude Include="src\eel.h" />
     <ClInclude Include="src\utility\makeCreate.h" />
     <ClInclude Include="src\component\object.h" />
+    <ClInclude Include="src\utility\Clonable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />

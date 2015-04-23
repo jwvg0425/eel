@@ -81,6 +81,7 @@
     <ClInclude Include="src\base\macro.h" />
     <ClInclude Include="src\component\object.h" />
     <ClInclude Include="src\eel.h" />
+    <ClInclude Include="src\utility\Clonable.h" />
     <ClInclude Include="src\utility\makeCreate.h" />
     <ClInclude Include="src\utility\singleton.h" />
   </ItemGroup>
