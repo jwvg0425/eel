@@ -16,6 +16,11 @@ public:
 
 		return ptr;
 	}
+
+	MakeCreate() = default;
+	~MakeCreate() = default;
+	MakeCreate(MakeCreate& rhs) = default;
+	MakeCreate& operator=(MakeCreate& rhs) = default;
 };
 
 NS_EEL_END
