@@ -10,12 +10,14 @@
     <ClInclude Include="src\utility\singleton.h" />
     <ClInclude Include="src\eel.h" />
     <ClInclude Include="src\utility\makeCreate.h" />
-    <ClInclude Include="src\component\object.h" />
     <ClInclude Include="src\utility\Clonable.h" />
+    <ClInclude Include="src\component\component.h" />
+    <ClInclude Include="src\base\object.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
-    <ClCompile Include="src\component\object.cpp" />
+    <ClCompile Include="src\component\component.cpp" />
+    <ClCompile Include="src\base\object.cpp" />
   </ItemGroup>
 </Project>
