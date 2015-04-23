@@ -85,7 +85,6 @@
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
-    <ClCompile Include="src\utility\singleton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

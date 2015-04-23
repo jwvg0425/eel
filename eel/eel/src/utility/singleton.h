@@ -22,6 +22,12 @@ public:
 		SAFE_DELETE(m_Instance);
 	}
 
+	Singleton() = default;
+	~Singleton() = default;
+
+	Singleton(Singleton& rhs) = delete;
+	Singleton& operator=(Singleton& rhs) = delete;
+
 private:
 	static T* m_Instance;
 };

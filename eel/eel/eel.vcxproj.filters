@@ -13,6 +13,5 @@
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
-    <ClCompile Include="src\utility\singleton.cpp" />
   </ItemGroup>
 </Project>
