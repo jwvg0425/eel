@@ -1,6 +1,7 @@
 ﻿#include <Windows.h>
 
-#include "Application.h"
+#include "application.h"
+#include "director.h"
 
 USING_NS_EEL;
 
@@ -48,11 +49,11 @@ int eel::Application::Run()
 		}
 		else
 		{
-			//Director::getInstance()->gameLoop();
+			Director::GetInstance()->GameLoop();
 		}
 	}
 
-	//Director::releaseInstance();
+	Director::ReleaseInstance();
 
 	return 0;
 }

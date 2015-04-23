@@ -11,7 +11,7 @@ public:
 
 	static Application* GetInstance();
 
-	//be careful. 
+	//be careful. DON'T override unless you know what you are doing.
 	virtual LRESULT CALLBACK WndProc
 		(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
