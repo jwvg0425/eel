@@ -57,3 +57,8 @@ int eel::Application::Run()
 
 	return 0;
 }
+
+bool eel::Application::MakeWindow(WCHAR* title, int width, int height)
+{
+	return true;
+}

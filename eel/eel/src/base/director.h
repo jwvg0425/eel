@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <Windows.h>
 #include "macro.h"
 #include "utility/singleton.h"
 
@@ -12,6 +13,9 @@ public:
 private:
 	Director();
 	~Director();
+
+	READ_ONLY(HANDLE, WindowHandle);
+	READ_ONLY(HINSTANCE, InstanceHandle);
 
 	friend class Singleton<Director>;
 };

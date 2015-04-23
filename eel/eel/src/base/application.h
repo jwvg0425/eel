@@ -17,6 +17,9 @@ public:
 
 	int Run();
 
+protected:
+	bool MakeWindow(WCHAR* title, int width, int height);
+
 private:
 	static Application* m_Instance;
 };

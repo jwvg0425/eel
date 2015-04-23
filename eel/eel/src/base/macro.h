@@ -45,3 +45,37 @@ if (PTR != nullptr)				\
 	PTR = nullptr;				\
 	}							\
 }
+
+#define GETTER(type, val, func)\
+type Get ## func ## () { return val; }
+
+#define SETTER(type, val, func)\
+void Set ## func ## (type arg) { val = arg; }
+
+//must placed in 'private' area.
+//make getter, setter function and member variable automatically.
+//member variable name is m_(name)  >> (name) is PROPERTY's second parameter.
+#define PROPERTY(type, name)\
+public:\
+	GETTER(type,m_ ## name, name)\
+	SETTER(type,m_ ## name, name)\
+private:\
+	type m_ ## name;
+
+//must placed in 'private' area.
+//make getter function and member variable automatically.
+//member variable name is m_(name) >> (name) is PROPERTY's second parameter.
+#define READ_ONLY(type, name)\
+public:\
+	GETTER(type, m_ ## name, name)\
+private:\
+	type m_ ## name;
+
+//must placed in 'private' area.
+//make setter function and member variable automatically.
+//member variable name is m_(name) >> (name) is PROPERTY's second parameter.
+#define WRITE_ONLY(type, name)\
+public:\
+	SETTER(type, m_ ## name, name)\
+private:\
+	type m_ ## name;
