@@ -79,9 +79,12 @@
     <ClInclude Include="src\base\application.h" />
     <ClInclude Include="src\base\director.h" />
     <ClInclude Include="src\base\macro.h" />
+    <ClInclude Include="src\base\renderer.h" />
     <ClInclude Include="src\component\component.h" />
     <ClInclude Include="src\base\object.h" />
     <ClInclude Include="src\eel.h" />
+    <ClInclude Include="src\math\matrix.h" />
+    <ClInclude Include="src\math\vector.h" />
     <ClInclude Include="src\utility\Clonable.h" />
     <ClInclude Include="src\utility\makeCreate.h" />
     <ClInclude Include="src\utility\singleton.h" />
@@ -89,8 +92,11 @@
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
+    <ClCompile Include="src\base\renderer.cpp" />
     <ClCompile Include="src\component\component.cpp" />
     <ClCompile Include="src\base\object.cpp" />
+    <ClCompile Include="src\math\matrix.cpp" />
+    <ClCompile Include="src\math\vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

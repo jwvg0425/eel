@@ -13,11 +13,17 @@
     <ClInclude Include="src\utility\Clonable.h" />
     <ClInclude Include="src\component\component.h" />
     <ClInclude Include="src\base\object.h" />
+    <ClInclude Include="src\math\vector.h" />
+    <ClInclude Include="src\math\matrix.h" />
+    <ClInclude Include="src\base\renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\application.cpp" />
     <ClCompile Include="src\base\director.cpp" />
     <ClCompile Include="src\component\component.cpp" />
     <ClCompile Include="src\base\object.cpp" />
+    <ClCompile Include="src\math\vector.cpp" />
+    <ClCompile Include="src\math\matrix.cpp" />
+    <ClCompile Include="src\base\renderer.cpp" />
   </ItemGroup>
 </Project>
