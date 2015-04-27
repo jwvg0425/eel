@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\base\application.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\director.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\object.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\renderer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\component\component.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utility\log.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\base\application.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\director.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\macro.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\object.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\renderer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\component.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\Clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\log.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\makeCreate.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\singleton.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\eel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="base">
+      <UniqueIdentifier>{0bac664f-ac8f-4fe0-bafe-cc8377bc5720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{b73462d9-1876-4114-a27c-697f2f5e5411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{30ccdd3c-0b44-4978-8ffb-0f971f642a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{be667cca-c8af-4bef-80d3-a6067543d4f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
