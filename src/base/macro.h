@@ -1,5 +1,8 @@
 ﻿#pragma once
+#include "d3dx11Effect.h"
+#include <dxerr.h>
 #include <memory>
+#include <array>
 
 //name space
 #define NS_EEL_BEGIN namespace eel{
@@ -115,3 +118,6 @@ using UPTR = std::unique_ptr<T>;
 
 template<typename T>
 using WPTR = std::weak_ptr<T>;
+
+template<typename T, int N>
+using ARRAY = std::array<T, N>;

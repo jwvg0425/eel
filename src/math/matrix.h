@@ -8,8 +8,12 @@ NS_EEL_BEGIN
 //XMMATRIX series's proxy class.
 class Matrix
 {
+public:
+	Matrix();
+	~Matrix();
+
 private:
-	XMFLOAT4X4 m_Value;
+	PROPERTY(XMFLOAT4X4, Value);
 };
 
 NS_EEL_END

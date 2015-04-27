@@ -1,11 +1,12 @@
 ﻿#pragma once
 #include <Windows.h>
 #include <string>
-#include "macro.h"
+#include "base/macro.h"
+#include "base/object.h"
 
 NS_EEL_BEGIN
 
-class Application
+class Application : public Object
 {
 public:
 	Application();
@@ -24,11 +25,14 @@ public:
 private:
 	bool MakeWindow(std::wstring title, int width, int height);
 
-	READ_ONLY(std::wstring, Title);
+	READ_ONLY_REF(std::wstring, Title);
 	READ_ONLY(HWND, WindowHandle);
 	READ_ONLY(HINSTANCE, InstanceHandle);
 
 	static Application* m_Instance;
+	
+	READ_ONLY(float, Width);
+	READ_ONLY(float, Height);
 };
 
 NS_EEL_END

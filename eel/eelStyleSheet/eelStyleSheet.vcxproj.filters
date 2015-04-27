@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="stylesheet">
+      <UniqueIdentifier>{af4359c9-0fa4-4bda-a617-d28ec8e61337}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

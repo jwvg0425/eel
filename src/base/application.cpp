@@ -53,14 +53,14 @@ int eel::Application::Run()
 		}
 	}
 
-	Director::ReleaseInstance();
-
 	return 0;
 }
 
 bool eel::Application::MakeWindow(std::wstring title, int width, int height)
 {
 	m_Title = title;
+	m_Width = static_cast<float>(width);
+	m_Height = static_cast<float>(height);
 
 	WNDCLASS WndClass;
 
