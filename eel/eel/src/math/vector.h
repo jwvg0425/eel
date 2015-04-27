@@ -10,6 +10,15 @@ NS_EEL_BEGIN
 class Vector
 {
 public:
+	Vector();
+	Vector(float x, float y, float z, float w);
+	Vector(XMFLOAT4 value);
+	Vector(XMVECTOR value);
+
+	operator XMFLOAT4();
+	operator XMVECTOR();
+
+	float	Dot(CXMVECTOR rhs);
 
 private:
 	XMFLOAT4 m_Value;

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "base/object.h"
+#include "math/vector.h"
 
 NS_EEL_BEGIN
 
@@ -33,6 +34,8 @@ private:
 	//identifier
 	std::string m_Name = "";
 	std::size_t m_NameHash = 0; // speed up 
+
+	Vector		m_Position;
 };
 
 NS_EEL_END
