@@ -98,6 +98,7 @@
     <ClInclude Include="..\..\src\math\matrix.h" />
     <ClInclude Include="..\..\src\math\vector.h" />
     <ClInclude Include="..\..\src\utility\Clonable.h" />
+    <ClInclude Include="..\..\src\utility\compare.h" />
     <ClInclude Include="..\..\src\utility\log.h" />
     <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />

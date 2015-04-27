@@ -54,9 +54,6 @@
     <ClInclude Include="..\..\src\math\vector.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\Clonable.h">
-      <Filter>utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\utility\log.h">
       <Filter>utility</Filter>
     </ClInclude>
@@ -67,6 +64,12 @@
       <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\eel.h" />
+    <ClInclude Include="..\..\src\utility\Clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\compare.h">
+      <Filter>utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
