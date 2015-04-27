@@ -6,4 +6,8 @@
 
 ## Main Features
 
+### eelCore
+
+### eelStylesheet
+
 ## Contributing to the Project
