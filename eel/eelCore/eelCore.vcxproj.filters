@@ -70,6 +70,9 @@
     <ClInclude Include="..\..\src\utility\compare.h">
       <Filter>utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\debug\debug.h">
+      <Filter>debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -83,6 +86,9 @@
     </Filter>
     <Filter Include="utility">
       <UniqueIdentifier>{be667cca-c8af-4bef-80d3-a6067543d4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{6e817eab-41d6-4897-9846-16bb94529346}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

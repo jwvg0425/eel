@@ -1,4 +1,7 @@
-﻿#include "base/macro.h"
+﻿#pragma once
+#include <Windows.h>
+#include "base/macro.h"
+
 
 NS_EEL_BEGIN
 

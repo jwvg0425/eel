@@ -1,5 +1,6 @@
 ﻿#include "renderer.h"
 #include "base/application.h"
+#include "debug/debug.h"
 
 USING_NS_EEL;
 
