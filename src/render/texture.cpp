@@ -41,6 +41,12 @@ eel::Texture::Texture(float width, float height)
 		CreateTexture2D(&textureDesc, 0, &m_Texture));
 }
 
+eel::Texture::Texture(ID3D11Texture2D* texture)
+: m_Texture(texture)
+{
+
+}
+
 eel::Texture::~Texture()
 {
 	SAFE_RELEASE(m_Texture);
