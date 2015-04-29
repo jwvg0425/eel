@@ -1,6 +1,7 @@
 ﻿#include "renderer.h"
 #include "base/application.h"
 #include "debug/debug.h"
+#include "component/scene.h"
 
 USING_NS_EEL;
 
@@ -193,7 +194,7 @@ void eel::Renderer::InitRenderTarget()
 	m_D3DImmediateContext->RSSetViewports(1, &m_ScreenViewport);
 }
 
-void eel::Renderer::Render()
+void eel::Renderer::Render(SPTR<Scene> scene)
 {
 	HR(m_SwapChain->Present(0, 0));
 }
@@ -215,4 +216,14 @@ void eel::Renderer::BeginFrame()
 void eel::Renderer::Update(float dTime)
 {
 
+}
+
+ID3D11Device* eel::Renderer::GetDevice() const
+{
+	return m_D3DDevice;
+}
+
+ID3D11DeviceContext* eel::Renderer::GetContext() const
+{
+	return m_D3DImmediateContext;
 }
