@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "base/macro.h"
 #include "utility/singleton.h"
-#include "base/object.h"
+#include "component/scene.h"
 
 NS_EEL_BEGIN
 
@@ -14,6 +14,7 @@ public:
 	void GameLoop();
 
 private:
+	SPTR<Scene> m_RunningScene = nullptr;
 };
 
 NS_EEL_END
