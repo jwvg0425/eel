@@ -124,10 +124,10 @@ void eel::Renderer::InitScreenRenderTarget()
 	_ASSERT(m_D3DDevice);
 	_ASSERT(m_SwapChain);
 
-	//오래된 뷰, 깊이 스텐실 버퍼 제거
+	//remove old render target
 	m_ScreenRenderTarget = nullptr;
 
-	//스왑 체인 크기 변경 후 렌더 타겟 뷰 재생성
+	//cbange swap chain size
 
 	auto width = Application::GetInstance()->GetWidth();
 	auto height = Application::GetInstance()->GetHeight();
@@ -137,7 +137,7 @@ void eel::Renderer::InitScreenRenderTarget()
 	HR(m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer)));
 
 
-	// 깊이, 스텐실 버퍼 다시 만들기
+	// recreate render target 
 	m_ScreenRenderTarget = 
 		RenderTarget::Create(Texture::Create(backBuffer),
 		Texture::Create(width, height), width, height);

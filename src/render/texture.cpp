@@ -19,7 +19,7 @@ eel::Texture::Texture(float width, float height)
 	textureDesc.ArraySize = 1;
 	textureDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
-	//4x MSAA를 쓰나 안쓰나 검사
+	//4x MSAA check
 	if (Renderer::GetInstance()->GetIsEnable4xMsaa())
 	{
 		textureDesc.SampleDesc.Count = 4;

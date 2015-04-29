@@ -18,7 +18,7 @@ m_DepthStencilBuffer(std::move(depthStencilBuffer))
 	HR(Renderer::GetInstance()->GetDevice()
 		->CreateDepthStencilView(*m_DepthStencilBuffer, 0, &m_DepthStencil));
 
-	//뷰포트 변환 설정
+	//set viewport
 
 	m_Viewport.TopLeftX = topLeftX;
 	m_Viewport.TopLeftY = topLeftY;
@@ -47,7 +47,7 @@ void eel::RenderTarget::BeginFrame()
 		ClearDepthStencilView(m_DepthStencil,
 		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	//렌더 타겟 뷰와 깊이 스텐실 뷰를 파이프라인에서 묶음
+	//bind render target & depthstencil to pipeline
 
 	Renderer::GetInstance()->GetContext()
 		->OMSetRenderTargets(1, &m_View, m_DepthStencil);
