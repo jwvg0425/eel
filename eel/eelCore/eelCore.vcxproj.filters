@@ -28,6 +28,12 @@
     <ClCompile Include="..\..\src\utility\log.cpp">
       <Filter>utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\renderStates.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\component\scene.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h">
@@ -73,6 +79,12 @@
     <ClInclude Include="..\..\src\debug\debug.h">
       <Filter>debug</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\render\renderStates.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\scene.h">
+      <Filter>component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -89,6 +101,12 @@
     </Filter>
     <Filter Include="debug">
       <UniqueIdentifier>{6e817eab-41d6-4897-9846-16bb94529346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{bdd16116-6f7d-4597-b336-f10a9fbb51ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\shader">
+      <UniqueIdentifier>{94092a8b-428a-4a89-bd27-3a60754c6eb0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
