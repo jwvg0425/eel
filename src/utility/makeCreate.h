@@ -10,9 +10,9 @@ class MakeCreate
 {
 public:
 	template<typename... Args>
-	static SPTR<T> Create(Args&&... args)
+	static UPTR<T> Create(Args&&... args)
 	{
-		auto ptr = std::make_shared<T>(std::forward<Args>(args)...);
+		auto ptr = std::make_unique<T>(std::forward<Args>(args)...);
 
 		return ptr;
 	}
