@@ -3,6 +3,7 @@
 #include "component/scene.h"
 #include "math/vector.h"
 #include "utility/singleton.h"
+#include "render/renderTarget.h"
 
 NS_EEL_BEGIN
 
@@ -16,24 +17,19 @@ public:
 	void Render(SPTR<Scene> scene);
 	void Update(float dTime);
 
-	void InitRenderTarget();
+	void InitScreenRenderTarget();
+	void SetScreenBackgroundColor(Color color);
 
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;
 
 private:
-	void BeginFrame();
-
-	PROPERTY_REF(Color, BackgroundColor);
 
 	ID3D11Device* m_D3DDevice = nullptr;
 	ID3D11DeviceContext* m_D3DImmediateContext = nullptr;
 
 	IDXGISwapChain* m_SwapChain = nullptr;
-	ID3D11Texture2D* m_DepthStencilBuffer = nullptr;
-	ID3D11RenderTargetView* m_RenderTargetView = nullptr;
-	ID3D11DepthStencilView* m_DepthStencilView = nullptr;
-	D3D11_VIEWPORT m_ScreenViewport;
+	UPTR<RenderTarget> m_ScreenRenderTarget = nullptr;
 	D3D_DRIVER_TYPE m_D3DDriverType = D3D_DRIVER_TYPE_HARDWARE;
 	
 	READ_ONLY(bool, IsEnable4xMsaa);
