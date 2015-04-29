@@ -1,5 +1,5 @@
 ﻿#include "renderTarget.h"
-#include "debug/debug.h"
+#include "utility/debug.h"
 #include "base/renderer.h"
 
 USING_NS_EEL;

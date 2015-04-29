@@ -82,9 +82,6 @@
     <ClInclude Include="..\..\src\utility\compare.h">
       <Filter>utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\debug\debug.h">
-      <Filter>debug</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\render\renderStates.h">
       <Filter>render</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\texture.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\debug.h">
+      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +110,6 @@
     </Filter>
     <Filter Include="utility">
       <UniqueIdentifier>{be667cca-c8af-4bef-80d3-a6067543d4f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="debug">
-      <UniqueIdentifier>{6e817eab-41d6-4897-9846-16bb94529346}</UniqueIdentifier>
     </Filter>
     <Filter Include="render">
       <UniqueIdentifier>{bdd16116-6f7d-4597-b336-f10a9fbb51ce}</UniqueIdentifier>

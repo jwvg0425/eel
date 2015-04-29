@@ -99,7 +99,6 @@
     <ClInclude Include="..\..\src\base\renderer.h" />
     <ClInclude Include="..\..\src\component\component.h" />
     <ClInclude Include="..\..\src\component\scene.h" />
-    <ClInclude Include="..\..\src\debug\debug.h" />
     <ClInclude Include="..\..\src\eel.h" />
     <ClInclude Include="..\..\src\math\matrix.h" />
     <ClInclude Include="..\..\src\math\vector.h" />
@@ -108,6 +107,7 @@
     <ClInclude Include="..\..\src\render\texture.h" />
     <ClInclude Include="..\..\src\utility\Clonable.h" />
     <ClInclude Include="..\..\src\utility\compare.h" />
+    <ClInclude Include="..\..\src\utility\debug.h" />
     <ClInclude Include="..\..\src\utility\log.h" />
     <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
