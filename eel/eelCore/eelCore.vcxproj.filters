@@ -34,6 +34,12 @@
     <ClCompile Include="..\..\src\component\scene.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\renderTarget.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\texture.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h">
@@ -84,6 +90,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\component\scene.h">
       <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\renderTarget.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\texture.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
