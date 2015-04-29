@@ -88,9 +88,6 @@
     <ProjectReference Include="..\eelCore\eelCore.vcxproj">
       <Project>{74569095-dec7-4a0b-be8c-b7435d51019b}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\eelStyleSheet\eelStyleSheet.vcxproj">
-      <Project>{368dad9d-be86-46d1-bd98-f6f9eb6760da}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

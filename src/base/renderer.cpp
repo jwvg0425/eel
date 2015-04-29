@@ -1,5 +1,8 @@
 ﻿#include "renderer.h"
 #include "base/application.h"
+#include "debug/debug.h"
+#include "component/scene.h"
+#include "render/texture.h"
 
 USING_NS_EEL;
 
@@ -15,21 +18,13 @@ eel::Renderer::~Renderer()
 		m_D3DImmediateContext->ClearState();
 	}
 
-	SAFE_RELEASE(m_RenderTargetView);
-	SAFE_RELEASE(m_DepthStencilView);
 	SAFE_RELEASE(m_SwapChain);
-	SAFE_RELEASE(m_DepthStencilBuffer);
 	SAFE_RELEASE(m_D3DImmediateContext);
 	SAFE_RELEASE(m_D3DDevice);
 }
 
 bool eel::Renderer::Init()
 {
-	ARRAY<float, 4> bgColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-	m_BackgroundColor.SetArray(bgColor);
-
-	ZeroMemory(&m_ScreenViewport, sizeof(D3D11_VIEWPORT));
-
 	UINT createDeviceFlags = 0;
 
 #if defined(DEBUG) || defined(_DEBUG)
@@ -118,22 +113,19 @@ bool eel::Renderer::Init()
 	SAFE_RELEASE(dxgiAdapter);
 	SAFE_RELEASE(dxgiFactory);
 
-	InitRenderTarget();
+	InitScreenRenderTarget();
 
 	return true;
 }
 
-void eel::Renderer::InitRenderTarget()
+void eel::Renderer::InitScreenRenderTarget()
 {
 	_ASSERT(m_D3DImmediateContext);
 	_ASSERT(m_D3DDevice);
 	_ASSERT(m_SwapChain);
 
 	//오래된 뷰, 깊이 스텐실 버퍼 제거
-
-	SAFE_RELEASE(m_RenderTargetView);
-	SAFE_RELEASE(m_DepthStencilView);
-	SAFE_RELEASE(m_DepthStencilBuffer);
+	m_ScreenRenderTarget = nullptr;
 
 	//스왑 체인 크기 변경 후 렌더 타겟 뷰 재생성
 
@@ -143,75 +135,37 @@ void eel::Renderer::InitRenderTarget()
 	HR(m_SwapChain->ResizeBuffers(1, (UINT)width, (UINT)height, DXGI_FORMAT_R8G8B8A8_UNORM, 0));
 	ID3D11Texture2D* backBuffer = nullptr;
 	HR(m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer)));
-	HR(m_D3DDevice->CreateRenderTargetView(backBuffer, 0, &m_RenderTargetView));
-	SAFE_RELEASE(backBuffer);
+
 
 	// 깊이, 스텐실 버퍼 다시 만들기
-
-	D3D11_TEXTURE2D_DESC depthStencilDesc;
-
-	depthStencilDesc.Width = (UINT)width;
-	depthStencilDesc.Height = (UINT)height;
-	depthStencilDesc.MipLevels = 1;
-	depthStencilDesc.ArraySize = 1;
-	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-
-	//4x MSAA를 쓰나 안쓰나 검사
-	if (m_IsEnable4xMsaa)
-	{
-		depthStencilDesc.SampleDesc.Count = 4;
-		depthStencilDesc.SampleDesc.Quality = m_4xMsaaQuality - 1;
-	}
-	else
-	{
-		depthStencilDesc.SampleDesc.Count = 1;
-		depthStencilDesc.SampleDesc.Quality = 0;
-	}
-
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
-
-	HR(m_D3DDevice->CreateTexture2D(&depthStencilDesc, 0, &m_DepthStencilBuffer));
-	HR(m_D3DDevice->CreateDepthStencilView(m_DepthStencilBuffer, 0, &m_DepthStencilView));
-
-	//렌더 타겟 뷰와 깊이 스텐실 뷰를 파이프라인에서 묶음
-
-	m_D3DImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
-
-	//뷰포트 변환 설정
-
-	m_ScreenViewport.TopLeftX = 0.0f;
-	m_ScreenViewport.TopLeftY = 0.0f;
-	m_ScreenViewport.Width = width;
-	m_ScreenViewport.Height = height;
-	m_ScreenViewport.MinDepth = 0.0f;
-	m_ScreenViewport.MaxDepth = 1.0f;
-
-	m_D3DImmediateContext->RSSetViewports(1, &m_ScreenViewport);
+	m_ScreenRenderTarget = 
+		RenderTarget::Create(Texture::Create(backBuffer),
+		Texture::Create(width, height), width, height);
 }
 
-void eel::Renderer::Render()
+void eel::Renderer::Render(SPTR<Scene> scene)
 {
+	m_ScreenRenderTarget->BeginFrame();
+
 	HR(m_SwapChain->Present(0, 0));
-}
-
-void eel::Renderer::BeginFrame()
-{
-	_ASSERT(m_D3DImmediateContext);
-	_ASSERT(m_SwapChain);
-
-	m_D3DImmediateContext->
-		ClearRenderTargetView(m_RenderTargetView, 
-		m_BackgroundColor.GetArray().data());
-
-	m_D3DImmediateContext->
-		ClearDepthStencilView(m_DepthStencilView,
-		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
 void eel::Renderer::Update(float dTime)
 {
 
+}
+
+ID3D11Device* eel::Renderer::GetDevice() const
+{
+	return m_D3DDevice;
+}
+
+ID3D11DeviceContext* eel::Renderer::GetContext() const
+{
+	return m_D3DImmediateContext;
+}
+
+void eel::Renderer::SetScreenBackgroundColor(Color color)
+{
+	m_ScreenRenderTarget->SetBackground(color);
 }

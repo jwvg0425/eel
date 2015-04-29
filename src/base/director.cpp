@@ -5,9 +5,9 @@ USING_NS_EEL;
 
 void Director::GameLoop()
 {
-	Renderer::GetInstance()->BeginFrame();
-	//TODO : Renderer Update
-	Renderer::GetInstance()->Render();
+	//TODO : Update
+
+	Renderer::GetInstance()->Render(m_RunningScene);
 }
 
 Director::Director()
