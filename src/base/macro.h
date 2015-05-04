@@ -95,3 +95,9 @@ using WPTR = std::weak_ptr<T>;
 
 template<typename T, int N>
 using ARRAY = std::array<T, N>;
+
+template<typename T, int ROW, int COL>
+using ARRAY2D = std::array<std::array<T, COL>, ROW>;
+
+template<typename T, int A, int B, int C>
+using ARRAY3D = std::array<std::array<std::array<T, C>, B>, A > ;
