@@ -101,3 +101,20 @@ using ARRAY2D = std::array<std::array<T, COL>, ROW>;
 
 template<typename T, int A, int B, int C>
 using ARRAY3D = std::array<std::array<std::array<T, C>, B>, A > ;
+
+//bit macro function
+template<typename T1, typename T2>
+void SetBit(T1& dest, T2 bit)
+{
+	static_assert(std::is_integral<T1>::value, "T1, T2 must be an integral type.");
+	static_assert(std::is_convertible<T2, T1>::value, "must be convertible from T2 to T1");
+	dest |= bit;
+}
+
+template<typename T1, typename T2>
+void RemoveBit(T1& dest, T2 bit)
+{
+	static_assert(std::is_integral<T1>::value, "T1 must be an integral type.");
+	static_assert(std::is_convertible<T2, T1>::value, "must be convertible from T2 to T1");
+	dest &= ~bit;
+}

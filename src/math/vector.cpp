@@ -26,7 +26,7 @@ eel::Vector::Vector()
 
 float eel::Vector::Dot(CXMVECTOR rhs)
 {
-	Vector res = XMVector4Dot(*this, rhs);
+	Vector res = Vector(XMVector4Dot(*this, rhs));
 
 	return res.m_Value.x;
 }

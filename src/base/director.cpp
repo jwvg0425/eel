@@ -19,3 +19,11 @@ Director::~Director()
 {
 
 }
+
+void eel::Director::ExcuteEvent(EventType type, const Event& e)
+{
+	for (auto& task : m_EventMap[type])
+	{
+		task->Excute(e);
+	}
+}

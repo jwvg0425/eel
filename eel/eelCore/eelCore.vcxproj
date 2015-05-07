@@ -80,6 +80,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\base\application.cpp" />
     <ClCompile Include="..\..\src\base\director.cpp" />
+    <ClCompile Include="..\..\src\base\event\event.cpp" />
+    <ClCompile Include="..\..\src\base\event\mouseEvent.cpp" />
     <ClCompile Include="..\..\src\base\object.cpp" />
     <ClCompile Include="..\..\src\base\renderer.cpp" />
     <ClCompile Include="..\..\src\component\component.cpp" />
@@ -94,6 +96,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h" />
     <ClInclude Include="..\..\src\base\director.h" />
+    <ClInclude Include="..\..\src\base\event\event.h" />
+    <ClInclude Include="..\..\src\base\event\mouseEvent.h" />
     <ClInclude Include="..\..\src\base\macro.h" />
     <ClInclude Include="..\..\src\base\object.h" />
     <ClInclude Include="..\..\src\base\renderer.h" />

@@ -11,9 +11,14 @@ class Vector
 {
 public:
 	Vector();
+	~Vector() = default;
+
 	Vector(float x, float y, float z, float w);
-	Vector(XMFLOAT4 value);
-	Vector(XMVECTOR value);
+	explicit Vector(XMFLOAT4 value);
+	explicit Vector(XMVECTOR value);
+
+	Vector(Vector& rhs) = default;
+	Vector& operator=(Vector& rhs) = default;
 
 	operator XMFLOAT4();
 	operator XMVECTOR();
