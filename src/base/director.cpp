@@ -27,3 +27,26 @@ void eel::Director::ExcuteEvent(EventType type, const Event& e)
 		task->Excute(e);
 	}
 }
+
+void eel::Director::UnregisterEvent(EventType type, Object* object)
+{
+	for (auto it = m_EventMap[type].cbegin(); it != m_EventMap[type].cend();)
+	{
+		if ((*it)->GetEventObject() == object)
+		{
+			it = m_EventMap[type].erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+}
+
+void eel::Director::UnregisterAllEvent(Object* object)
+{
+	for (auto& eventList : m_EventMap)
+	{
+		UnregisterEvent(eventList.first, object);
+	}
+}

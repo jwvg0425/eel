@@ -18,6 +18,8 @@ public:
 	template<typename T, typename F>
 	void RegisterEvent(EventType type, T* object, F memFunc);
 
+	void UnregisterEvent(EventType type, Object* object);
+	void UnregisterAllEvent(Object* object);
 	void ExcuteEvent(EventType type, const Event& e);
 
 private:

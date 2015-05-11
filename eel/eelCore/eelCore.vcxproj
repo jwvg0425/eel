@@ -92,6 +92,7 @@
     <ClCompile Include="..\..\src\render\renderTarget.cpp" />
     <ClCompile Include="..\..\src\render\texture.cpp" />
     <ClCompile Include="..\..\src\utility\log.cpp" />
+    <ClCompile Include="updateEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h" />
@@ -115,6 +116,7 @@
     <ClInclude Include="..\..\src\utility\log.h" />
     <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
+    <ClInclude Include="updateEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

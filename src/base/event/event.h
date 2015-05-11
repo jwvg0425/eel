@@ -1,5 +1,7 @@
 ﻿#pragma once
+#include <type_traits>
 #include "base/macro.h"
+#include "base/object.h"
 
 NS_EEL_BEGIN
 
@@ -25,6 +27,7 @@ class EventEntry
 {
 public:
 	virtual void Excute(const Event& e) = 0;
+	virtual Object* GetEventObject() = 0;
 };
 
 template<typename Obj, typename Func>
@@ -32,17 +35,23 @@ class EventTask : public EventEntry
 {
 public:
 	EventTask(Obj* object, Func func)
-	: m_Object(object), m_Function(func) { }
-	virtual void Excute(const Event& e);
+	: m_Object(object), m_Function(func) 
+	{
+		static_assert(std::is_base_of(Object, Obj)::value, "Obj must inherit eel::Object");
+	}
+	virtual void Excute(const Event& e)
+	{
+		m_Object->(*m_Function)(e);
+	}
+
+	virtual Object* GetEventObject()
+	{
+		return m_Object;
+	}
+
 private:
 	Obj* m_Object;
 	Func m_Function;
 };
-
-template<typename Obj, typename Func>
-void eel::EventTask<Obj, Func>::Excute(const Event& e)
-{
-	m_Object->(*m_Function)(e);
-}
 
 NS_EEL_END

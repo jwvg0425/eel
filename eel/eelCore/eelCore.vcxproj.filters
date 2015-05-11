@@ -46,6 +46,9 @@
     <ClCompile Include="..\..\src\base\event\mouseEvent.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
+    <ClCompile Include="updateEvent.cpp">
+      <Filter>base\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h">
@@ -107,6 +110,9 @@
       <Filter>base\event</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\base\event\mouseEvent.h">
+      <Filter>base\event</Filter>
+    </ClInclude>
+    <ClInclude Include="updateEvent.h">
       <Filter>base\event</Filter>
     </ClInclude>
   </ItemGroup>
