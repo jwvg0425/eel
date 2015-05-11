@@ -1,4 +1,5 @@
-﻿#include "base/macro.h"
+﻿#pragma once
+#include "base/macro.h"
 #include "math/vector.h"
 
 NS_EEL_BEGIN

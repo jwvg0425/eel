@@ -5,7 +5,7 @@
 
 USING_NS_EEL;
 
-EffectImpl::EffectImpl(const std::wstring& filePath, std::vector<EffectImpl::TypePair>& typePairs)
+Effect::Effect(const std::wstring& filePath)
 {
 	std::ifstream fin(filePath, std::ios::binary);
 
@@ -17,57 +17,95 @@ EffectImpl::EffectImpl(const std::wstring& filePath, std::vector<EffectImpl::Typ
 	fin.read(&compiledShader[0], size);
 	fin.close();
 
-	HR(D3DX11CreateEffectFromMemory(&compiledShader[0], size, 0, Renderer::GetInstance()->GetDevice(), &m_Fx));
+	D3DX11CreateEffectFromMemory(&compiledShader[0], size, 0, Renderer::GetInstance()->GetDevice(), &m_Fx);
+}
 
-	for(auto pair : typePairs)
+void eel::Effect::AddGenericMember(const std::string& memberName)
+{
+	GenericPair pair;
+	pair.first = memberName;
+	pair.second = m_Fx->GetVariableByName(pair.first.c_str());
+	m_GenericValues.push_back(pair);
+}
+
+void eel::Effect::AddVectorMember(const std::string& memberName)
+{
+	VectorPair pair;
+	pair.first = memberName;
+	pair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsVector();
+	m_Vectors.push_back(pair);
+
+}
+
+void eel::Effect::AddMatrixMember(const std::string& memberName)
+{
+	MatrixPair pair;
+	pair.first = memberName;
+	pair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsMatrix();
+	m_Matrixes.push_back(pair);
+}
+
+void eel::Effect::AddResourceMember(const std::string& memberName)
+{
+	ResourcePair pair;
+	pair.first = memberName;
+	pair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsShaderResource();
+	m_Resources.push_back(pair);
+}
+
+void eel::Effect::AddTech(const std::string& memberName, ID3D11InputLayout* inputLayout)
+{
+	TechData data(m_Fx->GetTechniqueByName(memberName.c_str()), inputLayout);
+	TechPair pair(memberName, data);
+	m_Techs.push_back(pair);
+}
+
+void eel::Effect::SetVectorMember(const std::string& memberName, const Vector4& value)
+{
+	for (auto pair : m_Vectors)
 	{
-		GetNewMember(pair);
+		if (pair.first == memberName)
+		{
+			pair.second->SetRawValue(&value, 0, sizeof(XMFLOAT4));
+			return;
+		}
 	}
 }
 
-void EffectImpl::GetNewMember(const TypePair& pair)
+void eel::Effect::SetMatrixMember(const std::string& memberName, const Matrix4& value)
 {
-	switch(pair.second)
+	for (auto pair : m_Matrixes)
 	{
-		case EffectValueType::TECH:
+		if (pair.first == memberName)
 		{
-			TechPair newPair;
-			newPair.first = pair.first;
-			newPair.second = m_Fx->GetTechniqueByName(pair.first.c_str());
-			m_Techs.push_back(newPair);
-			break;
-		}
-		case EffectValueType::GENERIC:
-		{
-			GenericPair newPair;
-			newPair.first = pair.first;
-			newPair.second = m_Fx->GetVariableByName(pair.first.c_str());
-			m_GenericValues.push_back(newPair);
-		}
-		case EffectValueType::MATRIX:
-		{
-			MatrixPair newPair;
-			newPair.first = pair.first;
-			newPair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsMatrix();
-			m_Matrixes.push_back(newPair);
-		}
-		case EffectValueType::VECTOR:
-		{
-			VectorPair newPair;
-			newPair.first = pair.first;
-			newPair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsVector();
-			m_Vectors.push_back(newPair);
-		}
-		case EffectValueType::RESOURCE:
-		{
-			ResourcePair newPair;
-			newPair.first = pair.first;
-			newPair.second = m_Fx->GetVariableByName(pair.first.c_str())->AsShaderResource();
-			m_Resources.push_back(newPair);
-		}
-		default:
-		{
-			break;
+			pair.second->SetMatrix(reinterpret_cast<const float*>(&value));
+			return;
 		}
 	}
+}
+
+void eel::Effect::SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value)
+{
+	for (auto pair : m_Resources)
+	{
+		if (pair.first == memberName)
+		{
+			pair.second->SetResource(value);
+			return;
+		}
+	}
+}
+
+TechData eel::Effect::GetTech(const std::string& techName)
+{
+	for (auto pair : m_Techs)
+	{
+		if (pair.first == techName)
+		{
+			return pair.second;
+		}
+	}
+
+	_ASSERT(false);
+	return m_Techs[0].second;
 }

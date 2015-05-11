@@ -3,6 +3,9 @@
 #include "utility/singleton.h"
 #include <d3dx11Effect.h>
 #include <vector>
+#include <string>
+#include "math/vector.h"
+#include "math/matrix.h"
 // const buffer / tech list
 // getVariable, setVariable,
 
@@ -17,10 +20,19 @@ enum class EffectValueType
 	TECH,
 };
 
-class EffectImpl
+struct TechData
+{
+	TechData(ID3DX11EffectTechnique* tech, ID3D11InputLayout* inputLayout)
+		: m_Tech(tech), m_InputLayout(inputLayout) {}
+
+	ID3DX11EffectTechnique* m_Tech;
+	ID3D11InputLayout* m_InputLayout;
+};
+
+class Effect
 {
 public:
-	using TechPair = std::pair < std::string, ID3DX11EffectTechnique* > ;
+	using TechPair = std::pair < std::string, TechData > ;
 	using TypePair = std::pair < std::string, EffectValueType > ;
 	using MatrixPair = std::pair < std::string, ID3DX11EffectMatrixVariable* > ;
 	using VectorPair = std::pair < std::string, ID3DX11EffectVectorVariable* > ;
@@ -28,14 +40,25 @@ public:
 	using ResourcePair = std::pair < std::string, ID3DX11EffectShaderResourceVariable* > ;
 
 public:
+	Effect(const std::wstring& fileName);
+	~Effect();
 
-	EffectImpl(const std::wstring& fileName, std::vector<EffectImpl::TypePair>& typePairs);
-	~EffectImpl();
+	void	AddGenericMember(const std::string& memberName);
+	void	AddVectorMember(const std::string& memberName);
+	void	AddMatrixMember(const std::string& memberName);
+	void	AddResourceMember(const std::string& memberName);
+	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
+	void	AddTech(const std::string& memberName, ID3D11InputLayout* inputLayout);
 
 	template<typename T>
-	bool	SetMember(const std::wstring& memberName, T value, EffectValueType valueType, UINT valueSize);
-private:
-	void	GetNewMember(const TypePair& pair);
+	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);
+
+	void	SetVectorMember(const std::string& memberName, const Vector4& value);
+	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
+	//TODO : ID3D11ShaderResourceView* -> const ShaderResource& (wrapper class)
+	void	SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value);
+
+	TechData GetTech(const std::string& techName);
 
 private:
 	ID3DX11Effect* m_Fx = nullptr;
@@ -47,77 +70,17 @@ private:
 };
 
 template<typename T>
-bool eel::EffectImpl::SetMember(const std::wstring& memberName, T value, EffectValueType valueType, UINT valueSize)
+void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)
 {
 
-	switch(valueType)
+	for (auto pair : m_GenericValues)
 	{
-		case eel::EffectValueType::GENERIC:
+		if (pair.first == memberName)
 		{
-			for(auto pair : m_GenericValues)
-			{
-				if(pair.first == memberName)
-				{
-					pair.second->SetRawValue(&value, 0, valueSize);
-					return true;
-				}
-			}
-			break;
+			pair.second->SetRawValue(&value, 0, valueSize);
+			return;
 		}
-		case eel::EffectValueType::VECTOR:
-		{
-			for(auto pair : m_Vectors)
-			{
-				if(pair.first == memberName)
-				{
-					pair.second->SetRawValue(&value, 0, valueSize);
-					return true;
-				}
-			}
-			break;
-		}
-		case eel::EffectValueType::MATRIX:
-		{
-			static_assert( std::is_same(T, CXMMATRIX)::value );
-			for(auto pair : m_Matrixes)
-			{
-				if(pair.first == memberName)
-				{
-					pair.second->SetMatrix(reinterpret_cast<const float*>( &value ));
-					return true;
-				}
-			}
-			break;
-		}
-		case eel::EffectValueType::RESOURCE:
-		{
-			static_assert( std::is_same(T, ID3D11ShaderResourceView*)::value );
-			for(auto pair : m_Resources)
-			{
-				if(pair.first == memberName)
-				{
-					pair.second->SetResource(value);
-					return true;
-				}
-			}
-			break;
-		}
-		default:
-		break;
 	}
-
-	return false;
 }
-
-template <typename T>
-class Effect : public EffectImpl, public Singleton<T>
-{
-public:
-	Effect(const std::wstring& fxPath, const std::vector<TypePair>& typePairs)
-		:EffectImpl(fxPath, typePairs)
-	{};
-	~Effect();
-private:
-};
 
 NS_EEL_END
