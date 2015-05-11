@@ -3,6 +3,7 @@
 #include <string>
 #include "base/macro.h"
 #include "base/object.h"
+#include "base/event/mouseEvent.h"
 
 NS_EEL_BEGIN
 
@@ -25,6 +26,7 @@ public:
 	float GetAspectRatio() const;
 
 private:
+	void OnMouse(int x, int y, int state, EventType type);
 	bool MakeWindow(std::wstring title, int width, int height);
 
 	READ_ONLY_REF(std::wstring, Title);
@@ -35,6 +37,8 @@ private:
 	
 	READ_ONLY(float, Width);
 	READ_ONLY(float, Height);
+
+	int m_MouseState;
 };
 
 NS_EEL_END

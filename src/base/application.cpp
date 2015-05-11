@@ -1,7 +1,7 @@
 ﻿#include <Windows.h>
 
 #include "application.h"
-#include "director.h"
+#include "base/director.h"
 
 USING_NS_EEL;
 
@@ -112,6 +112,11 @@ float eel::Application::GetAspectRatio() const
 	return m_Width / m_Height;
 }
 
+void eel::Application::OnMouse(int x, int y, int state, EventType type)
+{
+	Director::GetInstance()->ExcuteEvent(type, MouseEvent(Point2(static_cast<float>(x), static_cast<float>(y)), state));
+}
+
 LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
@@ -124,6 +129,25 @@ LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		EndPaint(hWnd, &ps);
+		return 0;
+	case WM_MOUSEMOVE:
+		OnMouse(LOWORD(lParam), HIWORD(lParam), m_MouseState, EventType::MOUSE_MOVE);
+		return 0;
+	case WM_LBUTTONDOWN:
+		SetBit(m_MouseState, MouseEvent::LEFT);
+		OnMouse(LOWORD(lParam), HIWORD(lParam), m_MouseState, EventType::MOUSE_DOWN);
+		return 0;
+	case WM_LBUTTONUP:
+		RemoveBit(m_MouseState, MouseEvent::LEFT);
+		OnMouse(LOWORD(lParam), HIWORD(lParam), m_MouseState, EventType::MOUSE_UP);
+		return 0;
+	case WM_RBUTTONDOWN:
+		SetBit(m_MouseState, MouseEvent::RIGHT);
+		OnMouse(LOWORD(lParam), HIWORD(lParam), m_MouseState, EventType::MOUSE_DOWN);
+		return 0;
+	case WM_RBUTTONUP:
+		RemoveBit(m_MouseState, MouseEvent::RIGHT);
+		OnMouse(LOWORD(lParam), HIWORD(lParam), m_MouseState, EventType::MOUSE_UP);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);

@@ -70,6 +70,12 @@
     <ClCompile Include="..\..\src\render\inputLayout.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\base\event\event.cpp">
+      <Filter>base\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\event\mouseEvent.cpp">
+      <Filter>base\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -175,6 +181,12 @@
     <ClInclude Include="..\..\src\render\inputLayout.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\base\event\event.h">
+      <Filter>base\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\event\mouseEvent.h">
+      <Filter>base\event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -200,6 +212,9 @@
     </Filter>
     <Filter Include="render\vertex">
       <UniqueIdentifier>{d4c0d938-f384-442b-a05d-82638b7bbf41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\event">
+      <UniqueIdentifier>{d417dc35-a9f4-4ebe-8900-eb43ca3c5037}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

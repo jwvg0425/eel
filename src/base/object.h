@@ -8,7 +8,7 @@ class Object
 {
 public:
 	Object() = default;
-	virtual ~Object() = default;
+	virtual ~Object();
 
 	Object(Object& rhs) = default;
 	Object& operator=(Object& rhs) = default;
