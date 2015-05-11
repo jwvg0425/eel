@@ -165,9 +165,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="base">
       <UniqueIdentifier>{9048f8c7-68fc-4474-857a-359327720431}</UniqueIdentifier>
     </Filter>
