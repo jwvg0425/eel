@@ -44,7 +44,7 @@ public:
 	using ResourcePair = std::pair < std::string, ID3DX11EffectShaderResourceVariable* > ;
 
 public:
-	Effect(const std::wstring& fileName);
+	Effect(const std::wstring& fileName, const std::string defaultTech);
 	~Effect();
 
 	void	AddGenericMember(const std::string& memberName);
@@ -63,6 +63,7 @@ public:
 	void	SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value);
 
 	TechData GetTech(const std::string& techName);
+	TechData GetTech();
 
 private:
 	ID3DX11Effect* m_Fx = nullptr;
@@ -71,6 +72,7 @@ private:
 	std::vector<VectorPair> m_Vectors;
 	std::vector<GenericPair> m_GenericValues;
 	std::vector<ResourcePair> m_Resources;
+	std::string m_DefaultTech;
 };
 
 template<typename T>

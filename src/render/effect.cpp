@@ -5,7 +5,8 @@
 
 USING_NS_EEL;
 
-Effect::Effect(const std::wstring& filePath)
+Effect::Effect(const std::wstring& filePath, const std::string defaultTech)
+	:m_DefaultTech(defaultTech)
 {
 	std::ifstream fin(filePath, std::ios::binary);
 
@@ -113,8 +114,15 @@ TechData eel::Effect::GetTech(const std::string& techName)
 	return m_Techs[0].second;
 }
 
+eel::TechData eel::Effect::GetTech()
+{
+	return GetTech(m_DefaultTech);
+}
+
 eel::Effect::~Effect()
 {
+	SAFE_RELEASE(m_Fx);
+
 	for (auto pair : m_Techs)
 	{
 		SAFE_RELEASE(pair.second.m_InputLayout);
