@@ -82,12 +82,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="firstScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SimpleModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eelCore\eelCore.vcxproj">
       <Project>{74569095-dec7-4a0b-be8c-b7435d51019b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="firstScene.h" />
+    <ClInclude Include="SimpleModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
