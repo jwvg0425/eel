@@ -13,6 +13,8 @@ public:
 
 	void GameLoop();
 
+	void RunWithScene(SPTR<Scene> scene);
+
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
 };

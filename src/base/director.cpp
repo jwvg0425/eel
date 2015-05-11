@@ -19,3 +19,8 @@ Director::~Director()
 {
 
 }
+
+void eel::Director::RunWithScene(SPTR<Scene> scene)
+{
+	m_RunningScene = scene;
+}

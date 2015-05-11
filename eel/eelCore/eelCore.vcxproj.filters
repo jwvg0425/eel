@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\src\base\application.cpp">
       <Filter>base</Filter>
     </ClCompile>
@@ -19,20 +16,35 @@
     <ClCompile Include="..\..\src\component\component.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\math\matrix.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\vector.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\utility\log.cpp">
-      <Filter>utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\renderStates.cpp">
-      <Filter>render</Filter>
+    <ClCompile Include="..\..\src\component\model.cpp">
+      <Filter>component</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\component\scene.cpp">
       <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix4.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector2.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector4.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\effect.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\mesh.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\renderStates.cpp">
+      <Filter>render</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\render\renderTarget.cpp">
       <Filter>render</Filter>
@@ -40,8 +52,27 @@
     <ClCompile Include="..\..\src\render\texture.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\utility\log.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\camera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\inputLayout.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\eel.h" />
     <ClInclude Include="..\..\src\base\application.h">
       <Filter>base</Filter>
     </ClInclude>
@@ -60,11 +91,56 @@
     <ClInclude Include="..\..\src\component\component.h">
       <Filter>component</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\component\model.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\scene.h">
+      <Filter>component</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\math\matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\matrix3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\matrix4.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\math\vector.h">
       <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector4.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\effect.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\mesh.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\renderStates.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\renderTarget.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\texture.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\Clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\compare.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\debug.h">
+      <Filter>utility</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\utility\log.h">
       <Filter>utility</Filter>
@@ -75,47 +151,60 @@
     <ClInclude Include="..\..\src\utility\singleton.h">
       <Filter>utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\eel.h" />
-    <ClInclude Include="..\..\src\utility\Clonable.h">
-      <Filter>utility</Filter>
+    <ClInclude Include="..\..\src\render\camera\camera.h">
+      <Filter>render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\compare.h">
-      <Filter>utility</Filter>
+    <ClInclude Include="..\..\src\render\camera\orthographicCamera.h">
+      <Filter>render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\renderStates.h">
+    <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h">
+      <Filter>render\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\posBasic.h">
+      <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\posColor.h">
+      <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\posNormal.h">
+      <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\mathHelper.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\inputLayout.h">
       <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\component\scene.h">
-      <Filter>component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\renderTarget.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\texture.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\debug.h">
-      <Filter>utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
-      <UniqueIdentifier>{0bac664f-ac8f-4fe0-bafe-cc8377bc5720}</UniqueIdentifier>
+      <UniqueIdentifier>{9048f8c7-68fc-4474-857a-359327720431}</UniqueIdentifier>
     </Filter>
     <Filter Include="component">
-      <UniqueIdentifier>{b73462d9-1876-4114-a27c-697f2f5e5411}</UniqueIdentifier>
+      <UniqueIdentifier>{45388ccb-bc23-48e5-b83e-5ccc0311bfba}</UniqueIdentifier>
     </Filter>
     <Filter Include="math">
-      <UniqueIdentifier>{30ccdd3c-0b44-4978-8ffb-0f971f642a31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="utility">
-      <UniqueIdentifier>{be667cca-c8af-4bef-80d3-a6067543d4f7}</UniqueIdentifier>
+      <UniqueIdentifier>{eabbb2e8-0740-4d44-99a1-e9f69dbadd3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="render">
-      <UniqueIdentifier>{bdd16116-6f7d-4597-b336-f10a9fbb51ce}</UniqueIdentifier>
+      <UniqueIdentifier>{dda8a99a-3f19-4614-9411-aa741fb19bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{dfb6bd11-6b13-4f5e-86d3-7a309ffb3a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\camera">
+      <UniqueIdentifier>{249be0e3-cce9-447c-815f-038e4e211129}</UniqueIdentifier>
     </Filter>
     <Filter Include="render\shader">
-      <UniqueIdentifier>{94092a8b-428a-4a89-bd27-3a60754c6eb0}</UniqueIdentifier>
+      <UniqueIdentifier>{4cc069d3-9320-4c36-a3aa-a90c87873779}</UniqueIdentifier>
     </Filter>
+    <Filter Include="render\vertex">
+      <UniqueIdentifier>{d4c0d938-f384-442b-a05d-82638b7bbf41}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\src\render\shader\color.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

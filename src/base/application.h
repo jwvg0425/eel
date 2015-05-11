@@ -22,6 +22,8 @@ public:
 
 	bool Init(std::wstring title, int width, int height);
 
+	float GetAspectRatio() const;
+
 private:
 	bool MakeWindow(std::wstring title, int width, int height);
 

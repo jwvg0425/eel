@@ -7,6 +7,8 @@ NS_EEL_BEGIN
 class Component : public Object
 {
 public:
+	using ChildList = std::vector<SPTR<Component> >;
+
 	Component() = default;
 	~Component() override = default;
 
@@ -23,8 +25,11 @@ public:
 
 	void RemoveAllChilds();
 
+	const ChildList& GetAllChilds() const;
+
+	virtual void Render() const = 0;
+
 private:
-	using ChildList = std::vector<SPTR<Component> >;
 
 	ChildList m_Childs;
 
@@ -34,8 +39,6 @@ private:
 	//identifier
 	std::string m_Name = "";
 	std::size_t m_NameHash = 0; // speed up 
-
-	Vector		m_Position;
 };
 
 NS_EEL_END

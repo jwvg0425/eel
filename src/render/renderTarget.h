@@ -4,6 +4,7 @@
 #include "render/texture.h"
 #include "utility/makeCreate.h"
 #include "math/vector.h"
+#include "render/camera/camera.h"
 
 NS_EEL_BEGIN
 
@@ -28,7 +29,8 @@ private:
 	READ_ONLY(ID3D11DepthStencilView*, DepthStencil);
 	D3D11_VIEWPORT			m_Viewport;
 
-	PROPERTY(Color, Background);
+	PROPERTY(Color4, Background);
+	PROPERTY(Camera*, Camera);
 };
 
 NS_EEL_END
