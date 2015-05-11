@@ -67,6 +67,9 @@
     <ClCompile Include="..\..\src\math\matrix.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\inputLayout.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -169,6 +172,9 @@
     <ClInclude Include="..\..\src\math\mathHelper.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\render\inputLayout.h">
+      <Filter>render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -195,5 +201,10 @@
     <Filter Include="render\vertex">
       <UniqueIdentifier>{d4c0d938-f384-442b-a05d-82638b7bbf41}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\src\render\shader\color.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

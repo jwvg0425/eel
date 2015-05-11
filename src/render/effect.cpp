@@ -53,9 +53,12 @@ void eel::Effect::AddResourceMember(const std::string& memberName)
 	m_Resources.push_back(pair);
 }
 
-void eel::Effect::AddTech(const std::string& memberName, ID3D11InputLayout* inputLayout)
+void eel::Effect::AddTech(const std::string& memberName, const InputLayout& inputLayout)
 {
-	TechData data(m_Fx->GetTechniqueByName(memberName.c_str()), inputLayout);
+	TechData data;
+	
+	data.m_Tech = m_Fx->GetTechniqueByName(memberName.c_str());
+	data.m_InputLayout = inputLayout.GetLayout(data.m_Tech);
 	TechPair pair(memberName, data);
 	m_Techs.push_back(pair);
 }
@@ -108,4 +111,12 @@ TechData eel::Effect::GetTech(const std::string& techName)
 
 	_ASSERT(false);
 	return m_Techs[0].second;
+}
+
+eel::Effect::~Effect()
+{
+	for (auto pair : m_Techs)
+	{
+		SAFE_RELEASE(pair.second.m_InputLayout);
+	}
 }

@@ -1,11 +1,12 @@
 ﻿#pragma once
 #include "base/macro.h"
-#include "utility/singleton.h"
+#include "utility/makeCreate.h"
 #include <d3dx11Effect.h>
 #include <vector>
 #include <string>
 #include "math/vector.h"
 #include "math/matrix.h"
+#include "render/inputLayout.h"
 // const buffer / tech list
 // getVariable, setVariable,
 
@@ -22,14 +23,17 @@ enum class EffectValueType
 
 struct TechData
 {
+	TechData() = default;
+	~TechData() = default;
+
 	TechData(ID3DX11EffectTechnique* tech, ID3D11InputLayout* inputLayout)
 		: m_Tech(tech), m_InputLayout(inputLayout) {}
 
-	ID3DX11EffectTechnique* m_Tech;
-	ID3D11InputLayout* m_InputLayout;
+	ID3DX11EffectTechnique* m_Tech = nullptr;
+	ID3D11InputLayout* m_InputLayout = nullptr;
 };
 
-class Effect
+class Effect : public MakeCreate<Effect>
 {
 public:
 	using TechPair = std::pair < std::string, TechData > ;
@@ -48,7 +52,7 @@ public:
 	void	AddMatrixMember(const std::string& memberName);
 	void	AddResourceMember(const std::string& memberName);
 	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
-	void	AddTech(const std::string& memberName, ID3D11InputLayout* inputLayout);
+	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
 	template<typename T>
 	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);

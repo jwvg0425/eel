@@ -87,6 +87,7 @@
     <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp" />
     <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp" />
     <ClCompile Include="..\..\src\render\effect.cpp" />
+    <ClCompile Include="..\..\src\render\inputLayout.cpp" />
     <ClCompile Include="..\..\src\render\mesh.cpp" />
     <ClCompile Include="..\..\src\math\matrix3.cpp" />
     <ClCompile Include="..\..\src\math\matrix4.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\..\src\render\camera\orthographicCamera.h" />
     <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h" />
     <ClInclude Include="..\..\src\render\effect.h" />
+    <ClInclude Include="..\..\src\render\inputLayout.h" />
     <ClInclude Include="..\..\src\render\mesh.h" />
     <ClInclude Include="..\..\src\math\vector2.h" />
     <ClInclude Include="..\..\src\math\vector3.h" />
@@ -133,6 +135,13 @@
     <ClInclude Include="..\..\src\utility\log.h" />
     <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\src\render\shader\color.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)Fx\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
