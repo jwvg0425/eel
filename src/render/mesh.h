@@ -1,22 +1,25 @@
 ﻿#pragma once
 #include "d3dx11Effect.h"
-#include "base/macro.h"
+#include "base/object.h"
 #include <vector>
 
-class Mesh
+NS_EEL_BEGIN
+
+class Mesh : public Object
 {
 public:
-	UINT GetIndex(UINT idx)
-	{
-		return m_Indices[idx];
-	}
+	Mesh();
+	~Mesh();
+
+	UINT GetIndex(UINT idx);
 
 private:
 	std::vector<UINT> m_Indices;
-	ID3D11Buffer* m_VertexBuffer = nullptr;
-	ID3D11Buffer* m_IndexBuffer = nullptr;
-	bool m_IsDynamic = false;
-	int m_Stride = 0;
+
+	READ_ONLY(ID3D11Buffer*, VertexBuffer);
+	READ_ONLY(ID3D11Buffer*, IndexBuffer);
+	READ_ONLY(bool, IsDynamic);
+	READ_ONLY(int, Stride);
 };
 
 template<typename Vertex>
@@ -85,3 +88,5 @@ private:
 
 	std::vector<Vertex> m_Vertices;
 };
+
+NS_EEL_END

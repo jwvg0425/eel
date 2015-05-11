@@ -6,7 +6,7 @@ NS_EEL_BEGIN
 
 class Effect;
 
-class Model : Component
+class Model : public Component
 {
 public:
 	template<typename Vertex>
