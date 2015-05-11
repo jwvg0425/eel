@@ -21,7 +21,7 @@ class InputLayout
 {
 public:
 	InputLayout() = default;
-	~InputLayout() = default;
+	~InputLayout();
 
 	void AddSemantic(const std::string& semantic, UINT semanticIdx, SemanticType type);
 	ID3D11InputLayout* GetLayout(ID3DX11EffectTechnique* tech) const;

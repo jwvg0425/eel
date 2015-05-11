@@ -7,10 +7,14 @@ USING_NS_EEL;
 
 void InputLayout::AddSemantic(const std::string& semantic, UINT semanticIdx, SemanticType type)
 {
-	D3D11_INPUT_ELEMENT_DESC desc =
-	{ semantic.c_str(), semanticIdx, (DXGI_FORMAT)type, 0, m_Offset, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+	char* str = new char[semantic.size() + 1];
 
-	m_Desc.emplace_back(desc);
+	strcpy_s(str, strlen(semantic.c_str()) + 1, semantic.c_str());
+
+	D3D11_INPUT_ELEMENT_DESC desc =
+	{ str, semanticIdx, (DXGI_FORMAT)type, 0, m_Offset, D3D11_INPUT_PER_VERTEX_DATA, 0 };
+
+	m_Desc.push_back(desc);
 
 	AddOffset(type);
 }
@@ -48,4 +52,14 @@ ID3D11InputLayout* eel::InputLayout::GetLayout(ID3DX11EffectTechnique* tech) con
 		desc.IAInputSignatureSize, &layout));
 
 	return layout;
+}
+
+eel::InputLayout::~InputLayout()
+{
+	
+	for (auto& desc : m_Desc)
+	{
+		delete[] desc.SemanticName;
+	}
+	
 }
