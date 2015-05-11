@@ -25,10 +25,10 @@ if (PTR != nullptr)				\
 }
 
 #define GETTER(type, val, func)\
-type Get ## func ## () { return val; }
+type Get ## func ## () const { return val; }
 
 #define GETTER_REF(type, val, func)\
-const type& Get ## func ##() { return val; }
+const type& Get ## func ##() const { return val; }
 
 #define SETTER(type, val, func)\
 void Set ## func ## (type arg) { val = arg; }
