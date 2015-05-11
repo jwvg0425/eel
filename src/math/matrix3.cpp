@@ -22,13 +22,13 @@ _20, _21, _22)
 
 }
 
-eel::Matrix3::Matrix3(XMFLOAT3X3& value)
+eel::Matrix3::Matrix3(const XMFLOAT3X3& value)
 	:m_Value(value)
 {
 
 }
 
-eel::Matrix3::Matrix3(XMMATRIX& value)
+eel::Matrix3::Matrix3(const XMMATRIX& value)
 {
 	XMStoreFloat3x3(&m_Value, value);
 }

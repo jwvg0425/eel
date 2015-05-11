@@ -16,8 +16,10 @@ public:
 			FLOAT _20, FLOAT _21, FLOAT _22, FLOAT _23,
 			FLOAT _30, FLOAT _31, FLOAT _32, FLOAT _33);
 
-	explicit Matrix4(XMFLOAT4X4& value);
-	explicit Matrix4(XMMATRIX& value);
+	explicit Matrix4(const XMFLOAT4X4& value);
+	explicit Matrix4(const XMMATRIX& value);
+
+	Matrix4(const Matrix4& rhs) = default;
 
 	operator XMFLOAT4X4();
 	operator XMMATRIX();

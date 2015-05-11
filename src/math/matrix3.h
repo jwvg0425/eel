@@ -15,8 +15,10 @@ public:
 		FLOAT _10, FLOAT _11, FLOAT _12,
 		FLOAT _20, FLOAT _21, FLOAT _22);
 
-	explicit Matrix3(XMFLOAT3X3& value);
-	explicit Matrix3(XMMATRIX& value);
+	explicit Matrix3(const XMFLOAT3X3& value);
+	explicit Matrix3(const XMMATRIX& value);
+
+	Matrix3(const Matrix3& rhs) = default;
 
 	operator XMFLOAT3X3();
 	operator XMMATRIX();

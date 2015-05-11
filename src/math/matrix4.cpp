@@ -25,13 +25,13 @@ eel::Matrix4::Matrix4
 
 }
 
-eel::Matrix4::Matrix4(XMFLOAT4X4& value)
+eel::Matrix4::Matrix4(const XMFLOAT4X4& value)
 :m_Value(value)
 {
 
 }
 
-eel::Matrix4::Matrix4(XMMATRIX& value)
+eel::Matrix4::Matrix4(const XMMATRIX& value)
 {
 	XMStoreFloat4x4(&m_Value, value);
 }

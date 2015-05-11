@@ -12,8 +12,10 @@ class Vector3
 public:
 	Vector3();
 	Vector3(float x, float y, float z);
-	explicit Vector3(XMFLOAT3 value);
-	explicit Vector3(XMVECTOR value);
+	explicit Vector3(const XMFLOAT3& value);
+	explicit Vector3(const XMVECTOR& value);
+
+	Vector3(const Vector3& rhs) = default;
 
 	operator XMFLOAT3();
 	operator XMVECTOR();

@@ -7,13 +7,13 @@ eel::Vector4::Vector4(float x, float y, float z, float w)
 {
 }
 
-eel::Vector4::Vector4(XMFLOAT4 value)
+eel::Vector4::Vector4(const XMFLOAT4& value)
 	: m_Value(value)
 {
 
 }
 
-eel::Vector4::Vector4(XMVECTOR value)
+eel::Vector4::Vector4(const XMVECTOR& value)
 {
 	XMStoreFloat4(&m_Value, value);
 }

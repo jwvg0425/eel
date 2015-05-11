@@ -7,13 +7,13 @@ eel::Vector3::Vector3(float x, float y, float z)
 {
 }
 
-eel::Vector3::Vector3(XMFLOAT3 value)
+eel::Vector3::Vector3(const XMFLOAT3& value)
 	: m_Value(value)
 {
 
 }
 
-eel::Vector3::Vector3(XMVECTOR value)
+eel::Vector3::Vector3(const XMVECTOR& value)
 {
 	XMStoreFloat3(&m_Value, value);
 }

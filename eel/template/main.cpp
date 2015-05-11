@@ -9,7 +9,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance
 	program.Init(L"dummy client", 800, 600);
 
 	eel::Renderer::GetInstance()->
-		SetScreenBackgroundColor(eel::Color(0.6f, 0.3f, 0.3f, 1.0f));
+		SetScreenBackgroundColor(eel::Color4(0.6f, 0.3f, 0.3f, 1.0f));
 
 	return program.Run();
 }

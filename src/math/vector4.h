@@ -12,8 +12,10 @@ class Vector4
 public:
 	Vector4();
 	Vector4(float x, float y, float z, float w);
-	explicit Vector4(XMFLOAT4 value);
-	explicit Vector4(XMVECTOR value);
+	explicit Vector4(const XMFLOAT4& value);
+	explicit Vector4(const XMVECTOR& value);
+
+	Vector4(const Vector4& rhs) = default;
 
 	operator XMFLOAT4();
 	operator XMVECTOR();

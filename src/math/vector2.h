@@ -12,8 +12,10 @@ class Vector2
 public:
 	Vector2();
 	Vector2(float x, float y);
-	explicit Vector2(XMFLOAT2 value);
-	explicit Vector2(XMVECTOR value);
+	explicit Vector2(const XMFLOAT2& value);
+	explicit Vector2(const XMVECTOR& value);
+
+	Vector2(const Vector2& rhs) = default;
 
 	operator XMFLOAT2();
 	operator XMVECTOR();
