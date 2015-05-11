@@ -107,6 +107,11 @@ bool eel::Application::Init(std::wstring title, int width, int height)
 	return true;
 }
 
+float eel::Application::GetAspectRatio() const
+{
+	return m_Width / m_Height;
+}
+
 LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;

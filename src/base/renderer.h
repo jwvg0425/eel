@@ -22,8 +22,13 @@ public:
 	void SetScreenBackgroundColor(Color4 color);
 	void SetScreenCamera(Camera* camera);
 
+	void SetInputLayout(ID3D11InputLayout* inputLayout);
+	void SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY topology);
+
 	void RegisterEffect(const std::string& effectName, UPTR<Effect> effect);
 	Effect* GetEffect(const std::string& effectName);
+
+	Camera* GetCurrentCamera();
 
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;
@@ -35,6 +40,7 @@ private:
 
 	IDXGISwapChain* m_SwapChain = nullptr;
 	UPTR<RenderTarget> m_ScreenRenderTarget = nullptr;
+	RenderTarget* m_CurrentRenderTarget = nullptr;
 	D3D_DRIVER_TYPE m_D3DDriverType = D3D_DRIVER_TYPE_HARDWARE;
 
 	using EffectPair = std::pair < std::string, UPTR<Effect> > ;

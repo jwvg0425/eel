@@ -8,6 +8,8 @@ public:
 	Scene() = default;
 	~Scene() override = default;
 
+	virtual void Render() const;
+
 private:
 };
 

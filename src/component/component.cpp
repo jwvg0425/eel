@@ -76,3 +76,8 @@ void eel::Component::RemoveAllChilds()
 {
 	m_Childs.clear();
 }
+
+const Component::ChildList& eel::Component::GetAllChilds() const
+{
+	return m_Childs;
+}
