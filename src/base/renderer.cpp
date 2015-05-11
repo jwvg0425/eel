@@ -3,12 +3,14 @@
 #include "utility/debug.h"
 #include "component/scene.h"
 #include "render/texture.h"
+#include "render/effect.h"
 
 USING_NS_EEL;
 
 eel::Renderer::Renderer()
 {
 	_ASSERT(Init());
+	RegisterDefaultEffect();
 }
 
 eel::Renderer::~Renderer()
@@ -173,4 +175,39 @@ void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 void eel::Renderer::SetScreenCamera(Camera* camera)
 {
 	m_ScreenRenderTarget->SetCamera(camera);
+}
+
+void eel::Renderer::RegisterEffect(const std::string& effectName, UPTR<Effect> effect)
+{
+	EffectPair pair;
+	pair.first = effectName;
+	pair.second = std::move(effect);
+	m_Effects.emplace_back(std::move(pair));
+}
+
+Effect* eel::Renderer::GetEffect(const std::string& effectName)
+{
+	for (auto& effect : m_Effects)
+	{
+		if (effect.first == effectName)
+		{
+			return effect.second.get();
+		}
+	}
+
+	return nullptr;
+}
+
+void eel::Renderer::RegisterDefaultEffect()
+{
+	auto effect = Effect::Create(L"fx/color.cso");
+	InputLayout inputLayout;
+
+	inputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	inputLayout.AddSemantic("COLOR", 0, SemanticType::RGBA_FLOAT32);
+
+	effect->AddTech("ColorTech", inputLayout);
+	effect->AddMatrixMember("gWorldViewProj");
+
+	RegisterEffect("SimpleColor", std::move(effect));
 }
