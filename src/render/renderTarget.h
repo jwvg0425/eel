@@ -7,6 +7,8 @@
 
 NS_EEL_BEGIN
 
+class Camera;
+
 class RenderTarget : public Object, public MakeCreate<RenderTarget>
 {
 public:
@@ -29,6 +31,7 @@ private:
 	D3D11_VIEWPORT			m_Viewport;
 
 	PROPERTY(Color, Background);
+	PROPERTY(Camera*, Camera);
 };
 
 NS_EEL_END

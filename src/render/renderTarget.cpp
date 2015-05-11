@@ -10,7 +10,8 @@ eel::RenderTarget::RenderTarget(UPTR<Texture> backBuffer, UPTR<Texture> depthSte
 	float minDepth, float maxDepth)
 : m_View(nullptr), m_DepthStencil(nullptr), 
 m_Background(1.0f,1.0f,1.0f,1.0f),
-m_DepthStencilBuffer(std::move(depthStencilBuffer))
+m_DepthStencilBuffer(std::move(depthStencilBuffer)),
+m_Camera(nullptr)
 {
 	HR(Renderer::GetInstance()->GetDevice()
 		->CreateRenderTargetView(*backBuffer, 0, &m_View));
