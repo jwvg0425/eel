@@ -87,6 +87,9 @@
     <ClCompile Include="..\..\src\component\scene.cpp" />
     <ClCompile Include="..\..\src\math\matrix.cpp" />
     <ClCompile Include="..\..\src\math\vector.cpp" />
+    <ClCompile Include="..\..\src\render\camera\camera.cpp" />
+    <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp" />
+    <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp" />
     <ClCompile Include="..\..\src\render\effect.cpp" />
     <ClCompile Include="..\..\src\render\mesh.cpp" />
     <ClCompile Include="..\..\src\render\renderStates.cpp" />
@@ -106,6 +109,9 @@
     <ClInclude Include="..\..\src\eel.h" />
     <ClInclude Include="..\..\src\math\matrix.h" />
     <ClInclude Include="..\..\src\math\vector.h" />
+    <ClInclude Include="..\..\src\render\camera\camera.h" />
+    <ClInclude Include="..\..\src\render\camera\orthographicCamera.h" />
+    <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h" />
     <ClInclude Include="..\..\src\render\effect.h" />
     <ClInclude Include="..\..\src\render\mesh.h" />
     <ClInclude Include="..\..\src\render\renderStates.h" />

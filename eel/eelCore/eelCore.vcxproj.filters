@@ -49,6 +49,15 @@
     <ClCompile Include="..\..\src\render\mesh.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\camera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
+      <Filter>render\camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h">
@@ -124,6 +133,15 @@
     <ClInclude Include="..\..\src\render\vertex\posNormal.h">
       <Filter>render\vertex</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\render\camera\orthographicCamera.h">
+      <Filter>render\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\camera\camera.h">
+      <Filter>render\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h">
+      <Filter>render\camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -146,6 +164,9 @@
     </Filter>
     <Filter Include="render\vertex">
       <UniqueIdentifier>{286f6cd7-8108-48df-86a2-f65a6ec9a97c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\camera">
+      <UniqueIdentifier>{49254cb0-8279-4225-a775-ef159df205d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
