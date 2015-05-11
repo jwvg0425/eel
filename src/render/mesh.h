@@ -29,7 +29,7 @@ public:
 		BuildBuffer();
 	}
 
-	MeshImpl(std::vector<Vertex>& vertices, std::vector <UINT>& indices, bool isDynamic)
+	MeshImpl(std::vector<Vertex>& vertices, std::vector<UINT>& indices, bool isDynamic)
 		: m_Vertices(vertices), m_Indices(indices), m_IsDynamic(isDynamic)
 	{
 		BuildBuffer();

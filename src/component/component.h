@@ -23,6 +23,8 @@ public:
 
 	void RemoveAllChilds();
 
+	virtual void Render() = 0;
+
 private:
 	using ChildList = std::vector<SPTR<Component> >;
 

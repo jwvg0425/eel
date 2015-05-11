@@ -25,6 +25,8 @@ public:
 
 	UINT GetIndex(UINT idx);
 
+	virtual void Render();
+
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
 	Effect* m_Effect = nullptr;
