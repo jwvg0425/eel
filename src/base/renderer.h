@@ -19,6 +19,7 @@ public:
 
 	void InitScreenRenderTarget();
 	void SetScreenBackgroundColor(Color4 color);
+	void SetScreenCamera(Camera* camera);
 
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;

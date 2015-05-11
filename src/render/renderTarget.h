@@ -4,10 +4,9 @@
 #include "render/texture.h"
 #include "utility/makeCreate.h"
 #include "math/vector.h"
+#include "render/camera/camera.h"
 
 NS_EEL_BEGIN
-
-class Camera;
 
 class RenderTarget : public Object, public MakeCreate<RenderTarget>
 {

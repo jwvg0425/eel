@@ -5,6 +5,10 @@ NS_EEL_BEGIN
 
 class PerspectiveCamera : public Camera
 {
+public:
+	PerspectiveCamera(Point3 eyePos, Point3 targetPos, Vector3 up);
+
+	virtual void SetLens(FLOAT fovAngle, FLOAT aspect, FLOAT nearZ, FLOAT farZ);
 };
 
 NS_EEL_END

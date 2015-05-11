@@ -25,10 +25,15 @@ public:
 	void SetEyePos(Point3 eyePos);
 	
 	void SetUpVector(Vector3 up);
+
+protected:
+	void UpdateView();
+	void UpdateProjection(Matrix4 matrix);
 	
 private:
 	Point3 m_EyePos;
 	Vector3 m_Up;
+	Vector3 m_Right;
 
 	READ_ONLY(Vector3, Look);
 	READ_ONLY(Matrix4, View);

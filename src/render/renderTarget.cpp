@@ -31,6 +31,7 @@ m_Camera(nullptr)
 
 eel::RenderTarget::~RenderTarget()
 {
+	SAFE_DELETE(m_Camera);
 	SAFE_RELEASE(m_View);
 	SAFE_RELEASE(m_DepthStencil);
 }
