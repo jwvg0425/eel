@@ -83,9 +83,12 @@
     <ClCompile Include="..\..\src\base\object.cpp" />
     <ClCompile Include="..\..\src\base\renderer.cpp" />
     <ClCompile Include="..\..\src\component\component.cpp" />
+    <ClCompile Include="..\..\src\component\model.cpp" />
     <ClCompile Include="..\..\src\component\scene.cpp" />
     <ClCompile Include="..\..\src\math\matrix.cpp" />
     <ClCompile Include="..\..\src\math\vector.cpp" />
+    <ClCompile Include="..\..\src\render\effect.cpp" />
+    <ClCompile Include="..\..\src\render\mesh.cpp" />
     <ClCompile Include="..\..\src\render\renderStates.cpp" />
     <ClCompile Include="..\..\src\render\renderTarget.cpp" />
     <ClCompile Include="..\..\src\render\texture.cpp" />
@@ -98,10 +101,13 @@
     <ClInclude Include="..\..\src\base\object.h" />
     <ClInclude Include="..\..\src\base\renderer.h" />
     <ClInclude Include="..\..\src\component\component.h" />
+    <ClInclude Include="..\..\src\component\model.h" />
     <ClInclude Include="..\..\src\component\scene.h" />
     <ClInclude Include="..\..\src\eel.h" />
     <ClInclude Include="..\..\src\math\matrix.h" />
     <ClInclude Include="..\..\src\math\vector.h" />
+    <ClInclude Include="..\..\src\render\effect.h" />
+    <ClInclude Include="..\..\src\render\mesh.h" />
     <ClInclude Include="..\..\src\render\renderStates.h" />
     <ClInclude Include="..\..\src\render\renderTarget.h" />
     <ClInclude Include="..\..\src\render\texture.h" />

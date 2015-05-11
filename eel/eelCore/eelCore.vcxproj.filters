@@ -40,6 +40,15 @@
     <ClCompile Include="..\..\src\render\texture.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\component\model.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\effect.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\mesh.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h">
@@ -96,6 +105,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\utility\debug.h">
       <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\model.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\effect.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\mesh.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

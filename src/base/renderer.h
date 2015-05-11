@@ -24,7 +24,6 @@ public:
 	ID3D11DeviceContext*	GetContext() const;
 
 private:
-
 	ID3D11Device* m_D3DDevice = nullptr;
 	ID3D11DeviceContext* m_D3DImmediateContext = nullptr;
 
