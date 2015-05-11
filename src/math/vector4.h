@@ -11,9 +11,10 @@ class Vector4
 {
 public:
 	Vector4();
+	Vector4(float value);
 	Vector4(float x, float y, float z, float w);
-	explicit Vector4(const XMFLOAT4& value);
-	explicit Vector4(const XMVECTOR& value);
+	Vector4(const XMFLOAT4& value);
+	Vector4(const XMVECTOR& value);
 
 	Vector4(const Vector4& rhs) = default;
 
@@ -23,6 +24,10 @@ public:
 	float		Dot(CXMVECTOR rhs);
 
 	XMVECTOR	Cross(CXMVECTOR rhs);
+
+	XMVECTOR	Normalize();
+	XMVECTOR	MultiplyAdd(XMVECTOR v1, XMVECTOR v2);
+	XMVECTOR	Transform(XMMATRIX& matrix);
 
 	//data get
 	float			GetX() const;

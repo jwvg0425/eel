@@ -64,6 +64,9 @@
     <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
       <Filter>render\camera</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -162,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\vertex\posNormal.h">
       <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\mathHelper.h">
+      <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

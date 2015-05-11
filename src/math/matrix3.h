@@ -15,8 +15,8 @@ public:
 		FLOAT _10, FLOAT _11, FLOAT _12,
 		FLOAT _20, FLOAT _21, FLOAT _22);
 
-	explicit Matrix3(const XMFLOAT3X3& value);
-	explicit Matrix3(const XMMATRIX& value);
+	Matrix3(const XMFLOAT3X3& value);
+	Matrix3(const XMMATRIX& value);
 
 	Matrix3(const Matrix3& rhs) = default;
 
@@ -27,6 +27,8 @@ public:
 	FLOAT& operator()(UINT row, UINT column);
 
 	FLOAT operator()(UINT row, UINT column) const;
+
+	XMMATRIX operator *(const Matrix3& rhs);
 
 private:
 	PROPERTY(XMFLOAT3X3, Value);

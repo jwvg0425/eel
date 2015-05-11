@@ -60,3 +60,8 @@ FLOAT eel::Matrix4::operator()(UINT row, UINT column) const
 {
 	return m_Value(row, column);
 }
+
+XMMATRIX eel::Matrix4::operator*(const Matrix4& rhs) const
+{
+	return XMMatrixMultiply(XMLoadFloat4x4(&m_Value), XMLoadFloat4x4(&rhs.m_Value));
+}

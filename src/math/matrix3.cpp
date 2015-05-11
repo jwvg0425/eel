@@ -57,3 +57,8 @@ FLOAT eel::Matrix3::operator()(UINT row, UINT column) const
 {
 	return m_Value(row, column);
 }
+
+XMMATRIX eel::Matrix3::operator*(const Matrix3& rhs)
+{
+	return XMMatrixMultiply(XMLoadFloat3x3(&m_Value), XMLoadFloat3x3(&rhs.m_Value));
+}

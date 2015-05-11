@@ -24,6 +24,12 @@ eel::Vector2::Vector2()
 
 }
 
+eel::Vector2::Vector2(float value)
+	: m_Value(value, value)
+{
+
+}
+
 float eel::Vector2::Dot(CXMVECTOR rhs)
 {
 	Vector2 res = Vector2(XMVector2Dot(*this, rhs));
@@ -66,6 +72,26 @@ ARRAY<float, 2> eel::Vector2::GetArray() const
 void eel::Vector2::SetArray(ARRAY<float, 2> arr)
 {
 	m_Value = arr.data();
+}
+
+XMVECTOR eel::Vector2::Normalize()
+{
+	return XMVector2Normalize(*this);
+}
+
+XMVECTOR eel::Vector2::MultiplyAdd(XMVECTOR v1, XMVECTOR v2)
+{
+	return XMVectorMultiplyAdd(*this, v1, v2);
+}
+
+XMVECTOR eel::Vector2::TransformNormal(XMMATRIX& matrix)
+{
+	return XMVector2TransformNormal(*this, matrix);
+}
+
+XMVECTOR eel::Vector2::Transform(XMMATRIX& matrix)
+{
+	return XMVector2Transform(*this, matrix);
 }
 
 Vector2::operator XMFLOAT2()

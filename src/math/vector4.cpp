@@ -24,6 +24,12 @@ eel::Vector4::Vector4()
 
 }
 
+eel::Vector4::Vector4(float value)
+	: m_Value(value, value, value, value)
+{
+
+}
+
 float eel::Vector4::Dot(CXMVECTOR rhs)
 {
 	Vector4 res = Vector4(XMVector4Dot(*this, rhs));
@@ -86,6 +92,21 @@ ARRAY<float, 4> eel::Vector4::GetArray() const
 void eel::Vector4::SetArray(ARRAY<float, 4> arr)
 {
 	m_Value = arr.data();
+}
+
+XMVECTOR eel::Vector4::Normalize()
+{
+	return XMVector4Normalize(*this);
+}
+
+XMVECTOR eel::Vector4::MultiplyAdd(XMVECTOR v1, XMVECTOR v2)
+{
+	return XMVectorMultiplyAdd(*this, v1, v2);
+}
+
+XMVECTOR eel::Vector4::Transform(XMMATRIX& matrix)
+{
+	return XMVector4Transform(*this, matrix);
 }
 
 Vector4::operator XMFLOAT4()

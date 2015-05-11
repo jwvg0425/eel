@@ -169,3 +169,8 @@ void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 {
 	m_ScreenRenderTarget->SetBackground(color);
 }
+
+void eel::Renderer::SetScreenCamera(Camera* camera)
+{
+	m_ScreenRenderTarget->SetCamera(camera);
+}

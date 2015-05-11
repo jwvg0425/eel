@@ -16,8 +16,8 @@ public:
 			FLOAT _20, FLOAT _21, FLOAT _22, FLOAT _23,
 			FLOAT _30, FLOAT _31, FLOAT _32, FLOAT _33);
 
-	explicit Matrix4(const XMFLOAT4X4& value);
-	explicit Matrix4(const XMMATRIX& value);
+	Matrix4(const XMFLOAT4X4& value);
+	Matrix4(const XMMATRIX& value);
 
 	Matrix4(const Matrix4& rhs) = default;
 
@@ -28,6 +28,13 @@ public:
 	FLOAT& operator()(UINT row, UINT column);
 
 	FLOAT operator()(UINT row, UINT column) const;
+
+	XMMATRIX operator *(const Matrix4& rhs) const;
+
+	XMMATRIX RotationAxis(XMVECTOR axis, float angle) const;
+	XMMATRIX RotationX(float angle) const;
+	XMMATRIX RotationY(float angle) const;
+	XMMATRIX RotationZ(float angle) const;
 
 private:
 	PROPERTY(XMFLOAT4X4, Value);
