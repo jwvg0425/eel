@@ -111,6 +111,9 @@
     <ClInclude Include="..\..\src\render\renderStates.h" />
     <ClInclude Include="..\..\src\render\renderTarget.h" />
     <ClInclude Include="..\..\src\render\texture.h" />
+    <ClInclude Include="..\..\src\render\vertex\posBasic.h" />
+    <ClInclude Include="..\..\src\render\vertex\posColor.h" />
+    <ClInclude Include="..\..\src\render\vertex\posNormal.h" />
     <ClInclude Include="..\..\src\utility\Clonable.h" />
     <ClInclude Include="..\..\src\utility\compare.h" />
     <ClInclude Include="..\..\src\utility\debug.h" />
