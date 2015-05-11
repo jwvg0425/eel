@@ -165,7 +165,7 @@ ID3D11DeviceContext* eel::Renderer::GetContext() const
 	return m_D3DImmediateContext;
 }
 
-void eel::Renderer::SetScreenBackgroundColor(Color color)
+void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 {
 	m_ScreenRenderTarget->SetBackground(color);
 }

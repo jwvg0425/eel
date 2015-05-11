@@ -18,7 +18,7 @@ public:
 	void Update(float dTime);
 
 	void InitScreenRenderTarget();
-	void SetScreenBackgroundColor(Color color);
+	void SetScreenBackgroundColor(Color4 color);
 
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;

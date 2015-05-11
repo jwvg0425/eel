@@ -19,12 +19,6 @@
     <ClCompile Include="..\..\src\component\component.cpp">
       <Filter>component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\math\matrix.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\vector.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\utility\log.cpp">
       <Filter>utility</Filter>
     </ClCompile>
@@ -57,6 +51,20 @@
     </ClCompile>
     <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
       <Filter>render\camera</Filter>
+    <ClCompile Include="..\..\src\math\vector2.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix4.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix3.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\vector4.cpp">
+      <Filter>math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,12 +85,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\component\component.h">
       <Filter>component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\math\matrix.h">
-      <Filter>math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\math\vector.h">
-      <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\utility\log.h">
       <Filter>utility</Filter>
@@ -141,6 +143,26 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h">
       <Filter>render\camera</Filter>
+    <ClInclude Include="..\..\src\math\matrix.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector3.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\vector4.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\matrix4.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\matrix3.h">
+      <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
