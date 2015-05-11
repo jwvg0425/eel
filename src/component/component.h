@@ -35,7 +35,7 @@ private:
 	std::string m_Name = "";
 	std::size_t m_NameHash = 0; // speed up 
 
-	Vector		m_Position;
+	Vector4		m_Position;
 };
 
 NS_EEL_END

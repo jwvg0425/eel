@@ -28,7 +28,7 @@ private:
 	READ_ONLY(ID3D11DepthStencilView*, DepthStencil);
 	D3D11_VIEWPORT			m_Viewport;
 
-	PROPERTY(Color, Background);
+	PROPERTY(Color4, Background);
 };
 
 NS_EEL_END
