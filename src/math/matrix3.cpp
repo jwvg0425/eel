@@ -4,9 +4,9 @@ USING_NS_EEL;
 
 eel::Matrix3::Matrix3() :
 m_Value
-(0, 0, 0,
-0, 0, 0,
-0, 0, 0)
+(1, 0, 0,
+0, 1, 0,
+0, 0, 1)
 {
 }
 
