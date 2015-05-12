@@ -79,6 +79,9 @@
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\base\KeyManager.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -192,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\base\event\updateEvent.h">
       <Filter>base\event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\KeyManager.h">
+      <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
