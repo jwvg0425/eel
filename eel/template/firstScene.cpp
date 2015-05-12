@@ -1,5 +1,4 @@
 ﻿#include "firstScene.h"
-#include "simpleModel.h"
 
 FirstScene::FirstScene()
 {
@@ -14,7 +13,14 @@ FirstScene::FirstScene()
 	index.push_back(1);
 	index.push_back(0);
 
-	SPTR<SimpleModel> model = SimpleModel::Create(vertex, index);
+	SPTR<eel::Model> model = eel::Model::Create(vertex, index);
+
+	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleColor"));
+
+	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
+	{
+		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*eel::Renderer::GetInstance()->GetCurrentCamera()->GetViewProjection());
+	});
 
 	AddChild(model);
 }

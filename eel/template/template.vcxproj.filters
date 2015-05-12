@@ -21,7 +21,7 @@
     <ClCompile Include="firstScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleModel.cpp">
+    <ClCompile Include="MyApplication.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="firstScene.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleModel.h">
+    <ClInclude Include="MyApplication.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
