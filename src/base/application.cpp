@@ -81,8 +81,6 @@ bool eel::Application::MakeWindow(std::wstring title, int width, int height)
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		width, height, NULL, (HMENU)NULL, m_InstanceHandle, NULL);
 
-	//TODO : store window size
-
 	if (m_WindowHandle == NULL)
 	{
 		return false;
