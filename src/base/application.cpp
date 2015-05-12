@@ -81,6 +81,8 @@ bool eel::Application::MakeWindow(std::wstring title, int width, int height)
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		width, height, NULL, (HMENU)NULL, m_InstanceHandle, NULL);
 
+	FinishLaunching();
+
 	if (m_WindowHandle == NULL)
 	{
 		return false;
@@ -113,6 +115,11 @@ float eel::Application::GetAspectRatio() const
 void eel::Application::OnMouse(int x, int y, int state, EventType type)
 {
 	Director::GetInstance()->ExcuteEvent(type, MouseEvent(Point2(static_cast<float>(x), static_cast<float>(y)), state));
+}
+
+void eel::Application::FinishLaunching()
+{
+
 }
 
 LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)

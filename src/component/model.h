@@ -2,13 +2,14 @@
 #include "component/component.h"
 #include "render/mesh.h"
 #include "math/matrix.h"
+#include "utility/makeCreate.h"
 #include <functional>
 
 NS_EEL_BEGIN
 
 class Effect;
 
-class Model : public Component
+class Model : public Component, public MakeCreate<Model>
 {
 public:
 	using RenderUpdateFunc = std::function < void(const Model*, Effect*) > ;
