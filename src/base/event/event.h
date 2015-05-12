@@ -30,18 +30,19 @@ public:
 	virtual Object* GetEventObject() = 0;
 };
 
-template<typename Obj, typename Func>
+template<typename Obj, typename Func, typename E>
 class EventTask : public EventEntry
 {
 public:
 	EventTask(Obj* object, Func func)
 	: m_Object(object), m_Function(func) 
 	{
-		static_assert(std::is_base_of(Object, Obj)::value, "Obj must inherit eel::Object");
+		static_assert(std::is_base_of<Event, E>::value, "E must inherit eel::Event");
+		static_assert(std::is_base_of<Object, Obj>::value, "Obj must inherit eel::Object");
 	}
 	virtual void Excute(const Event& e)
 	{
-		m_Object->(*m_Function)(e);
+		(m_Object->*m_Function)(static_cast<const E&>(e));
 	}
 
 	virtual Object* GetEventObject()

@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <memory>
 #include <array>
+#include <type_traits>
+#include <xtr1common>
 
 //name space
 #define NS_EEL_BEGIN namespace eel{
@@ -101,6 +103,16 @@ using ARRAY2D = std::array<std::array<T, COL>, ROW>;
 
 template<typename T, int A, int B, int C>
 using ARRAY3D = std::array<std::array<std::array<T, C>, B>, A > ;
+
+//type traits alias
+template<typename T>
+using decay_t = typename std::decay<T>::type;
+
+template<bool test>
+using enable_if_t = typename std::enable_if<test>::type;
+
+template<typename T>
+using remove_reference_t = typename std::remove_reference<T>::type;
 
 //bit macro function
 template<typename T1, typename T2>
