@@ -21,6 +21,8 @@ public:
 	RenderTarget& operator=(RenderTarget& rhs) = delete;
 
 	void BeginFrame();
+	void SetCamera(UPTR<Camera> camera);
+	Camera* GetCamera() const;
 
 private:
 	UPTR<Texture>			m_DepthStencilBuffer = nullptr;
@@ -30,7 +32,7 @@ private:
 	D3D11_VIEWPORT			m_Viewport;
 
 	PROPERTY(Color4, Background);
-	PROPERTY(Camera*, Camera);
+	UPTR<Camera> m_Camera = nullptr;
 };
 
 NS_EEL_END

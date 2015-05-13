@@ -177,9 +177,9 @@ void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 	m_ScreenRenderTarget->SetBackground(color);
 }
 
-void eel::Renderer::SetScreenCamera(Camera* camera)
+void eel::Renderer::SetScreenCamera(UPTR<Camera> camera)
 {
-	m_ScreenRenderTarget->SetCamera(camera);
+	m_ScreenRenderTarget->SetCamera(std::move(camera));
 }
 
 void eel::Renderer::RegisterEffect(const std::string& effectName, UPTR<Effect> effect)

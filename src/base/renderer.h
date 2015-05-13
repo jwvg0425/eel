@@ -20,7 +20,7 @@ public:
 
 	void InitScreenRenderTarget();
 	void SetScreenBackgroundColor(Color4 color);
-	void SetScreenCamera(Camera* camera);
+	void SetScreenCamera(UPTR<Camera> camera);
 
 	void SetInputLayout(ID3D11InputLayout* inputLayout);
 	void SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY topology);
