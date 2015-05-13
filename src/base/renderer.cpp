@@ -154,10 +154,19 @@ void eel::Renderer::Render(SPTR<Scene> scene)
 
 	scene->Render();
 
+	//draw to registered render target
+
+	for (auto& renderTarget : m_RenderTargets)
+	{
+		m_CurrentRenderTarget = renderTarget.get();
+		renderTarget->BeginFrame();
+		scene->Render();
+	}
+
 	HR(m_SwapChain->Present(0, 0));
 }
 
-void eel::Renderer::Update(float dTime)
+void eel::Renderer::Update(const UpdateEvent& e)
 {
 
 }
@@ -232,4 +241,23 @@ Camera* eel::Renderer::GetCurrentCamera()
 	_ASSERT(m_CurrentRenderTarget != nullptr);
 
 	return m_CurrentRenderTarget->GetCamera();
+}
+
+void eel::Renderer::RegisterRenderTarget(SPTR<RenderTarget> renderTarget)
+{
+	m_RenderTargets.push_back(renderTarget);
+}
+
+bool eel::Renderer::UnregisterRenderTarget(SPTR<RenderTarget> renderTarget)
+{
+	for (auto it = m_RenderTargets.cbegin(); it != m_RenderTargets.cend(); ++it)
+	{
+		if (*it == renderTarget)
+		{
+			it = m_RenderTargets.erase(it);
+			return true;
+		}
+	}
+
+	return false;
 }
