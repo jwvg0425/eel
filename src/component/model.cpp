@@ -16,7 +16,16 @@ void eel::Model::Render() const
 		m_Func(this, m_Effect);
 	}
 
-	TechData tech = m_Effect->GetTech();
+	TechData tech;
+
+	if (m_TechName == "")
+	{
+		tech = m_Effect->GetTech();
+	}
+	else
+	{
+		tech = m_Effect->GetTech(m_TechName);
+	}
 
 	Renderer::GetInstance()->SetInputLayout(tech.m_InputLayout);
 	Renderer::GetInstance()->SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -47,4 +56,9 @@ void eel::Model::SetRenderUpdate(RenderUpdateFunc func)
 eel::Matrix4 eel::Model::GetWorld() const
 {
 	return m_World;
+}
+
+void eel::Model::SetTech(const std::string& techName)
+{
+	m_TechName = techName;
 }

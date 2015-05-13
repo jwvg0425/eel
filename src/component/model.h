@@ -29,6 +29,7 @@ public:
 	}
 
 	void SetRenderUpdate(RenderUpdateFunc func);
+	void SetTech(const std::string& techName);
 
 	UINT GetIndex(UINT idx) const;
 	Matrix4 GetWorld() const;
@@ -39,6 +40,7 @@ private:
 	UPTR<Mesh> m_Mesh = nullptr;
 	WRITE_ONLY(Effect*, Effect);
 	RenderUpdateFunc m_Func = nullptr;
+	std::string m_TechName = "";
 
 	Matrix4		m_World;
 };
