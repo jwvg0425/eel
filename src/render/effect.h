@@ -37,7 +37,6 @@ class Effect : public MakeCreate<Effect>
 {
 public:
 	using TechPair = std::pair < std::string, TechData > ;
-	using TypePair = std::pair < std::string, EffectValueType > ;
 	using MatrixPair = std::pair < std::string, ID3DX11EffectMatrixVariable* > ;
 	using VectorPair = std::pair < std::string, ID3DX11EffectVectorVariable* > ;
 	using GenericPair = std::pair < std::string, ID3DX11EffectVariable* > ;

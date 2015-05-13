@@ -4,6 +4,7 @@
 #include "component/scene.h"
 #include "render/texture.h"
 #include "render/effect.h"
+#include "base/director.h"
 
 USING_NS_EEL;
 
@@ -11,6 +12,7 @@ eel::Renderer::Renderer()
 {
 	_ASSERT(Init());
 	RegisterDefaultEffect();
+	Director::GetInstance()->RegisterEvent(EventType::UPDATE, this, &Renderer::Update);
 }
 
 eel::Renderer::~Renderer()
