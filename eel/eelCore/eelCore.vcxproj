@@ -83,6 +83,7 @@
     <ClCompile Include="..\..\src\base\KeyManager.cpp" />
     <ClCompile Include="..\..\src\base\object.cpp" />
     <ClCompile Include="..\..\src\base\renderer.cpp" />
+    <ClCompile Include="..\..\src\base\timer.cpp" />
     <ClCompile Include="..\..\src\component\component.cpp" />
     <ClCompile Include="..\..\src\component\model.cpp" />
     <ClCompile Include="..\..\src\component\scene.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="..\..\src\base\macro.h" />
     <ClInclude Include="..\..\src\base\object.h" />
     <ClInclude Include="..\..\src\base\renderer.h" />
+    <ClInclude Include="..\..\src\base\timer.h" />
     <ClInclude Include="..\..\src\component\component.h" />
     <ClInclude Include="..\..\src\component\model.h" />
     <ClInclude Include="..\..\src\component\scene.h" />

@@ -5,6 +5,7 @@
 #include "component/scene.h"
 #include "base/event/mouseEvent.h"
 #include "base/event/UpdateEvent.h"
+#include "base/timer.h"
 
 NS_EEL_BEGIN
 
@@ -31,6 +32,7 @@ private:
 	using EventMap = std::map < EventType, EventList > ;
 
 	EventMap m_EventMap;
+	Timer m_Timer;
 };
 
 template<typename T, typename E>

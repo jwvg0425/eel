@@ -5,14 +5,15 @@ USING_NS_EEL;
 
 void Director::GameLoop()
 {
-	//TODO : Update
+	m_Timer.Tick();
+	Director::ExcuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
 
 	Renderer::GetInstance()->Render(m_RunningScene);
 }
 
 Director::Director()
 {
-
+	m_Timer.Reset();
 }
 
 Director::~Director()
@@ -22,6 +23,8 @@ Director::~Director()
 
 void eel::Director::RunWithScene(SPTR<Scene> scene)
 {
+	_ASSERT(m_RunningScene == nullptr);
+
 	m_RunningScene = scene;
 }
 
