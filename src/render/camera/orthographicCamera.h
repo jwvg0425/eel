@@ -4,7 +4,7 @@
 
 NS_EEL_BEGIN
 
-class OrthographicCamera : public Camera, public MakeCreate<OrthographicCamera>
+class OrthographicCamera : public Camera
 {
 public:
 	OrthographicCamera(Point3 eyePos, Point3 targetPos, Vector3 up);

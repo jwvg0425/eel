@@ -4,6 +4,7 @@
 #include <d3dx11Effect.h>
 #include <vector>
 #include <string>
+#include <functional>
 #include "math/vector.h"
 #include "math/matrix.h"
 #include "render/inputLayout.h"
@@ -66,6 +67,7 @@ public:
 
 private:
 	ID3DX11Effect* m_Fx = nullptr;
+
 	std::vector<TechPair> m_Techs;
 	std::vector<MatrixPair> m_Matrixes;
 	std::vector<VectorPair> m_Vectors;

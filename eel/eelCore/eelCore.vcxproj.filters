@@ -79,10 +79,10 @@
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\base\KeyManager.cpp">
+    <ClCompile Include="..\..\src\base\timer.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\base\timer.cpp">
+    <ClCompile Include="..\..\src\base\keyManager.cpp">
       <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
@@ -199,10 +199,13 @@
     <ClInclude Include="..\..\src\base\event\updateEvent.h">
       <Filter>base\event</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\base\KeyManager.h">
+    <ClInclude Include="..\..\src\base\timer.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\base\timer.h">
+    <ClInclude Include="..\..\src\render\light\light.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\keyManager.h">
       <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>
@@ -233,6 +236,9 @@
     </Filter>
     <Filter Include="base\event">
       <UniqueIdentifier>{d417dc35-a9f4-4ebe-8900-eb43ca3c5037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\light">
+      <UniqueIdentifier>{d6c0ef4c-273f-4170-8b59-759e676be0ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

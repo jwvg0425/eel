@@ -4,7 +4,7 @@
 
 NS_EEL_BEGIN
 
-class PerspectiveCamera : public Camera, public MakeCreate<PerspectiveCamera>
+class PerspectiveCamera : public Camera
 {
 public:
 	PerspectiveCamera(Point3 eyePos, Point3 targetPos, Vector3 up);

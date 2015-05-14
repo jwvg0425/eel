@@ -1,5 +1,6 @@
 ﻿#include "director.h"
 #include "base/renderer.h"
+#include "base/keyManager.h"
 
 USING_NS_EEL;
 
@@ -13,6 +14,7 @@ void Director::GameLoop()
 
 Director::Director()
 {
+	KeyManager::GetInstance();
 	m_Timer.Reset();
 }
 

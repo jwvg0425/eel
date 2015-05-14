@@ -15,6 +15,21 @@ public:
 	Component(Component& rhs) = delete;
 	Component& operator=(Component& rhs) = delete;
 
+
+	template<typename T>
+	void AddChild(UPTR<T>& child)
+	{
+		SPTR<Component> sharedChild = std::move(child);
+		AddChild(sharedChild, sharedChild->m_Name);
+	}
+
+	template<typename T>
+	void Addchild(UPTR<T>& child, const std::string& name)
+	{
+		SPTR<Component> sharedChild = std::move(child);
+		AddChild(sharedChild, name);
+	}
+
 	void AddChild(SPTR<Component> child);
 	void AddChild(SPTR<Component> child, const std::string& name);
 
