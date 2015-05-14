@@ -80,7 +80,7 @@
     <ClCompile Include="..\..\src\base\event\event.cpp" />
     <ClCompile Include="..\..\src\base\event\mouseEvent.cpp" />
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp" />
-    <ClCompile Include="..\..\src\base\KeyManager.cpp" />
+    <ClCompile Include="..\..\src\base\keyManager.cpp" />
     <ClCompile Include="..\..\src\base\object.cpp" />
     <ClCompile Include="..\..\src\base\renderer.cpp" />
     <ClCompile Include="..\..\src\base\timer.cpp" />
@@ -110,7 +110,7 @@
     <ClInclude Include="..\..\src\base\event\event.h" />
     <ClInclude Include="..\..\src\base\event\mouseEvent.h" />
     <ClInclude Include="..\..\src\base\event\updateEvent.h" />
-    <ClInclude Include="..\..\src\base\KeyManager.h" />
+    <ClInclude Include="..\..\src\base\keyManager.h" />
     <ClInclude Include="..\..\src\base\macro.h" />
     <ClInclude Include="..\..\src\base\object.h" />
     <ClInclude Include="..\..\src\base\renderer.h" />
@@ -129,6 +129,7 @@
     <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h" />
     <ClInclude Include="..\..\src\render\effect.h" />
     <ClInclude Include="..\..\src\render\inputLayout.h" />
+    <ClInclude Include="..\..\src\render\light\light.h" />
     <ClInclude Include="..\..\src\render\mesh.h" />
     <ClInclude Include="..\..\src\math\vector2.h" />
     <ClInclude Include="..\..\src\math\vector3.h" />

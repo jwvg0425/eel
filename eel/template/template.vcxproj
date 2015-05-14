@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="firstScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingCamera.cpp" />
     <ClCompile Include="MyApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="firstScene.h" />
+    <ClInclude Include="MovingCamera.h" />
     <ClInclude Include="MyApplication.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

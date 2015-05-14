@@ -13,7 +13,8 @@ FirstScene::FirstScene()
 	index.push_back(1);
 	index.push_back(0);
 
-	SPTR<eel::Model> model = eel::Model::Create(vertex, index);
+	auto model = eel::Model::Create(vertex, index);
+
 
 	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleColor"));
 
