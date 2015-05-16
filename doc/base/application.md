@@ -6,7 +6,7 @@ this class handle window messages and manage window data(size, caption, etc..).
 
 ## file
 
-src/base/application.h
+src/base/application.h  
 src/base/application.cpp
 
 ##define
@@ -58,6 +58,14 @@ float GetAspectRatio() const
 ```
 
 this function return program window's aspect ratio.
+
+#### FinishLaunching
+
+```C++
+virtual void FinishLaunching()
+````
+
+this function called when program start(complete to create program window). you should override this function and init state depending on your game's feature.
 
 ### non-member functions
 
