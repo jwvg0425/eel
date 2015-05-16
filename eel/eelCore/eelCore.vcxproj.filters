@@ -85,6 +85,9 @@
     <ClCompile Include="..\..\src\base\keyManager.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\light\light.cpp">
+      <Filter>render\light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -148,9 +151,6 @@
     <ClInclude Include="..\..\src\render\texture.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\Clonable.h">
-      <Filter>utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\utility\compare.h">
       <Filter>utility</Filter>
     </ClInclude>
@@ -207,6 +207,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\base\keyManager.h">
       <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\Clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\directionalLight.h">
+      <Filter>render\light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
