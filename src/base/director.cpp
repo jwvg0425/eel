@@ -7,7 +7,7 @@ USING_NS_EEL;
 void Director::GameLoop()
 {
 	m_Timer.Tick();
-	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
+	Director::ExcuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
 
 	Renderer::GetInstance()->Render(m_RunningScene);
 }
@@ -30,7 +30,7 @@ void eel::Director::RunWithScene(SPTR<Scene> scene)
 	m_RunningScene = scene;
 }
 
-void eel::Director::ExecuteEvent(EventType type, const Event& e)
+void eel::Director::ExcuteEvent(EventType type, const Event& e)
 {
 	for (auto& task : m_EventMap[type])
 	{

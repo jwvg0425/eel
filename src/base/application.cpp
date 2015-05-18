@@ -114,7 +114,7 @@ float eel::Application::GetAspectRatio() const
 
 void eel::Application::OnMouse(int x, int y, int state, EventType type)
 {
-	Director::GetInstance()->ExecuteEvent(type, MouseEvent(Point2(static_cast<float>(x), static_cast<float>(y)), state));
+	Director::GetInstance()->ExcuteEvent(type, MouseEvent(Point2(static_cast<float>(x), static_cast<float>(y)), state));
 }
 
 void eel::Application::FinishLaunching()
