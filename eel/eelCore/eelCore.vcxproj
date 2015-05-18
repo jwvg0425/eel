@@ -93,7 +93,6 @@
     <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp" />
     <ClCompile Include="..\..\src\render\effect.cpp" />
     <ClCompile Include="..\..\src\render\inputLayout.cpp" />
-    <ClCompile Include="..\..\src\render\light\light.cpp" />
     <ClCompile Include="..\..\src\render\mesh.cpp" />
     <ClCompile Include="..\..\src\math\matrix3.cpp" />
     <ClCompile Include="..\..\src\math\matrix4.cpp" />
@@ -130,7 +129,6 @@
     <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h" />
     <ClInclude Include="..\..\src\render\effect.h" />
     <ClInclude Include="..\..\src\render\inputLayout.h" />
-    <ClInclude Include="..\..\src\render\light\directionalLight.h" />
     <ClInclude Include="..\..\src\render\light\light.h" />
     <ClInclude Include="..\..\src\render\mesh.h" />
     <ClInclude Include="..\..\src\math\vector2.h" />

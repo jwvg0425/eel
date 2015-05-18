@@ -55,7 +55,7 @@ public:
 	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
 	template<typename T>
-	void	SetGenericMember(const std::string& memberName, const T& value, UINT valueSize);
+	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);
 
 	void	SetVectorMember(const std::string& memberName, const Vector4& value);
 	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
@@ -77,7 +77,7 @@ private:
 };
 
 template<typename T>
-void eel::Effect::SetGenericMember(const std::string& memberName, const T& value, UINT valueSize)
+void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)
 {
 
 	for (auto pair : m_GenericValues)

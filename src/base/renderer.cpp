@@ -5,7 +5,6 @@
 #include "render/texture.h"
 #include "render/effect.h"
 #include "base/director.h"
-#include "render/light/directionalLight.h"
 
 USING_NS_EEL;
 
@@ -152,12 +151,6 @@ void eel::Renderer::Render(SPTR<Scene> scene)
 {
 	_ASSERT(scene != nullptr);
 
-	//update light
-	for (auto& update : m_UpdateLights)
-	{
-		update();
-	}
-
 	m_CurrentRenderTarget = m_ScreenRenderTarget.get();
 	m_ScreenRenderTarget->BeginFrame();
 
@@ -269,15 +262,4 @@ bool eel::Renderer::UnregisterRenderTarget(SPTR<RenderTarget> renderTarget)
 	}
 
 	return false;
-}
-
-void eel::Renderer::RegisterLightFunction(std::function<void()> clear, std::function<void()> update)
-{
-	m_ClearLights.push_back(clear);
-	m_UpdateLights.push_back(update);
-}
-
-void eel::Renderer::RegisterDefaultLight()
-{
-	DirectionalLight::BindEffect("SimpleLight", "gDirLights", "gDirLightsNum");
 }

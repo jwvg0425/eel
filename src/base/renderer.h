@@ -6,7 +6,6 @@
 #include "render/renderTarget.h"
 #include "base/event/updateEvent.h"
 #include <vector>
-#include <functional>
 
 NS_EEL_BEGIN
 class Effect;
@@ -38,10 +37,7 @@ public:
 	void RegisterRenderTarget(SPTR<RenderTarget> renderTarget);
 	bool UnregisterRenderTarget(SPTR<RenderTarget> renderTarget);
 
-	void RegisterLightFunction(std::function<void()> clear, std::function<void()> update);
-
 private:
-	void RegisterDefaultLight();
 	void RegisterDefaultEffect();
 	ID3D11Device* m_D3DDevice = nullptr;
 	ID3D11DeviceContext* m_D3DImmediateContext = nullptr;
@@ -55,9 +51,6 @@ private:
 	using EffectPair = std::pair < std::string, UPTR<Effect> > ;
 
 	std::vector<EffectPair> m_Effects;
-	
-	std::vector<std::function<void()>> m_ClearLights;
-	std::vector<std::function<void()>> m_UpdateLights;
 	
 	READ_ONLY(bool, IsEnable4xMsaa);
 	READ_ONLY(UINT, 4xMsaaQuality);
