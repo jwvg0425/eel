@@ -214,6 +214,9 @@
     <ClInclude Include="..\..\src\render\light\directionalLight.h">
       <Filter>render\light</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\utility\utility.h">
+      <Filter>utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">

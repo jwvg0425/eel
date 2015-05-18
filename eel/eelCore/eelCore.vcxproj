@@ -148,6 +148,7 @@
     <ClInclude Include="..\..\src\utility\log.h" />
     <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
+    <ClInclude Include="..\..\src\utility\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\src\render\shader\color.fx">
