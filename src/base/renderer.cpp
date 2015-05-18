@@ -5,6 +5,9 @@
 #include "render/texture.h"
 #include "render/effect.h"
 #include "base/director.h"
+#include "render/light/directionalLight.h"
+#include "render/light/pointLight.h"
+#include "render/light/spotLight.h"
 
 USING_NS_EEL;
 
@@ -216,6 +219,7 @@ Effect* eel::Renderer::GetEffect(const std::string& effectName)
 
 void eel::Renderer::RegisterDefaultEffect()
 {
+	//simple color
 	auto effect = Effect::Create(L"fx/color.cso", "ColorTech");
 	InputLayout inputLayout;
 
@@ -226,6 +230,28 @@ void eel::Renderer::RegisterDefaultEffect()
 	effect->AddMatrixMember("gWorldViewProj");
 
 	RegisterEffect("SimpleColor", std::move(effect));
+
+	//simple light
+	auto rightEffect = Effect::Create(L"fx/light.cso", "Light");
+	InputLayout rightInputLayout;
+
+	rightInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	rightInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+
+	rightEffect->AddTech("Light", rightInputLayout);
+	rightEffect->AddMatrixMember("gWorldViewProj");
+	rightEffect->AddMatrixMember("gWorld");
+	rightEffect->AddMatrixMember("gWorldInvTranspose");
+
+	rightEffect->AddVectorMember("gEyePosW");
+
+	rightEffect->AddGenericMember("gMaterial");
+
+	rightEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
+	rightEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
+	rightEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
+
+	RegisterEffect("SimpleLight", std::move(rightEffect));
 }
 
 void eel::Renderer::SetInputLayout(ID3D11InputLayout* inputLayout)

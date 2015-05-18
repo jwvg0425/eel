@@ -54,6 +54,9 @@ public:
 	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
 	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
+	template<typename L>
+	void	AddLightMember(const std::string& memberName, const std::string& lightNumName, int maxNum);
+
 	template<typename T>
 	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);
 
@@ -75,6 +78,17 @@ private:
 	std::vector<ResourcePair> m_Resources;
 	std::string m_DefaultTech;
 };
+
+template<typename L>
+void eel::Effect::AddLightMember(const std::string& memberName, const std::string& lightNumName, int maxNum)
+{
+
+	AddGenericMember(memberName);
+	AddGenericMember(lightNumName);
+
+	L::BindEffect(this, memberName, lightNumName, maxNum);
+	L::UpdateBindEffect();
+}
 
 template<typename T>
 void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)

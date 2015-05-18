@@ -85,6 +85,9 @@
     <ClCompile Include="..\..\src\base\keyManager.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\math\mathHelper.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -148,9 +151,6 @@
     <ClInclude Include="..\..\src\render\texture.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\Clonable.h">
-      <Filter>utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\utility\compare.h">
       <Filter>utility</Filter>
     </ClInclude>
@@ -208,6 +208,21 @@
     <ClInclude Include="..\..\src\base\keyManager.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\render\light\directionalLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\pointLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\spotLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\material.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -243,6 +258,12 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\src\render\shader\color.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\light.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
       <Filter>render\shader</Filter>
     </FxCompile>
   </ItemGroup>
