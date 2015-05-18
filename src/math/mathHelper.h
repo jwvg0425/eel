@@ -1,4 +1,3 @@
-﻿#include "base/macro.h"
 ﻿
 #include "base/macro.h"
 #include <xnamath.h>

@@ -23,7 +23,6 @@ FirstScene::FirstScene()
 
 	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
 	{
-		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*eel::Renderer::GetInstance()->GetCurrentCamera()->GetViewProjection());
 		auto camera = eel::Renderer::GetInstance()->GetCurrentCamera();
 
 		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*camera->GetViewProjection());

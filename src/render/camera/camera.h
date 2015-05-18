@@ -22,10 +22,8 @@ public:
 	void Pitch(float angle);
 	void RotateY(float angle);
 
-	GETTER(Point3, m_EyePos, EyePos);
 
 	void SetEyePos(Point3 eyePos);
-	
 	void SetUpVector(Vector3 up);
 	Ray	GetCameraRay() const
 	{
