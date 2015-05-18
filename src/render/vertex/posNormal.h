@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "render/vertex/vertexUtil.h"
+#include "base/macro.h"
+#include "math/vector.h"
 
 NS_EEL_BEGIN
 

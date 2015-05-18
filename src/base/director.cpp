@@ -16,7 +16,6 @@ Director::Director()
 {
 	KeyManager::GetInstance();
 	m_Timer.Reset();
-	RegisterEvent(EventType::MOUSE_MOVE, this, &eel::Director::UpdateMousePos);
 }
 
 Director::~Director()
@@ -63,9 +62,4 @@ void eel::Director::UnregisterAllEvent(Object* object)
 	{
 		UnregisterEvent(eventList.first, object);
 	}
-}
-
-void eel::Director::UpdateMousePos(const MouseEvent& event)
-{
-	m_MousePos = event.m_Position;
 }

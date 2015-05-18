@@ -3,6 +3,7 @@
 #include "base/director.h"
 #include "base/renderer.h"
 #include "base/keyManager.h"
+#include "math/vector.h"
 #include "component/model.h"
 #include "render/vertex/posColor.h"
 #include "render/effect.h"
