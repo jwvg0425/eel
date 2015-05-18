@@ -23,7 +23,7 @@ public:
 
 	void UnregisterEvent(EventType type, Object* object);
 	void UnregisterAllEvent(Object* object);
-	void ExcuteEvent(EventType type, const Event& e);
+	void ExecuteEvent(EventType type, const Event& e);
 
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
