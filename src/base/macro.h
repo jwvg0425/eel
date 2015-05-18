@@ -120,3 +120,5 @@ void RemoveBit(T1& dest, T2 bit)
 	static_assert(std::is_convertible<T2, T1>::value, "must be convertible from T2 to T1");
 	dest &= ~bit;
 }
+
+

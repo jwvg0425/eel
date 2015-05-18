@@ -1,6 +1,5 @@
 ﻿#pragma once
-#include "base/macro.h"
-#include "math/vector.h"
+#include "render/vertex/vertexUtil.h"
 
 NS_EEL_BEGIN
 
@@ -11,5 +10,6 @@ struct PosBasic
 	Point2 m_Tex;
 	Color4 m_Color;
 };
+
 
 NS_EEL_END

@@ -8,8 +8,6 @@
 #include "math/vector.h"
 #include "math/matrix.h"
 #include "render/inputLayout.h"
-// const buffer / tech list
-// getVariable, setVariable,
 
 NS_EEL_BEGIN
 

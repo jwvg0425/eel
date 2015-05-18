@@ -6,6 +6,7 @@
 #include "base/event/mouseEvent.h"
 #include "base/event/UpdateEvent.h"
 #include "base/timer.h"
+#include "math/vector.h"
 
 NS_EEL_BEGIN
 
@@ -24,7 +25,11 @@ public:
 	void UnregisterEvent(EventType type, Object* object);
 	void UnregisterAllEvent(Object* object);
 	void ExecuteEvent(EventType type, const Event& e);
-
+	void UpdateMousePos(const MouseEvent& event);
+	Point2	GetCurrentMousePos() const
+	{
+		return m_MousePos;
+	}
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
 
@@ -33,6 +38,7 @@ private:
 
 	EventMap m_EventMap;
 	Timer m_Timer;
+	Point2 m_MousePos;
 };
 
 template<typename T, typename E>
