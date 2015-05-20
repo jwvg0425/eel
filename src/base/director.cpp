@@ -7,9 +7,8 @@ USING_NS_EEL;
 void Director::GameLoop()
 {
 	m_Timer.Tick();
-	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
-
 	Renderer::GetInstance()->Render(m_RunningScene);
+	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
 }
 
 Director::Director()
