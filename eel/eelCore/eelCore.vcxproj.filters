@@ -79,6 +79,18 @@
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\base\timer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\keyManager.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\mathHelper.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\ray.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -142,9 +154,6 @@
     <ClInclude Include="..\..\src\render\texture.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\Clonable.h">
-      <Filter>utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\utility\compare.h">
       <Filter>utility</Filter>
     </ClInclude>
@@ -193,6 +202,39 @@
     <ClInclude Include="..\..\src\base\event\updateEvent.h">
       <Filter>base\event</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\base\timer.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\light.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\keyManager.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\directionalLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\pointLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\spotLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\clonable.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\material.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\utility.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
+      <Filter>render\vertex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
@@ -222,9 +264,18 @@
     <Filter Include="base\event">
       <UniqueIdentifier>{d417dc35-a9f4-4ebe-8900-eb43ca3c5037}</UniqueIdentifier>
     </Filter>
+    <Filter Include="render\light">
+      <UniqueIdentifier>{d6c0ef4c-273f-4170-8b59-759e676be0ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\src\render\shader\color.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\light.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
       <Filter>render\shader</Filter>
     </FxCompile>
   </ItemGroup>

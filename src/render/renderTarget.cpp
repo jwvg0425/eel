@@ -31,7 +31,6 @@ m_Camera(nullptr)
 
 eel::RenderTarget::~RenderTarget()
 {
-	SAFE_DELETE(m_Camera);
 	SAFE_RELEASE(m_View);
 	SAFE_RELEASE(m_DepthStencil);
 }
@@ -53,4 +52,14 @@ void eel::RenderTarget::BeginFrame()
 
 	Renderer::GetInstance()->GetContext()
 		->OMSetRenderTargets(1, &m_View, m_DepthStencil);
+}
+
+void eel::RenderTarget::SetCamera(UPTR<Camera> camera)
+{
+	m_Camera = std::move(camera);
+}
+
+Camera* eel::RenderTarget::GetCamera() const
+{
+	return m_Camera.get();
 }

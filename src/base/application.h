@@ -24,6 +24,8 @@ public:
 	bool Init(std::wstring title, int width, int height);
 
 	float GetAspectRatio() const;
+protected:
+	virtual void FinishLaunching();
 
 private:
 	void OnMouse(int x, int y, int state, EventType type);

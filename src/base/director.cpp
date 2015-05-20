@@ -1,18 +1,21 @@
 ﻿#include "director.h"
 #include "base/renderer.h"
+#include "base/keyManager.h"
 
 USING_NS_EEL;
 
 void Director::GameLoop()
 {
-	//TODO : Update
-
+	m_Timer.Tick();
 	Renderer::GetInstance()->Render(m_RunningScene);
+	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
 }
 
 Director::Director()
 {
-
+	KeyManager::GetInstance();
+	m_Timer.Reset();
+	RegisterEvent(EventType::MOUSE_MOVE, this, &eel::Director::UpdateMousePos);
 }
 
 Director::~Director()
@@ -22,10 +25,12 @@ Director::~Director()
 
 void eel::Director::RunWithScene(SPTR<Scene> scene)
 {
+	_ASSERT(m_RunningScene == nullptr);
+
 	m_RunningScene = scene;
 }
 
-void eel::Director::ExcuteEvent(EventType type, const Event& e)
+void eel::Director::ExecuteEvent(EventType type, const Event& e)
 {
 	for (auto& task : m_EventMap[type])
 	{
@@ -57,4 +62,9 @@ void eel::Director::UnregisterAllEvent(Object* object)
 	{
 		UnregisterEvent(eventList.first, object);
 	}
+}
+
+void eel::Director::UpdateMousePos(const MouseEvent& event)
+{
+	m_MousePos = event.m_Position;
 }

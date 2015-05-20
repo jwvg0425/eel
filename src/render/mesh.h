@@ -2,6 +2,8 @@
 #include "d3dx11Effect.h"
 #include "base/object.h"
 #include "utility/debug.h"
+#include "math/vector.h"
+#include "vertex/vertexUtil.h"
 #include <vector>
 
 NS_EEL_BEGIN
@@ -15,6 +17,10 @@ public:
 
 	UINT GetIndex(UINT idx) const;
 	UINT GetIndexCount() const;
+	virtual const Point3* GetPosByIndex(UINT idx) const
+	{
+		return nullptr;
+	}
 
 protected:
 	void SetStride(UINT stride);
@@ -30,29 +36,34 @@ private:
 	READ_ONLY(UINT, Stride);
 };
 
-template<typename Vertex>
+template<typename RawVertex>
 class MeshImpl : public Mesh
 {
 public:
-	MeshImpl(std::vector<Vertex>& vertices, std::vector<UINT>& indices)
-		: Mesh(indices), m_Vertices(vertices)
+	MeshImpl(std::vector<RawVertex>& vertices, std::vector<UINT>& indices)
+		: Mesh(indices)
 	{
-		BuildBuffer();
+		BuildBuffer(vertices);
 	}
 
-	MeshImpl(std::vector<Vertex>& vertices, std::vector<UINT>& indices, bool isDynamic)
-		: Mesh(indices), m_Vertices(vertices), m_Indices(indices)
+	MeshImpl(std::vector<RawVertex>& vertices, std::vector<UINT>& indices, bool isDynamic)
+		: Mesh(indices)
 	{
-		BuildBuffer();
+		BuildBuffer(vertices);
 	}
 
-	Vertex GetVertex(UINT idx) const
+	VertexWrapper<RawVertex> GetVertex(UINT idx) const
 	{
 		return m_Vertices[idx];
 	}
 
+	const Point3* GetPosByIndex(UINT idx) const override
+	{
+		return m_Vertices[idx].GetPos();
+	}
+
 private:
-	void BuildBuffer()
+	void BuildBuffer(const std::vector<RawVertex>& vertices)
 	{
 		D3D11_BUFFER_DESC vbd;
 
@@ -65,8 +76,8 @@ private:
 			vbd.Usage = D3D11_USAGE_IMMUTABLE;
 		}
 
-		SetStride(sizeof(Vertex));
-		vbd.ByteWidth = sizeof(Vertex)* m_Vertices.size();
+		SetStride(sizeof(RawVertex));
+		vbd.ByteWidth = sizeof(RawVertex)* vertices.size();
 		vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
 		if (GetIsDynamic())
@@ -80,7 +91,7 @@ private:
 
 		vbd.MiscFlags = 0;
 		D3D11_SUBRESOURCE_DATA vinitData;
-		vinitData.pSysMem = &m_Vertices[0];
+		vinitData.pSysMem = &vertices[0];
 		ID3D11Buffer* vertexBuffer = nullptr;
 		HR(Renderer::GetInstance()->GetDevice()->CreateBuffer(&vbd, &vinitData, &vertexBuffer));
 
@@ -96,9 +107,16 @@ private:
 		HR(Renderer::GetInstance()->GetDevice()->CreateBuffer(&ibd, &iinitData, &indexBuffer));
 
 		SetBuffer(vertexBuffer, indexBuffer);
+
+		UINT idx = 0;
+		for(auto vertex : vertices)
+		{
+			m_Vertices.push_back(vertex);
+		}
 	}
 
-	std::vector<Vertex> m_Vertices;
+	std::vector<VertexWrapper<RawVertex>>	m_Vertices;
 };
+
 
 NS_EEL_END

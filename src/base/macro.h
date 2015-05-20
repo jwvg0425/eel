@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <memory>
 #include <array>
+#include <type_traits>
+#include <xtr1common>
 
 //name space
 #define NS_EEL_BEGIN namespace eel{

@@ -4,6 +4,7 @@
 #include "math/vector.h"
 #include "utility/singleton.h"
 #include "render/renderTarget.h"
+#include "base/event/updateEvent.h"
 #include <vector>
 
 NS_EEL_BEGIN
@@ -16,11 +17,11 @@ public:
 
 	bool Init();
 	void Render(SPTR<Scene> scene);
-	void Update(float dTime);
+	void Update(const UpdateEvent& e);
 
 	void InitScreenRenderTarget();
 	void SetScreenBackgroundColor(Color4 color);
-	void SetScreenCamera(Camera* camera);
+	void SetScreenCamera(UPTR<Camera> camera);
 
 	void SetInputLayout(ID3D11InputLayout* inputLayout);
 	void SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY topology);
@@ -33,6 +34,9 @@ public:
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;
 
+	void RegisterRenderTarget(SPTR<RenderTarget> renderTarget);
+	bool UnregisterRenderTarget(SPTR<RenderTarget> renderTarget);
+
 private:
 	void RegisterDefaultEffect();
 	ID3D11Device* m_D3DDevice = nullptr;
@@ -40,6 +44,7 @@ private:
 
 	IDXGISwapChain* m_SwapChain = nullptr;
 	UPTR<RenderTarget> m_ScreenRenderTarget = nullptr;
+	std::vector<SPTR<RenderTarget>> m_RenderTargets;
 	RenderTarget* m_CurrentRenderTarget = nullptr;
 	D3D_DRIVER_TYPE m_D3DDriverType = D3D_DRIVER_TYPE_HARDWARE;
 

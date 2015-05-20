@@ -1,14 +1,14 @@
 ﻿#pragma once
-#include "base/macro.h"
+#include "base/object.h"
+#include "base/event/updateEvent.h"
 #include "utility/makeCreate.h"
 #include <d3dx11Effect.h>
 #include <vector>
 #include <string>
+#include <functional>
 #include "math/vector.h"
 #include "math/matrix.h"
 #include "render/inputLayout.h"
-// const buffer / tech list
-// getVariable, setVariable,
 
 NS_EEL_BEGIN
 
@@ -33,11 +33,13 @@ struct TechData
 	ID3D11InputLayout* m_InputLayout = nullptr;
 };
 
-class Effect : public MakeCreate<Effect>
+class Effect;
+using EffectUpdateFunc = std::function < void(Effect*) > ;
+
+class Effect : public Object, public MakeCreate<Effect>
 {
 public:
 	using TechPair = std::pair < std::string, TechData > ;
-	using TypePair = std::pair < std::string, EffectValueType > ;
 	using MatrixPair = std::pair < std::string, ID3DX11EffectMatrixVariable* > ;
 	using VectorPair = std::pair < std::string, ID3DX11EffectVectorVariable* > ;
 	using GenericPair = std::pair < std::string, ID3DX11EffectVariable* > ;
@@ -54,8 +56,14 @@ public:
 	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
 	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
+	template<typename L>
+	void	AddLightMember(const std::string& memberName, const std::string& lightNumName, int maxNum);
+
 	template<typename T>
 	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);
+
+	template<typename T>
+	void	SetGenericMember(const std::string& memberName, T* value, UINT valueSize);
 
 	void	SetVectorMember(const std::string& memberName, const Vector4& value);
 	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
@@ -65,8 +73,14 @@ public:
 	TechData GetTech(const std::string& techName);
 	TechData GetTech();
 
+	void SetUpdateFunc(EffectUpdateFunc func);
+
+	void Update(const UpdateEvent& e);
+
 private:
 	ID3DX11Effect* m_Fx = nullptr;
+	EffectUpdateFunc m_Updater = nullptr;
+
 	std::vector<TechPair> m_Techs;
 	std::vector<MatrixPair> m_Matrixes;
 	std::vector<VectorPair> m_Vectors;
@@ -76,9 +90,32 @@ private:
 };
 
 template<typename T>
-void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)
+void eel::Effect::SetGenericMember(const std::string& memberName, T* value, UINT valueSize)
+{
+	for (auto pair : m_GenericValues)
+	{
+		if (pair.first == memberName)
+		{
+			pair.second->SetRawValue(value, 0, valueSize);
+			return;
+		}
+	}
+}
+
+template<typename L>
+void eel::Effect::AddLightMember(const std::string& memberName, const std::string& lightNumName, int maxNum)
 {
 
+	AddGenericMember(memberName);
+	AddGenericMember(lightNumName);
+
+	L::BindEffect(this, memberName, lightNumName, maxNum);
+	L::UpdateBindEffect();
+}
+
+template<typename T>
+void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)
+{
 	for (auto pair : m_GenericValues)
 	{
 		if (pair.first == memberName)

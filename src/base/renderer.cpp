@@ -4,6 +4,10 @@
 #include "component/scene.h"
 #include "render/texture.h"
 #include "render/effect.h"
+#include "base/director.h"
+#include "render/light/directionalLight.h"
+#include "render/light/pointLight.h"
+#include "render/light/spotLight.h"
 
 USING_NS_EEL;
 
@@ -11,6 +15,7 @@ eel::Renderer::Renderer()
 {
 	_ASSERT(Init());
 	RegisterDefaultEffect();
+	Director::GetInstance()->RegisterEvent(EventType::UPDATE, this, &Renderer::Update);
 }
 
 eel::Renderer::~Renderer()
@@ -154,10 +159,19 @@ void eel::Renderer::Render(SPTR<Scene> scene)
 
 	scene->Render();
 
+	//draw to registered render target
+
+	for (auto& renderTarget : m_RenderTargets)
+	{
+		m_CurrentRenderTarget = renderTarget.get();
+		renderTarget->BeginFrame();
+		scene->Render();
+	}
+
 	HR(m_SwapChain->Present(0, 0));
 }
 
-void eel::Renderer::Update(float dTime)
+void eel::Renderer::Update(const UpdateEvent& e)
 {
 
 }
@@ -177,9 +191,9 @@ void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 	m_ScreenRenderTarget->SetBackground(color);
 }
 
-void eel::Renderer::SetScreenCamera(Camera* camera)
+void eel::Renderer::SetScreenCamera(UPTR<Camera> camera)
 {
-	m_ScreenRenderTarget->SetCamera(camera);
+	m_ScreenRenderTarget->SetCamera(std::move(camera));
 }
 
 void eel::Renderer::RegisterEffect(const std::string& effectName, UPTR<Effect> effect)
@@ -205,6 +219,7 @@ Effect* eel::Renderer::GetEffect(const std::string& effectName)
 
 void eel::Renderer::RegisterDefaultEffect()
 {
+	//simple color
 	auto effect = Effect::Create(L"fx/color.cso", "ColorTech");
 	InputLayout inputLayout;
 
@@ -215,6 +230,34 @@ void eel::Renderer::RegisterDefaultEffect()
 	effect->AddMatrixMember("gWorldViewProj");
 
 	RegisterEffect("SimpleColor", std::move(effect));
+
+	//simple light
+	auto rightEffect = Effect::Create(L"fx/light.cso", "Light");
+	InputLayout rightInputLayout;
+
+	rightInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	rightInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+
+	rightEffect->AddTech("Light", rightInputLayout);
+	rightEffect->AddMatrixMember("gWorldViewProj");
+	rightEffect->AddMatrixMember("gWorld");
+	rightEffect->AddMatrixMember("gWorldInvTranspose");
+
+	rightEffect->AddVectorMember("gEyePosW");
+
+	rightEffect->AddGenericMember("gMaterial");
+
+	rightEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
+	rightEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
+	rightEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
+
+	rightEffect->SetUpdateFunc([](Effect* effect)
+	{
+		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
+		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
+	});
+
+	RegisterEffect("SimpleLight", std::move(rightEffect));
 }
 
 void eel::Renderer::SetInputLayout(ID3D11InputLayout* inputLayout)
@@ -232,4 +275,23 @@ Camera* eel::Renderer::GetCurrentCamera()
 	_ASSERT(m_CurrentRenderTarget != nullptr);
 
 	return m_CurrentRenderTarget->GetCamera();
+}
+
+void eel::Renderer::RegisterRenderTarget(SPTR<RenderTarget> renderTarget)
+{
+	m_RenderTargets.push_back(renderTarget);
+}
+
+bool eel::Renderer::UnregisterRenderTarget(SPTR<RenderTarget> renderTarget)
+{
+	for (auto it = m_RenderTargets.cbegin(); it != m_RenderTargets.cend(); ++it)
+	{
+		if (*it == renderTarget)
+		{
+			it = m_RenderTargets.erase(it);
+			return true;
+		}
+	}
+
+	return false;
 }

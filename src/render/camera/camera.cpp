@@ -45,6 +45,8 @@ void eel::Camera::Pitch(float angle)
 
 	m_Up = m_Up.TransformNormal(r);
 	m_Look = m_Look.TransformNormal(r);
+
+	UpdateView();
 }
 
 void eel::Camera::RotateY(float angle)
@@ -54,6 +56,8 @@ void eel::Camera::RotateY(float angle)
 	m_Right = m_Right.TransformNormal(r);
 	m_Up = m_Up.TransformNormal(r);
 	m_Look = m_Look.TransformNormal(r);
+
+	UpdateView();
 }
 
 void eel::Camera::SetEyePos(Point3 eyePos)

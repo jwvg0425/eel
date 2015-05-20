@@ -4,6 +4,9 @@
 #include "utility/singleton.h"
 #include "component/scene.h"
 #include "base/event/mouseEvent.h"
+#include "base/event/UpdateEvent.h"
+#include "base/timer.h"
+#include "math/vector.h"
 
 NS_EEL_BEGIN
 
@@ -16,13 +19,18 @@ public:
 	void GameLoop();
 
 	void RunWithScene(SPTR<Scene> scene);
-	template<typename T, typename F>
-	void RegisterEvent(EventType type, T* object, F memFunc);
+	template<typename T, typename E>
+	void RegisterEvent(EventType type, T* object, void (T::*memFunc)(E));
 
 	void UnregisterEvent(EventType type, Object* object);
 	void UnregisterAllEvent(Object* object);
-	void ExcuteEvent(EventType type, const Event& e);
+	void ExecuteEvent(EventType type, const Event& e);
 
+	void UpdateMousePos(const MouseEvent& event);
+	Point2	GetCurrentMousePos() const
+	{
+		return m_MousePos;
+	}
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
 
@@ -30,14 +38,14 @@ private:
 	using EventMap = std::map < EventType, EventList > ;
 
 	EventMap m_EventMap;
+	Timer m_Timer;
+	Point2 m_MousePos;
 };
 
-template<typename T, typename F>
-void eel::Director::RegisterEvent(EventType type, T* object, F memFunc)
+template<typename T, typename E>
+void eel::Director::RegisterEvent(EventType type, T* object, void (T::*memFunc)(E))
 {
-	UPTR<EventTask<T, F>> task = std::make_unique(object, memFunc);
-
-	m_EventMap[type].push_back(std::move(task));
+	m_EventMap[type].push_back(std::make_unique<EventTask<T, decltype(memFunc), std::decay_t<E>>>(object, memFunc));
 }
 
 NS_EEL_END
