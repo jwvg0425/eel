@@ -35,7 +35,6 @@ public:
 
 	UINT GetIndex(UINT idx) const;
 	UINT GetIndexCount() const;
-	Matrix4 GetWorld() const;
 
 	virtual void Render() const;
 
@@ -78,13 +77,27 @@ public:
 
 	CREATE_FUNC(Model);
 
+	void SetPosition(float x, float y, float z);
+	void SetScaleRate(float scaleX, float scaleY, float scaleZ);
+	void SetRotateAngle(float angleX, float angleY, float angleZ);
+
+	void UpdateWorld();
+
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
 	WRITE_ONLY(Effect*, Effect);
 	RenderUpdateFunc m_Func = nullptr;
 	std::string m_TechName = "";
 	std::vector<MaterialTuple> m_Materials;
-	Matrix4		m_World;
+
+	READ_ONLY(Matrix4, World);
+	Matrix4		m_Translation;
+	Matrix4		m_Scaling;
+	Matrix4		m_Rotation;
+
+	READ_ONLY(Vector3, Position);
+	READ_ONLY(Vector3, ScaleRate);
+	READ_ONLY(Vector3, RotateAngle);
 };
 
 NS_EEL_END

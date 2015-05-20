@@ -56,11 +56,6 @@ void eel::Model::SetRenderUpdate(RenderUpdateFunc func)
 	m_Func = func;
 }
 
-eel::Matrix4 eel::Model::GetWorld() const
-{
-	return m_World;
-}
-
 void eel::Model::SetTech(const std::string& techName)
 {
 	m_TechName = techName;
@@ -114,4 +109,34 @@ int eel::Model::CheckWithRay(const Ray& ray) const
 	}
 
 	return pickedTriangle;
+}
+
+void eel::Model::SetPosition(float x, float y, float z)
+{
+	m_Position = Vector3(x, y, z);
+
+	m_Translation = XMMatrixTranslation(x, y, z);
+}
+
+void eel::Model::SetScaleRate(float scaleX, float scaleY, float scaleZ)
+{
+	m_ScaleRate = Vector3(scaleX, scaleY, scaleZ);
+
+	m_Scaling = XMMatrixScaling(scaleX, scaleY, scaleZ);
+}
+
+void eel::Model::SetRotateAngle(float angleX, float angleY, float angleZ)
+{
+	m_RotateAngle = Vector3(angleX, angleY, angleZ);
+
+	Matrix4 X = XMMatrixRotationX(angleX);
+	Matrix4 Y = XMMatrixRotationY(angleY);
+	Matrix4 Z = XMMatrixRotationZ(angleZ);
+
+	m_Rotation = X*Y*Z;
+}
+
+void eel::Model::UpdateWorld()
+{
+	m_World = m_Scaling * m_Rotation * m_Translation;
 }
