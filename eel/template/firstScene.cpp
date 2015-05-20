@@ -25,24 +25,25 @@ FirstScene::FirstScene()
 
 	auto model = eel::Model::Create(vertex, index);
 
-	eel::Material mat;
+	eel::LightMaterial mat;
 
 	mat.m_Ambient = eel::Color4(0.2f);
 	mat.m_Diffuse = eel::Color4(0.7f,0.2f,0.2f,1.0f);
 	mat.m_Specular = eel::Color4(0.5f,0.5f,0.5f,16.0f);
 
+	model->AddMaterial("light", mat);
+
 
 	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleLight"));
 
-	model->SetRenderUpdate([mat](const eel::Model* model, eel::Effect* effect)
+	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
 	{
 		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*eel::Renderer::GetInstance()->GetCurrentCamera()->GetViewProjection());
 		effect->SetMatrixMember("gWorld", model->GetWorld());
 		effect->SetMatrixMember("gWorldInvTranspose", eel::Math::inverseTranspose(model->GetWorld()));
-		effect->SetGenericMember("gMaterial", mat, sizeof(eel::Material));
-		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
-		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
-		eel::DirectionalLight::UpdateBindEffect();
+		eel::MaterialData mat = model->GetMaterial(("light"));
+		
+		effect->SetGenericMember("gMaterial", mat.m_Material, mat.m_Size);
 	});
 
 	AddChild(model);
