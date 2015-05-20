@@ -1,13 +1,14 @@
 ﻿#pragma once
 #include "d3dx11Effect.h"
 #include "base/object.h"
-#include "utility/makeCreate.h"
 
 NS_EEL_BEGIN
 
-class Texture : public Object, public MakeCreate<Texture>
+class Texture : public Object
 {
 public:
+	CREATE_FUNC(Texture);
+
 	Texture(float width, float height);
 	~Texture() override;
 

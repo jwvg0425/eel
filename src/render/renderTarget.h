@@ -2,13 +2,12 @@
 #include "d3dx11Effect.h"
 #include "base/object.h"
 #include "render/texture.h"
-#include "utility/makeCreate.h"
 #include "math/vector.h"
 #include "render/camera/camera.h"
 
 NS_EEL_BEGIN
 
-class RenderTarget : public Object, public MakeCreate<RenderTarget>
+class RenderTarget : public Object
 {
 public:
 	RenderTarget(UPTR<Texture> backBuffer, UPTR<Texture> depthStencilBuffer,
@@ -23,6 +22,8 @@ public:
 	void BeginFrame();
 	void SetCamera(UPTR<Camera> camera);
 	Camera* GetCamera() const;
+
+	CREATE_FUNC(RenderTarget);
 
 private:
 	UPTR<Texture>			m_DepthStencilBuffer = nullptr;

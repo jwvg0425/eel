@@ -163,9 +163,6 @@
     <ClInclude Include="..\..\src\utility\log.h">
       <Filter>utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\utility\makeCreate.h">
-      <Filter>utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\utility\singleton.h">
       <Filter>utility</Filter>
     </ClInclude>

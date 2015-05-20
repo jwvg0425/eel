@@ -1,9 +1,11 @@
 ﻿#pragma once
 #include "eel.h"
 
-class MovingCamera : public eel::PerspectiveCamera, public eel::MakeCreate<MovingCamera>
+class MovingCamera : public eel::PerspectiveCamera
 {
 public:
+	CREATE_FUNC(MovingCamera);
+
 	MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vector3 up);
 	~MovingCamera() override = default;
 

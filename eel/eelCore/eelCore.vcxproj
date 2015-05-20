@@ -152,7 +152,6 @@
     <ClInclude Include="..\..\src\utility\compare.h" />
     <ClInclude Include="..\..\src\utility\debug.h" />
     <ClInclude Include="..\..\src\utility\log.h" />
-    <ClInclude Include="..\..\src\utility\makeCreate.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
     <ClInclude Include="..\..\src\utility\utility.h" />
   </ItemGroup>

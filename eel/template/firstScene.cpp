@@ -44,7 +44,7 @@ FirstScene::FirstScene()
 		auto camera = eel::Renderer::GetInstance()->GetCurrentCamera();
 		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*camera->GetViewProjection());
 		effect->SetMatrixMember("gWorld", model->GetWorld());
-		effect->SetMatrixMember("gWorldInvTranspose", eel::Math::inverseTranspose(model->GetWorld()));
+		effect->SetMatrixMember("gWorldInvTranspose", eel::Math::InverseTranspose(model->GetWorld()));
 		eel::MaterialData mat = model->GetMaterial(("light"));
 		
 		effect->SetGenericMember("gMaterial", mat.m_Material, mat.m_Size);

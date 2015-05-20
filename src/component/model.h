@@ -2,7 +2,6 @@
 #include "component/component.h"
 #include "render/mesh.h"
 #include "math/matrix.h"
-#include "utility/makeCreate.h"
 #include "render/light/material.h"
 #include <functional>
 #include "math/ray.h"
@@ -12,7 +11,7 @@ NS_EEL_BEGIN
 class Effect;
 using MaterialTuple = std::tuple < std::string, UPTR<Material>, UINT >;
 
-class Model : public Component, public MakeCreate<Model>
+class Model : public Component
 {
 public:
 	using RenderUpdateFunc = std::function < void(const Model*, Effect*) > ;
@@ -76,6 +75,8 @@ public:
 	}
 	/// if fails it will return -1, or return index of triangle
 	int CheckWithRay(const Ray& ray) const;
+
+	CREATE_FUNC(Model);
 
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
