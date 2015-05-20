@@ -251,6 +251,12 @@ void eel::Renderer::RegisterDefaultEffect()
 	rightEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
 	rightEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
 
+	rightEffect->SetUpdateFunc([](Effect* effect)
+	{
+		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
+		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
+	});
+
 	RegisterEffect("SimpleLight", std::move(rightEffect));
 }
 

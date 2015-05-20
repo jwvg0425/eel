@@ -1,7 +1,8 @@
 ﻿#include "effect.h"
 #include <fstream>
-#include "base\renderer.h"
-#include "utility\debug.h"
+#include "base/renderer.h"
+#include "utility/debug.h"
+#include "base/director.h"
 
 USING_NS_EEL;
 
@@ -19,6 +20,8 @@ Effect::Effect(const std::wstring& filePath, const std::string defaultTech)
 	fin.close();
 
 	D3DX11CreateEffectFromMemory(&compiledShader[0], size, 0, Renderer::GetInstance()->GetDevice(), &m_Fx);
+
+	Director::GetInstance()->RegisterEvent(EventType::UPDATE, this, &Effect::Update);
 }
 
 void eel::Effect::AddGenericMember(const std::string& memberName)
@@ -126,5 +129,18 @@ eel::Effect::~Effect()
 	for (auto pair : m_Techs)
 	{
 		SAFE_RELEASE(pair.second.m_InputLayout);
+	}
+}
+
+void eel::Effect::SetUpdateFunc(EffectUpdateFunc func)
+{
+	m_Updater = func;
+}
+
+void eel::Effect::Update(const UpdateEvent& e)
+{
+	if (m_Updater != nullptr)
+	{
+		m_Updater(this);
 	}
 }

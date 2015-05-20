@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "base/macro.h"
+#include "base/object.h"
+#include "base/event/updateEvent.h"
 #include "utility/makeCreate.h"
 #include <d3dx11Effect.h>
 #include <vector>
@@ -34,7 +35,10 @@ struct TechData
 	ID3D11InputLayout* m_InputLayout = nullptr;
 };
 
-class Effect : public MakeCreate<Effect>
+class Effect;
+using EffectUpdateFunc = std::function < void(Effect*) > ;
+
+class Effect : public Object, public MakeCreate<Effect>
 {
 public:
 	using TechPair = std::pair < std::string, TechData > ;
@@ -60,6 +64,9 @@ public:
 	template<typename T>
 	void	SetGenericMember(const std::string& memberName, T value, UINT valueSize);
 
+	template<typename T>
+	void	SetGenericMember(const std::string& memberName, T* value, UINT valueSize);
+
 	void	SetVectorMember(const std::string& memberName, const Vector4& value);
 	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
 	//TODO : ID3D11ShaderResourceView* -> const ShaderResource& (wrapper class)
@@ -68,8 +75,13 @@ public:
 	TechData GetTech(const std::string& techName);
 	TechData GetTech();
 
+	void SetUpdateFunc(EffectUpdateFunc func);
+
+	void Update(const UpdateEvent& e);
+
 private:
 	ID3DX11Effect* m_Fx = nullptr;
+	EffectUpdateFunc m_Updater = nullptr;
 
 	std::vector<TechPair> m_Techs;
 	std::vector<MatrixPair> m_Matrixes;
@@ -78,6 +90,19 @@ private:
 	std::vector<ResourcePair> m_Resources;
 	std::string m_DefaultTech;
 };
+
+template<typename T>
+void eel::Effect::SetGenericMember(const std::string& memberName, T* value, UINT valueSize)
+{
+	for (auto pair : m_GenericValues)
+	{
+		if (pair.first == memberName)
+		{
+			pair.second->SetRawValue(value, 0, valueSize);
+			return;
+		}
+	}
+}
 
 template<typename L>
 void eel::Effect::AddLightMember(const std::string& memberName, const std::string& lightNumName, int maxNum)
@@ -93,7 +118,6 @@ void eel::Effect::AddLightMember(const std::string& memberName, const std::strin
 template<typename T>
 void eel::Effect::SetGenericMember(const std::string& memberName, T value, UINT valueSize)
 {
-
 	for (auto pair : m_GenericValues)
 	{
 		if (pair.first == memberName)
