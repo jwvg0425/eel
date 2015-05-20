@@ -2,6 +2,7 @@
 #include "utility\log.h"
 #include "base\director.h"
 #include "math\ray.h"
+#include "component\debugLine.h"
 
 FirstScene::FirstScene()
 {
@@ -17,19 +18,18 @@ FirstScene::FirstScene()
 	index.push_back(0);
 
 	auto model = eel::Model::Create(vertex, index);
-
-
+	
 	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleColor"));
 
 	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
 	{
+		eel::DebugLine line;
 		auto camera = eel::Renderer::GetInstance()->GetCurrentCamera();
 
 		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*camera->GetViewProjection());
 		auto mousePos = eel::Director::GetInstance()->GetCurrentMousePos();
-		if(int peekedIndex = model->CheckWithRay(camera->GetCameraRay()) != -1)
+		if(int peekedIndex = model->CheckWithRay(eel::Ray(mousePos.GetX(), mousePos.GetY())))
 		{
-			//using eel::DebugLogW;
 			eel::LOG(L"%d번째 삼각형 Peeked\n", peekedIndex);
 		}
 	});

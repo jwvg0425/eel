@@ -1,7 +1,7 @@
 #include "ray.h"
 #include <MathHelper.h>
-#include "..\base\renderer.h"
-#include "..\base\application.h"
+#include "base\renderer.h"
+#include "base\application.h"
 
 eel::Ray::Ray()
 	:m_RayOrigin(), m_RayDirection()
@@ -53,4 +53,3 @@ eel::Ray::Ray(int sx, int sy)
 	m_RayDirection = XMVector3TransformCoord(dirInViewCoordinate, viewInverse);
 }
 
-	

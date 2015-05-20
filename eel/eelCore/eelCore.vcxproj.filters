@@ -88,6 +88,12 @@
     <ClCompile Include="..\..\src\render\light\light.cpp">
       <Filter>render\light</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\math\ray.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\component\debugLine.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -216,6 +222,13 @@
     </ClInclude>
     <ClInclude Include="..\..\src\utility\utility.h">
       <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\vertexUtil.h" />
+    <ClInclude Include="..\..\src\math\ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\debugLine.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

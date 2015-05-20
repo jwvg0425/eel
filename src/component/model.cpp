@@ -31,7 +31,7 @@ void eel::Model::Render() const
 	}
 
 	Renderer::GetInstance()->SetInputLayout(tech.m_InputLayout);
-	Renderer::GetInstance()->SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	Renderer::GetInstance()->SetPrimitiveTopology(m_Topology);
 
 	UINT stride = m_Mesh->GetStride();
 	UINT offset = 0;

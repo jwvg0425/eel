@@ -15,6 +15,7 @@ public:
 	Ray(const Ray&) = default;
 	//Init with viewport coordinate
 	Ray(int sx, int sy);
+
 private:
 	PROPERTY(Point4, RayOrigin);
 	PROPERTY(Vector4, RayDirection);
