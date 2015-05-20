@@ -88,6 +88,9 @@
     <ClCompile Include="..\..\src\math\mathHelper.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\math\ray.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -222,6 +225,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\light\material.h">
       <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\utility.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
+      <Filter>render\vertex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

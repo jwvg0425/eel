@@ -2,6 +2,7 @@
 #include "base/object.h"
 #include "math/vector.h"
 #include "math/matrix.h"
+#include "math/ray.h"
 
 NS_EEL_BEGIN
 
@@ -21,20 +22,23 @@ public:
 	void Pitch(float angle);
 	void RotateY(float angle);
 
-	GETTER(Point3, m_EyePos, EyePos);
+
 	void SetEyePos(Point3 eyePos);
-	
 	void SetUpVector(Vector3 up);
+	Ray	GetCameraRay() const
+	{
+		return Ray(m_EyePos, m_Look);
+	}
 
 protected:
 	void UpdateView();
 	void UpdateProjection(Matrix4 matrix);
 	
 private:
-	Point3 m_EyePos;
 	Vector3 m_Up;
 	Vector3 m_Right;
 
+	READ_ONLY(Point3, EyePos);
 	READ_ONLY(Vector3, Look);
 	READ_ONLY(Matrix4, View);
 	READ_ONLY(Matrix4, Projection);

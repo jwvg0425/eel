@@ -1,4 +1,7 @@
 ﻿#include "firstScene.h"
+#include "utility\log.h"
+#include "base\director.h"
+#include "math\ray.h"
 
 FirstScene::FirstScene()
 {
@@ -38,12 +41,20 @@ FirstScene::FirstScene()
 
 	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
 	{
-		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*eel::Renderer::GetInstance()->GetCurrentCamera()->GetViewProjection());
+		auto camera = eel::Renderer::GetInstance()->GetCurrentCamera();
+		effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*camera->GetViewProjection());
 		effect->SetMatrixMember("gWorld", model->GetWorld());
 		effect->SetMatrixMember("gWorldInvTranspose", eel::Math::inverseTranspose(model->GetWorld()));
 		eel::MaterialData mat = model->GetMaterial(("light"));
 		
 		effect->SetGenericMember("gMaterial", mat.m_Material, mat.m_Size);
+
+		auto mousePos = eel::Director::GetInstance()->GetCurrentMousePos();
+		if(int peekedIndex = model->CheckWithRay(camera->GetCameraRay()) != -1)
+		{
+			//using eel::DebugLogW;
+			eel::LOG(L"%d번째 삼각형 Peeked\n", peekedIndex);
+		}
 	});
 
 	AddChild(model);

@@ -5,6 +5,7 @@
 #include "utility/makeCreate.h"
 #include "render/light/material.h"
 #include <functional>
+#include "math/ray.h"
 
 NS_EEL_BEGIN
 
@@ -34,6 +35,7 @@ public:
 	void SetTech(const std::string& techName);
 
 	UINT GetIndex(UINT idx) const;
+	UINT GetIndexCount() const;
 	Matrix4 GetWorld() const;
 
 	virtual void Render() const;
@@ -72,6 +74,8 @@ public:
 
 		return res;
 	}
+	/// if fails it will return -1, or return index of triangle
+	int CheckWithRay(const Ray& ray) const;
 
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
