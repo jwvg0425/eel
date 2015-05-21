@@ -4,12 +4,19 @@
 
 NS_EEL_BEGIN
 
+enum class TextureType
+{
+	NORMAL,
+	CUBE
+};
+
 class Texture : public Object
 {
 public:
 	CREATE_FUNC(Texture);
 
-	Texture(float width, float height);
+	Texture(float width, float height, UINT bindFlags);
+	Texture(float width, float height, UINT bindFlags, TextureType type);
 	~Texture() override;
 
 	Texture(ID3D11Texture2D* texture);

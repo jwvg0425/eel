@@ -147,7 +147,7 @@ void eel::Renderer::InitScreenRenderTarget()
 	// recreate render target 
 	m_ScreenRenderTarget = 
 		RenderTarget::Create(Texture::Create(backBuffer),
-		Texture::Create(width, height), width, height);
+		Texture::Create(width, height, D3D11_BIND_DEPTH_STENCIL), width, height);
 }
 
 void eel::Renderer::Render(SPTR<Scene> scene)

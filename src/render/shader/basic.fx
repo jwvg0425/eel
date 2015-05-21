@@ -145,12 +145,14 @@ float4 PS(VertexOut pin) : SV_Target
 	// Modulate with late add.
 	float4 litColor = texColor*(ambient + diffuse) + spec;
 
+/*
 	if (gIsFogEnable)
 	{
 		float fogLerp = saturate((distToEye - gFogStart) / gFogRange);
 
 		litColor = lerp(litColor, gFogColor, fogLerp);
 	}
+*/
 
 	// Common to take alpha from diffuse material and texture.
 	litColor.a = gMaterial.Diffuse.a * texColor.a;
