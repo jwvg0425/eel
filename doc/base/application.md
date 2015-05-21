@@ -9,7 +9,7 @@ this class handle window messages and manage window data(size, caption, etc..).
 src/base/application.h  
 src/base/application.cpp
 
-##define
+##definition
 
 ```C++
 class Application : public Object

@@ -7,7 +7,7 @@ director is a singleton class that manage game state.
 src/base/director.h  
 src/base/director.cpp
 
-##define
+##definition
 
 ```C++
 class Director : public Object, public Singleton<Director>
