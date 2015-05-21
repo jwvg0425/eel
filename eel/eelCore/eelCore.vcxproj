@@ -105,6 +105,7 @@
     <ClCompile Include="..\..\src\render\renderTarget.cpp" />
     <ClCompile Include="..\..\src\render\texture.cpp" />
     <ClCompile Include="..\..\src\utility\log.cpp" />
+    <ClCompile Include="..\..\src\utility\meshGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\base\application.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="..\..\src\utility\compare.h" />
     <ClInclude Include="..\..\src\utility\debug.h" />
     <ClInclude Include="..\..\src\utility\log.h" />
+    <ClInclude Include="..\..\src\utility\meshGenerator.h" />
     <ClInclude Include="..\..\src\utility\singleton.h" />
     <ClInclude Include="..\..\src\utility\utility.h" />
   </ItemGroup>
