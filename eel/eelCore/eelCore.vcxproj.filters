@@ -94,6 +94,9 @@
     <ClCompile Include="..\..\src\utility\meshGenerator.cpp">
       <Filter>utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\render\shaderResource.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -237,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\utility\meshGenerator.h">
       <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\shaderResource.h">
+      <Filter>render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

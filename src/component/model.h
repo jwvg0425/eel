@@ -5,6 +5,7 @@
 #include "render/light/material.h"
 #include <functional>
 #include "math/ray.h"
+#include "render/shaderResource.h"
 
 NS_EEL_BEGIN
 
@@ -29,7 +30,7 @@ public:
 	{
 		return static_cast<MeshImpl<Vertex>>(m_Mesh)->GetVertex(idx);
 	}
-
+	
 	void SetRenderUpdate(RenderUpdateFunc func);
 	void SetTech(const std::string& techName);
 
@@ -51,27 +52,12 @@ public:
 		m_Materials.push_back(std::move(pair));
 	}
 
-	MaterialData GetMaterial(const std::string& name) const
-	{
-		MaterialData res;
-		res.m_Material = nullptr;
-		res.m_Size = 0;
+	MaterialData GetMaterial(const std::string& name) const;
 
-		for (auto& material : m_Materials)
-		{
-			if (std::get<0>(material) == name)
-			{
-				res.m_Material = std::get<1>(material).get();
-				res.m_Size = std::get<2>(material);
+	void AddShaderResource(const std::string& name, const std::string& path);
 
-				return res;
-			}
-		}
+	const ShaderResource& GetShaderResource(const std::string& name) const;
 
-		_ASSERT(false);
-
-		return res;
-	}
 	/// if fails it will return -1, or return index of triangle
 	int CheckWithRay(const Ray& ray) const;
 
@@ -89,6 +75,9 @@ private:
 	RenderUpdateFunc m_Func = nullptr;
 	std::string m_TechName = "";
 	std::vector<MaterialTuple> m_Materials;
+
+	using ResourcePair = std::pair < std::string, ShaderResource > ;
+	std::vector<ResourcePair> m_ShaderResources;
 
 	READ_ONLY(Matrix4, World);
 	Matrix4		m_Translation;

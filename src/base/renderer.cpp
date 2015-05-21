@@ -280,6 +280,8 @@ void eel::Renderer::RegisterDefaultEffect()
 	basicEffect->AddGenericMember("gFogStart");
 	basicEffect->AddGenericMember("gIsFogEnable");
 	basicEffect->AddGenericMember("gFogRange");
+
+	basicEffect->AddResourceMember("gDiffuseMap");
 	
 	basicEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
 	basicEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
