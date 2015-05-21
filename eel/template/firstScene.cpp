@@ -5,17 +5,6 @@
 
 FirstScene::FirstScene()
 {
-	std::vector<eel::PosNormal> vertex;
-	std::vector<UINT> index;
-
-	vertex.push_back(eel::PosNormal(eel::Point3(-0.25f, -0.25f, 0.25f), eel::Vector3(0.2f, 0.5f, 0.3f)));
-	vertex.push_back(eel::PosNormal(eel::Point3(0.25f, 0.25f, 0.25f), eel::Vector3(0.7f, 0.3f, 0.1f)));
-	vertex.push_back(eel::PosNormal(eel::Point3(-0.25f, 0.25f, 0.25f), eel::Vector3(0.1f, 0.6f, 0.8f)));
-
-	index.push_back(0);
-	index.push_back(1);
-	index.push_back(2);
-
 	eel::DirectionalLight testLight;
 
 	testLight.m_Ambient = eel::Color4(0.2f);
@@ -24,7 +13,11 @@ FirstScene::FirstScene()
 	testLight.m_Direction = eel::Vector3(-0.4f);
 
 	eel::DirectionalLight::RegisterLight(testLight);
-	
+
+	std::vector<eel::PosNormal> vertex;
+	std::vector<UINT> index;
+
+	eel::MeshGenerator::CreateNormalCube(2.0f, 2.0f, 2.0f, vertex, index);
 
 	auto model = eel::Model::Create(vertex, index);
 
