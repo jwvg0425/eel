@@ -116,6 +116,8 @@ void eel::Model::SetPosition(float x, float y, float z)
 	m_Position = Vector3(x, y, z);
 
 	m_Translation = XMMatrixTranslation(x, y, z);
+
+	UpdateWorld();
 }
 
 void eel::Model::SetScaleRate(float scaleX, float scaleY, float scaleZ)
@@ -123,6 +125,8 @@ void eel::Model::SetScaleRate(float scaleX, float scaleY, float scaleZ)
 	m_ScaleRate = Vector3(scaleX, scaleY, scaleZ);
 
 	m_Scaling = XMMatrixScaling(scaleX, scaleY, scaleZ);
+
+	UpdateWorld();
 }
 
 void eel::Model::SetRotateAngle(float angleX, float angleY, float angleZ)
@@ -134,6 +138,8 @@ void eel::Model::SetRotateAngle(float angleX, float angleY, float angleZ)
 	Matrix4 Z = XMMatrixRotationZ(angleZ);
 
 	m_Rotation = X*Y*Z;
+
+	UpdateWorld();
 }
 
 void eel::Model::UpdateWorld()
