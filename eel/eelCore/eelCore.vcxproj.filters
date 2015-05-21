@@ -281,5 +281,8 @@
     <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
       <Filter>render\shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\basic.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

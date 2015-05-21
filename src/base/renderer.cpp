@@ -258,6 +258,40 @@ void eel::Renderer::RegisterDefaultEffect()
 	});
 
 	RegisterEffect("SimpleLight", std::move(rightEffect));
+
+	//basic effect
+	auto basicEffect = Effect::Create(L"fx/basic.cso", "Basic");
+	InputLayout basicInputLayout;
+
+	basicInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	basicInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+	basicInputLayout.AddSemantic("TEXCOORD", 0, SemanticType::RG_FLOAT32);
+
+	basicEffect->AddTech("Basic", basicInputLayout);
+	basicEffect->AddMatrixMember("gWorldViewProj");
+	basicEffect->AddMatrixMember("gWorld");
+	basicEffect->AddMatrixMember("gWorldInvTranspose");
+	basicEffect->AddMatrixMember("gTexTransform");
+
+	basicEffect->AddVectorMember("gEyePosW");
+	basicEffect->AddVectorMember("gFogColor");
+
+	basicEffect->AddGenericMember("gMaterial");
+	basicEffect->AddGenericMember("gFogStart");
+	basicEffect->AddGenericMember("gIsFogEnable");
+	basicEffect->AddGenericMember("gFogRange");
+	
+	basicEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
+	basicEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
+	basicEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
+
+	basicEffect->SetUpdateFunc([](Effect* effect)
+	{
+		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
+		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
+	});
+
+	RegisterEffect("Basic", std::move(basicEffect));
 }
 
 void eel::Renderer::SetInputLayout(ID3D11InputLayout* inputLayout)
