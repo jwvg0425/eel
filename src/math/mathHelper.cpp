@@ -2,6 +2,12 @@
 
 USING_NS_EEL;
 
+const Matrix4 Math::I = Matrix4
+(1.0f, 0.0f, 0.0f, 0.0f,
+0.0f, 1.0f, 0.0f, 0.0f,
+0.0f, 0.0f, 1.0f, 0.0f,
+0.0f, 0.0f, 0.0f, 1.0f);
+
 eel::Matrix4 eel::Math::InverseTranspose(Matrix4 mat)
 {
 	XMMATRIX A = mat;

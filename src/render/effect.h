@@ -8,6 +8,7 @@
 #include "math/vector.h"
 #include "math/matrix.h"
 #include "render/inputLayout.h"
+#include "render/shaderResource.h"
 
 NS_EEL_BEGIN
 
@@ -54,7 +55,6 @@ public:
 	void	AddVectorMember(const std::string& memberName);
 	void	AddMatrixMember(const std::string& memberName);
 	void	AddResourceMember(const std::string& memberName);
-	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
 	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
 	template<typename L>
@@ -68,8 +68,7 @@ public:
 
 	void	SetVectorMember(const std::string& memberName, const Vector4& value);
 	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
-	//TODO : ID3D11ShaderResourceView* -> const ShaderResource& (wrapper class)
-	void	SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value);
+	void	SetResourceMember(const std::string& memberName, const ShaderResource& value);
 
 	TechData GetTech(const std::string& techName);
 	TechData GetTech();

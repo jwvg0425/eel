@@ -1,6 +1,7 @@
 ﻿#include "director.h"
 #include "base/renderer.h"
 #include "base/keyManager.h"
+#include <time.h>
 
 USING_NS_EEL;
 
@@ -14,6 +15,7 @@ void Director::GameLoop()
 Director::Director()
 {
 	KeyManager::GetInstance();
+	srand((unsigned)time(nullptr));
 	m_Timer.Reset();
 	RegisterEvent(EventType::MOUSE_MOVE, this, &eel::Director::UpdateMousePos);
 }

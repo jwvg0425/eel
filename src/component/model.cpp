@@ -56,11 +56,6 @@ void eel::Model::SetRenderUpdate(RenderUpdateFunc func)
 	m_Func = func;
 }
 
-eel::Matrix4 eel::Model::GetWorld() const
-{
-	return m_World;
-}
-
 void eel::Model::SetTech(const std::string& techName)
 {
 	m_TechName = techName;
@@ -114,4 +109,84 @@ int eel::Model::CheckWithRay(const Ray& ray) const
 	}
 
 	return pickedTriangle;
+}
+
+void eel::Model::SetPosition(float x, float y, float z)
+{
+	m_Position = Vector3(x, y, z);
+
+	m_Translation = XMMatrixTranslation(x, y, z);
+
+	UpdateWorld();
+}
+
+void eel::Model::SetScaleRate(float scaleX, float scaleY, float scaleZ)
+{
+	m_ScaleRate = Vector3(scaleX, scaleY, scaleZ);
+
+	m_Scaling = XMMatrixScaling(scaleX, scaleY, scaleZ);
+
+	UpdateWorld();
+}
+
+void eel::Model::SetRotateAngle(float angleX, float angleY, float angleZ)
+{
+	m_RotateAngle = Vector3(angleX, angleY, angleZ);
+
+	Matrix4 X = XMMatrixRotationX(angleX);
+	Matrix4 Y = XMMatrixRotationY(angleY);
+	Matrix4 Z = XMMatrixRotationZ(angleZ);
+
+	m_Rotation = X*Y*Z;
+
+	UpdateWorld();
+}
+
+void eel::Model::UpdateWorld()
+{
+	m_World = m_Scaling * m_Rotation * m_Translation;
+}
+
+eel::MaterialData eel::Model::GetMaterial(const std::string& name) const
+{
+	MaterialData res;
+	res.m_Material = nullptr;
+	res.m_Size = 0;
+
+	for (auto& material : m_Materials)
+	{
+		if (std::get<0>(material) == name)
+		{
+			res.m_Material = std::get<1>(material).get();
+			res.m_Size = std::get<2>(material);
+
+			return res;
+		}
+	}
+
+	_ASSERT(false);
+
+	return res;
+}
+
+void eel::Model::AddShaderResource(const std::string& name, const std::string& path)
+{
+	std::pair<std::string, ShaderResource> pair(name, std::move(ShaderResource(path)));
+
+	m_ShaderResources.push_back(std::move(pair));
+}
+
+const ShaderResource& eel::Model::GetShaderResource(const std::string& name) const
+{
+	for (auto& shaderResource : m_ShaderResources)
+	{
+		if (shaderResource.first == name)
+		{
+			return shaderResource.second;
+		}
+	}
+
+	_ASSERT(false);
+
+	return *(new ShaderResource());
 }

@@ -13,7 +13,7 @@ public:
 	RenderTarget(UPTR<Texture> backBuffer, UPTR<Texture> depthStencilBuffer,
 		float width, float height,
 		float topLeftX = 0.0f, float topLeftY = 0.0f,
-		float minDepth = 0.0f, float maxDepth = 0.0f);
+		float minDepth = 0.0f, float maxDepth = 1.0f);
 	~RenderTarget() override;
 
 	RenderTarget(RenderTarget& rhs) = delete;

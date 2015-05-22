@@ -5,6 +5,9 @@ NS_EEL_BEGIN
 
 struct PosNormal
 {
+	PosNormal()
+		:m_Pos(0.0f, 0.0f, 0.0f), m_Normal(0.0f, 0.0f, 0.0f){}
+
 	PosNormal(Point3 pos, Vector3 normal)
 		:m_Pos(pos), m_Normal(normal){}
 

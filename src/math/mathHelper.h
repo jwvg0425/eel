@@ -10,6 +10,7 @@ namespace Math
 {
 	static const float PI = 3.141592f;
 	static const float INF = FLT_MAX;
+	extern const Matrix4 I;
 
 	Matrix4 InverseTranspose(Matrix4 mat);
 	

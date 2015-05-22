@@ -91,8 +91,16 @@
     <ClCompile Include="..\..\src\math\ray.cpp">
       <Filter>math</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\src\component\debugLine.cpp">
       <Filter>component</Filter>
+=======
+    <ClCompile Include="..\..\src\utility\meshGenerator.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\shaderResource.cpp">
+      <Filter>render</Filter>
+>>>>>>> a9c473e6cbefdad83089c9b3673258ace752f8fd
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,8 +243,16 @@
     <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
       <Filter>render\vertex</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\..\src\component\debugLine.h">
       <Filter>component</Filter>
+=======
+    <ClInclude Include="..\..\src\utility\meshGenerator.h">
+      <Filter>utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\shaderResource.h">
+      <Filter>render</Filter>
+>>>>>>> a9c473e6cbefdad83089c9b3673258ace752f8fd
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +295,9 @@
       <Filter>render\shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\basic.fx">
       <Filter>render\shader</Filter>
     </FxCompile>
   </ItemGroup>

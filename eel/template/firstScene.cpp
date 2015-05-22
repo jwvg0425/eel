@@ -5,17 +5,6 @@
 
 FirstScene::FirstScene()
 {
-	std::vector<eel::PosNormal> vertex;
-	std::vector<UINT> index;
-
-	vertex.push_back(eel::PosNormal(eel::Point3(-0.25f, -0.25f, 0.25f), eel::Vector3(0.2f, 0.5f, 0.3f)));
-	vertex.push_back(eel::PosNormal(eel::Point3(0.25f, 0.25f, 0.25f), eel::Vector3(0.7f, 0.3f, 0.1f)));
-	vertex.push_back(eel::PosNormal(eel::Point3(-0.25f, 0.25f, 0.25f), eel::Vector3(0.1f, 0.6f, 0.8f)));
-
-	index.push_back(0);
-	index.push_back(1);
-	index.push_back(2);
-
 	eel::DirectionalLight testLight;
 
 	testLight.m_Ambient = eel::Color4(0.2f);
@@ -24,7 +13,11 @@ FirstScene::FirstScene()
 	testLight.m_Direction = eel::Vector3(-0.4f);
 
 	eel::DirectionalLight::RegisterLight(testLight);
-	
+
+	std::vector<eel::PosBasic> vertex;
+	std::vector<UINT> index;
+
+	eel::MeshGenerator::CreateCube(2.0f, 2.0f, 2.0f, vertex, index);
 
 	auto model = eel::Model::Create(vertex, index);
 
@@ -35,9 +28,9 @@ FirstScene::FirstScene()
 	mat.m_Specular = eel::Color4(0.5f,0.5f,0.5f,16.0f);
 
 	model->AddMaterial("light", mat);
+	model->AddShaderResource("texture", "resource/texture/WoodCrate01.dds");
 
-
-	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleLight"));
+	model->SetEffect(eel::Renderer::GetInstance()->GetEffect("Basic"));
 
 	model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
 	{
@@ -48,6 +41,8 @@ FirstScene::FirstScene()
 		eel::MaterialData mat = model->GetMaterial(("light"));
 		
 		effect->SetGenericMember("gMaterial", mat.m_Material, mat.m_Size);
+		effect->SetMatrixMember("gTexTransform", eel::Math::I);
+		effect->SetResourceMember("gDiffuseMap", model->GetShaderResource("texture"));
 
 		auto mousePos = eel::Director::GetInstance()->GetCurrentMousePos();
 		if(int peekedIndex = model->CheckWithRay(camera->GetCameraRay()) != -1)

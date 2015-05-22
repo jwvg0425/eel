@@ -52,6 +52,9 @@ void eel::RenderTarget::BeginFrame()
 
 	Renderer::GetInstance()->GetContext()
 		->OMSetRenderTargets(1, &m_View, m_DepthStencil);
+
+	Renderer::GetInstance()->GetContext()
+		->RSSetViewports(1, &m_Viewport);
 }
 
 void eel::RenderTarget::SetCamera(UPTR<Camera> camera)
