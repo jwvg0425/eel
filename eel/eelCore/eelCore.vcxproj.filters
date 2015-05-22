@@ -91,6 +91,9 @@
     <ClCompile Include="..\..\src\math\ray.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\component\debugLine.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -231,6 +234,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
       <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\debugLine.h">
+      <Filter>component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
