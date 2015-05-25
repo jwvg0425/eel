@@ -1,10 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <FxCompile Include="..\..\src\render\shader\light.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\color.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\src\render\shader\basic.fx">
+      <Filter>render\shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\..\src\base\application.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\base\director.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\base\keyManager.cpp">
       <Filter>base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\base\object.cpp">
@@ -13,7 +30,13 @@
     <ClCompile Include="..\..\src\base\renderer.cpp">
       <Filter>base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\base\timer.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\component\component.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\component\debugLine.cpp">
       <Filter>component</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\component\model.cpp">
@@ -22,10 +45,19 @@
     <ClCompile Include="..\..\src\component\scene.cpp">
       <Filter>component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\math\mathHelper.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\matrix.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\math\matrix3.cpp">
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\math\matrix4.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\ray.cpp">
       <Filter>math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\math\vector2.cpp">
@@ -37,39 +69,6 @@
     <ClCompile Include="..\..\src\math\vector4.cpp">
       <Filter>math</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\render\effect.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\mesh.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\renderStates.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\renderTarget.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\texture.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\utility\log.cpp">
-      <Filter>utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\camera\camera.cpp">
-      <Filter>render\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp">
-      <Filter>render\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
-      <Filter>render\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\matrix.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\render\inputLayout.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\base\event\event.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
@@ -79,28 +78,41 @@
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp">
       <Filter>base\event</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\base\timer.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\..\src\render\camera\camera.cpp">
+      <Filter>render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\base\keyManager.cpp">
-      <Filter>base</Filter>
+    <ClCompile Include="..\..\src\render\camera\perspectiveCamera.cpp">
+      <Filter>render\camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\math\mathHelper.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\math\ray.cpp">
-      <Filter>math</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\..\src\component\debugLine.cpp">
-      <Filter>component</Filter>
-=======
-    <ClCompile Include="..\..\src\utility\meshGenerator.cpp">
-      <Filter>utility</Filter>
+    <ClCompile Include="..\..\src\render\camera\orthographicCamera.cpp">
+      <Filter>render\camera</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\render\shaderResource.cpp">
       <Filter>render</Filter>
->>>>>>> a9c473e6cbefdad83089c9b3673258ace752f8fd
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\texture.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\mesh.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\inputLayout.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\renderStates.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\renderTarget.cpp">
+      <Filter>render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utility\log.cpp">
+      <Filter>uitility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\utility\meshGenerator.cpp">
+      <Filter>uitility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\render\effect.cpp">
+      <Filter>render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +121,9 @@
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\base\director.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\keyManager.h">
       <Filter>base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\base\macro.h">
@@ -120,7 +135,13 @@
     <ClInclude Include="..\..\src\base\renderer.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\base\timer.h">
+      <Filter>base</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\component\component.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\component\debugLine.h">
       <Filter>component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\component\model.h">
@@ -129,6 +150,9 @@
     <ClInclude Include="..\..\src\component\scene.h">
       <Filter>component</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\math\mathHelper.h">
+      <Filter>math</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\math\matrix.h">
       <Filter>math</Filter>
     </ClInclude>
@@ -136,6 +160,9 @@
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\math\matrix4.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ray.h">
       <Filter>math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\math\vector.h">
@@ -150,32 +177,14 @@
     <ClInclude Include="..\..\src\math\vector4.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\effect.h">
-      <Filter>render</Filter>
+    <ClInclude Include="..\..\src\base\event\event.h">
+      <Filter>base\event</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\mesh.h">
-      <Filter>render</Filter>
+    <ClInclude Include="..\..\src\base\event\mouseEvent.h">
+      <Filter>base\event</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\renderStates.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\renderTarget.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\texture.h">
-      <Filter>render</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\compare.h">
-      <Filter>utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\debug.h">
-      <Filter>utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\log.h">
-      <Filter>utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\singleton.h">
-      <Filter>utility</Filter>
+    <ClInclude Include="..\..\src\base\event\updateEvent.h">
+      <Filter>base\event</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\render\camera\camera.h">
       <Filter>render\camera</Filter>
@@ -186,7 +195,22 @@
     <ClInclude Include="..\..\src\render\camera\perspectiveCamera.h">
       <Filter>render\camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\vertex\posBasic.h">
+    <ClInclude Include="..\..\src\render\light\light.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\pointLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\directionalLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\material.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\light\spotLight.h">
+      <Filter>render\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
       <Filter>render\vertex</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\render\vertex\posColor.h">
@@ -195,110 +219,82 @@
     <ClInclude Include="..\..\src\render\vertex\posNormal.h">
       <Filter>render\vertex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\math\mathHelper.h">
-      <Filter>math</Filter>
+    <ClInclude Include="..\..\src\render\vertex\posBasic.h">
+      <Filter>render\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\shaderResource.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\texture.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\mesh.h">
+      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\render\inputLayout.h">
       <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\base\event\event.h">
-      <Filter>base\event</Filter>
+    <ClInclude Include="..\..\src\render\renderStates.h">
+      <Filter>render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\base\event\mouseEvent.h">
-      <Filter>base\event</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\base\event\updateEvent.h">
-      <Filter>base\event</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\base\timer.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\light\light.h">
-      <Filter>render\light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\base\keyManager.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\light\directionalLight.h">
-      <Filter>render\light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\light\pointLight.h">
-      <Filter>render\light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\light\spotLight.h">
-      <Filter>render\light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\utility\clonable.h">
-      <Filter>utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\render\light\material.h">
-      <Filter>render\light</Filter>
+    <ClInclude Include="..\..\src\render\renderTarget.h">
+      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\utility\utility.h">
-      <Filter>utility</Filter>
+      <Filter>uitility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\math\ray.h">
-      <Filter>math</Filter>
+    <ClInclude Include="..\..\src\utility\clonable.h">
+      <Filter>uitility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\vertex\vertexUtil.h">
-      <Filter>render\vertex</Filter>
+    <ClInclude Include="..\..\src\utility\compare.h">
+      <Filter>uitility</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="..\..\src\component\debugLine.h">
-      <Filter>component</Filter>
-=======
+    <ClInclude Include="..\..\src\utility\log.h">
+      <Filter>uitility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\utility\debug.h">
+      <Filter>uitility</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\src\utility\meshGenerator.h">
-      <Filter>utility</Filter>
+      <Filter>uitility</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\render\shaderResource.h">
+    <ClInclude Include="..\..\src\utility\singleton.h">
+      <Filter>uitility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\render\effect.h">
       <Filter>render</Filter>
->>>>>>> a9c473e6cbefdad83089c9b3673258ace752f8fd
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="base">
-      <UniqueIdentifier>{9048f8c7-68fc-4474-857a-359327720431}</UniqueIdentifier>
+      <UniqueIdentifier>{f2945bf8-a9c3-4fc0-8647-e9b56db961fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="component">
-      <UniqueIdentifier>{45388ccb-bc23-48e5-b83e-5ccc0311bfba}</UniqueIdentifier>
+      <UniqueIdentifier>{037c0a15-52d9-403f-8901-e572db7a74c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="math">
-      <UniqueIdentifier>{eabbb2e8-0740-4d44-99a1-e9f69dbadd3d}</UniqueIdentifier>
+      <UniqueIdentifier>{7ebcb101-9320-4b3c-a742-658685222c5f}</UniqueIdentifier>
     </Filter>
     <Filter Include="render">
-      <UniqueIdentifier>{dda8a99a-3f19-4614-9411-aa741fb19bbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="utility">
-      <UniqueIdentifier>{dfb6bd11-6b13-4f5e-86d3-7a309ffb3a25}</UniqueIdentifier>
+      <UniqueIdentifier>{12703f15-648b-453c-b0a2-ac4be36e44d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="render\camera">
-      <UniqueIdentifier>{249be0e3-cce9-447c-815f-038e4e211129}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\shader">
-      <UniqueIdentifier>{4cc069d3-9320-4c36-a3aa-a90c87873779}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render\vertex">
-      <UniqueIdentifier>{d4c0d938-f384-442b-a05d-82638b7bbf41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="base\event">
-      <UniqueIdentifier>{d417dc35-a9f4-4ebe-8900-eb43ca3c5037}</UniqueIdentifier>
+      <UniqueIdentifier>{f7e7c6b2-d01c-410b-94b5-499a73c97e4d}</UniqueIdentifier>
     </Filter>
     <Filter Include="render\light">
-      <UniqueIdentifier>{d6c0ef4c-273f-4170-8b59-759e676be0ee}</UniqueIdentifier>
+      <UniqueIdentifier>{f90cf854-4c41-4040-bd2a-2a9166ecdf0f}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\..\src\render\shader\color.fx">
-      <Filter>render\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\src\render\shader\light.fx">
-      <Filter>render\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\src\render\shader\lightHelper.fx">
-      <Filter>render\shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\src\render\shader\basic.fx">
-      <Filter>render\shader</Filter>
-    </FxCompile>
+    <Filter Include="render\shader">
+      <UniqueIdentifier>{b50a2127-9ff6-4c37-ac5a-3116718b9c24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render\vertex">
+      <UniqueIdentifier>{2e0e0167-c870-4170-b8fc-f9a2638fba46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base\event">
+      <UniqueIdentifier>{23531166-3c5c-416d-ba3e-da3f676989fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="uitility">
+      <UniqueIdentifier>{5756a33e-338e-4913-9e20-1f5c3953c9d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@ public:
 	using RenderUpdateFunc = std::function < void(const Model*, Effect*) > ;
 	template<typename Vertex>
 	Model(std::vector<Vertex> vertices, std::vector<UINT> indices)
-		:m_Effect(nullptr)
+		:m_Effect(nullptr), m_Topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	{
 		m_Mesh = std::make_unique<MeshImpl<Vertex>>(vertices, indices);
 	}
@@ -79,6 +79,7 @@ private:
 	using ResourcePair = std::pair < std::string, ShaderResource > ;
 	std::vector<ResourcePair> m_ShaderResources;
 
+	PROPERTY(D3D_PRIMITIVE_TOPOLOGY, Topology);
 	READ_ONLY(Matrix4, World);
 	Matrix4		m_Translation;
 	Matrix4		m_Scaling;
