@@ -79,6 +79,7 @@
     <ClCompile Include="..\..\src\base\director.cpp" />
     <ClCompile Include="..\..\src\base\event\event.cpp" />
     <ClCompile Include="..\..\src\base\event\mouseEvent.cpp" />
+    <ClCompile Include="..\..\src\base\event\mousePickTriangleEvent.cpp" />
     <ClCompile Include="..\..\src\base\event\updateEvent.cpp" />
     <ClCompile Include="..\..\src\base\keyManager.cpp" />
     <ClCompile Include="..\..\src\base\object.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="..\..\src\base\director.h" />
     <ClInclude Include="..\..\src\base\event\event.h" />
     <ClInclude Include="..\..\src\base\event\mouseEvent.h" />
+    <ClInclude Include="..\..\src\base\event\mousePickTriangleEvent.h" />
     <ClInclude Include="..\..\src\base\event\updateEvent.h" />
     <ClInclude Include="..\..\src\base\keyManager.h" />
     <ClInclude Include="..\..\src\base\macro.h" />

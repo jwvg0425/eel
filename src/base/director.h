@@ -40,6 +40,8 @@ public:
 	Ray GetMouseRay();
 	
 private:
+	void PickingCheck();
+
 	SPTR<Scene> m_RunningScene = nullptr;
 
 	using EventList = std::vector < UPTR<EventEntry> > ;
