@@ -126,7 +126,7 @@ void eel::Director::PickingCheck()
 
 	auto ExecuteRegisteredEvent = [this](SPTR<Component> minChild, const Event& e)
 	{
-		for(auto& entry : m_EventMap[EventType::MOUSE_PICK_TRIANGLE])
+		for (auto& entry : m_EventMap[EventType::MOUSE_PICK_TRIANGLE])
 		{
 			if (entry->GetEventObject() == minChild.get())
 			{
@@ -138,15 +138,14 @@ void eel::Director::PickingCheck()
 
 	Vector3 pickPos = ray.GetRayOrigin() + ray.GetRayDirection() * minDist;
 
-	if (prev != nullptr && prev != minChild)
+	MousePickTriangleEvent e(-1, minDist, pickPos);
+	if (prev != minChild)
 	{
-		MousePickTriangleEvent e(-1, minDist, pickPos);
-
 		ExecuteRegisteredEvent(prev, e);
-		e.m_TriangleIdx = minPick;
-		ExecuteRegisteredEvent(minChild, e);
 
 		WPTR<Component> weak(minChild);
 		prevChild.swap(weak);
 	}
+	e.m_TriangleIdx = minPick;
+	ExecuteRegisteredEvent(minChild, e);
 }
