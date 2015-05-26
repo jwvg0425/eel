@@ -11,10 +11,12 @@ public:
 
 	void Update(const eel::UpdateEvent& e);
 	void MouseMove(const eel::MouseEvent& e);
+	void MouseDown(const eel::MouseEvent& e);
 
 private:
 	bool		m_First = true;
 	eel::Point2 m_LastPos;
 	float		m_Height = 10.f;
-	float		m_Gravity = 20.f;
+	float		m_Gravity = 40.f;
+	float		m_Speed = 0.0f;
 };

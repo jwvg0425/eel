@@ -12,5 +12,7 @@ FirstScene::FirstScene()
 	testLight.m_Specular = eel::Color4(0.5f);
 	testLight.m_Direction = eel::Vector3(-0.4f);
 
+	ShowCursor(false);
+
 	eel::DirectionalLight::RegisterLight(testLight);
 }

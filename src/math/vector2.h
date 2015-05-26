@@ -18,8 +18,8 @@ public:
 
 	Vector2(const Vector2& rhs) = default;
 
-	operator XMFLOAT2();
-	operator XMVECTOR();
+	operator XMFLOAT2() const;
+	operator XMVECTOR() const;
 
 	float		Dot(CXMVECTOR rhs);
 

@@ -27,11 +27,10 @@ BoxLand::BoxLand(eel::Vector3 boxSize)
 				m_BoxStates[xIdx][yIdx][zIdx] = false;
 				if(yIdx == 0)
 				{
-					auto box = Box::Create(boxSize);
-					float posX = m_GridOrigin.GetX() + xIdx*m_BoxSize.GetX();
-					float posY = m_GridOrigin.GetY() - m_BoxSize.GetY();
-					float posZ = m_GridOrigin.GetZ() + zIdx*m_BoxSize.GetZ();
-					box->SetPosition(posX, posY, posZ);
+					m_BoxStates[xIdx][yIdx][zIdx] = true;
+					auto box = Box::Create(boxSize, xIdx, yIdx, zIdx);
+					auto pos = GetRealPos(eel::Vector3(xIdx, yIdx, zIdx));
+					box->SetPosition(pos.GetX(), pos.GetY(), pos.GetZ());
 					scene->AddChild(box);
 				}
 			}
@@ -52,12 +51,20 @@ void BoxLand::SetBoxState(eel::Vector3 position, bool state)
 	m_BoxStates[position.GetX()][position.GetY()][position.GetZ()] = state;
 }
 
-void BoxLand::AddBox(eel::Vector3 position)
+void BoxLand::AddBox()
 {
+	eel::Vector3 position = m_MousePosForCreate;
+
 	if(!IsInTheLand(position))
 		return;
 
-	auto box = Box::Create(m_BoxSize);
+	int gridX = position.GetX();
+	int gridY = position.GetY();
+	int gridZ = position.GetZ();
+
+	m_BoxStates[gridX][gridY][gridZ] = true;
+
+	auto box = Box::Create(m_BoxSize, gridX, gridY, gridZ);
 	auto pos = GetRealPos(position);
 	box->SetPosition(pos.GetX(), pos.GetY(), pos.GetZ());
 	auto scene = eel::Director::GetInstance()->GetRunningScene();
@@ -94,13 +101,18 @@ eel::Vector3 BoxLand::GetGridPos(eel::Vector3 realPos)
 
 float BoxLand::UpperLimit(eel::Vector3 realPos)
 {
-	auto gridPos = GetGridPos(realPos);
+	auto gridPos = GetGridPos(realPos); 
+	float halfHeight = m_BoxSize.GetY() / 2;
+
+	if (!IsInTheLand(gridPos))
+	{
+		return HEIGHT_BOX_NUM*m_BoxSize.GetY() + m_GridOrigin.GetY() - halfHeight;
+	}
 	int x = gridPos.GetX();
 	int y = gridPos.GetY();
 	int z = gridPos.GetZ();
 
 	int endY = y;
-	float halfHeight = m_BoxSize.GetY() / 2;
 	for(int yIdx = y; yIdx < HEIGHT_BOX_NUM; ++yIdx)
 	{
 		if(m_BoxStates[x][yIdx][z])

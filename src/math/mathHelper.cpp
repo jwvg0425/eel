@@ -115,8 +115,7 @@ BOOL eel::Math::IntersectRayTriangle(FXMVECTOR Origin, FXMVECTOR Direction, FXMV
 	}
 }
 
-eel::Matrix4 eel::Math::Inverse(Matrix4 mat)
+XMMATRIX eel::Math::Inverse(Matrix4 mat)
 {
-	XMVECTOR det = XMMatrixDeterminant(mat);
-	return XMMatrixInverse(&det, mat);
+	return XMMatrixInverse(&XMMatrixDeterminant(mat), mat);
 }

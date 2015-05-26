@@ -40,6 +40,8 @@ public:
 
 	void RemoveAllChilds();
 
+	void RemoveFromParent();
+
 	const ChildList& GetAllChilds() const;
 
 	virtual void Render() const = 0;

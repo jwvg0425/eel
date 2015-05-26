@@ -17,7 +17,7 @@ namespace Math
 	BOOL IntersectRayTriangle(FXMVECTOR Origin, FXMVECTOR Direction, FXMVECTOR V0, CXMVECTOR V1, CXMVECTOR V2,
 		FLOAT* pDist);
 
-	Matrix4 Inverse(Matrix4 mat);
+	XMMATRIX Inverse(Matrix4 mat);
 };
 
 NS_EEL_END

@@ -6,6 +6,7 @@
 #include "base/event/mousePickTriangleEvent.h"
 #include <time.h>
 #include <algorithm>
+#include "utility/log.h"
 
 USING_NS_EEL;
 

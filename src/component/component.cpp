@@ -91,3 +91,15 @@ int eel::Component::CheckWithRay(const Ray& ray, OUT float& minDist) const
 {
 	return -1;
 }
+
+void eel::Component::RemoveFromParent()
+{
+	for (auto it = m_Parent->m_Childs.cbegin(); it != m_Parent->m_Childs.cend(); ++it)
+	{
+		if (it->get() == this)
+		{
+			m_Childs.erase(it);
+			return;
+		}
+	}
+}

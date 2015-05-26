@@ -36,7 +36,7 @@ protected:
 	
 private:
 	Vector3 m_Up;
-	Vector3 m_Right;
+	READ_ONLY(Vector3, Right);
 
 	READ_ONLY(Point3, EyePos);
 	READ_ONLY(Vector3, Look);

@@ -82,6 +82,9 @@ public:
 
 	void UpdateWorld();
 
+protected:
+	Mesh* GetMesh() { return m_Mesh.get(); }
+
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
 	WRITE_ONLY(Effect*, Effect);

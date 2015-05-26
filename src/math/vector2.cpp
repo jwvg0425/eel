@@ -94,12 +94,12 @@ XMVECTOR eel::Vector2::Transform(XMMATRIX& matrix)
 	return XMVector2Transform(*this, matrix);
 }
 
-Vector2::operator XMFLOAT2()
+Vector2::operator XMFLOAT2() const
 {
 	return m_Value;
 }
 
-Vector2::operator XMVECTOR()
+Vector2::operator XMVECTOR() const
 {
 	return XMLoadFloat2(&m_Value);
 }

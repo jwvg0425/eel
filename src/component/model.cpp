@@ -68,14 +68,17 @@ UINT eel::Model::GetIndexCount() const
 
 int eel::Model::CheckWithRay(const Ray& ray, OUT float& minDist) const
 {
-	XMMATRIX W = XMLoadFloat4x4(&m_World.GetValue());
-	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
+	Ray eyeRay = ray;
+	XMMATRIX invWorld = Math::Inverse(m_World);
+
+	XMVECTOR origin = XMVector3TransformCoord(eyeRay.GetRayOrigin(), invWorld);
+	XMVECTOR dir = XMVector3TransformNormal(eyeRay.GetRayDirection(), invWorld);
+	dir = XMVector3Normalize(dir);
 
 	Ray testRay;
 
-	testRay.SetRayOrigin(XMVector3TransformCoord(ray.GetRayOrigin(), invWorld));
-	testRay.SetRayDirection(XMVector3TransformCoord(ray.GetRayDirection(), invWorld));
-	testRay.SetRayDirection(testRay.GetRayDirection().Normalize());
+	testRay.SetRayOrigin(origin);
+	testRay.SetRayDirection(dir);
 
 	int pickedTriangle = -1;
 	for(UINT i = 0; i < m_Mesh->GetIndexCount() / 3; ++i)
@@ -93,8 +96,8 @@ int eel::Model::CheckWithRay(const Ray& ray, OUT float& minDist) const
 		// We have to iterate over all the triangles in order to find the nearest intersection.
 		float t = 0.0f;
 		if(Math::IntersectRayTriangle(
-			ray.GetRayOrigin(),
-			ray.GetRayDirection(),
+			testRay.GetRayOrigin(),
+			testRay.GetRayDirection(),
 			v0, v1, v2, &t))
 		{
 			if(t < minDist)

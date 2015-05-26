@@ -104,12 +104,12 @@ XMVECTOR eel::Vector3::Transform(XMMATRIX& matrix)
 	return XMVector2Transform(*this, matrix);
 }
 
-Vector3::operator XMFLOAT3()
+Vector3::operator XMFLOAT3() const
 {
 	return m_Value;
 }
 
-Vector3::operator XMVECTOR()
+Vector3::operator XMVECTOR() const
 {
 	return XMLoadFloat3(&m_Value);
 }
