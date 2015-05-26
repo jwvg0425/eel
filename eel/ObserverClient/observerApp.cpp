@@ -4,7 +4,8 @@
 #include "networkManager.h"
 #include "utility/log.h"
 #include "gameScene.h"
-#include "MovingCamera.h"
+
+int GId = 0;
 
 ObserverApp::ObserverApp()
 {

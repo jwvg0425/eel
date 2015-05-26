@@ -2,6 +2,7 @@
 #include "PacketInterface.h"
 #include "networkManager.h"
 #include "utility/log.h"
+#include "observerApp.h"
 
 //@{ Handler Helper
 
@@ -99,21 +100,11 @@ REGISTER_HANDLER(PKT_SC_LOGIN)
 
 	const Position& pos = loginResult.playerpos();
 
+	GId = loginResult.playerid();
+
+	eel::Renderer::GetInstance()->GetCurrentCamera()->SetEyePos(eel::Point3(pos.x(), pos.y(), pos.z()));
+
 	//mPlayer->ResponseLogin(success, loginResult.playerid(),pos.x(), pos.y(), pos.z(), loginResult.playername().c_str());
-}
-
-REGISTER_HANDLER(PKT_SC_CREATE)
-{
-	CreateResponse createResult;
-	if(false == createResult.ParseFromCodedStream(&payloadStream))
-	{
-		//Disconnect
-		return;
-	}
-
-	bool success = createResult.playerid() != -1;
-	int id = createResult.playerid();
-	//mPlayer->ResponseSignIn(success, id);
 }
 
 REGISTER_HANDLER(PKT_SC_MOVE)
@@ -129,6 +120,15 @@ REGISTER_HANDLER(PKT_SC_MOVE)
 
 	const Position& pos = moveResult.playerpos();
 
+	if (moveResult.playerid() == GId)
+		return;
+
+	auto player = eel::Director::GetInstance()->GetRunningScene()->GetChildByName(std::to_string(moveResult.playerid()));
+
+	if (player == nullptr)
+	{
+	}
+
 	//mPlayer->ResponseMove(success, pos.x(), pos.y(), pos.z());
 }
 
@@ -143,4 +143,13 @@ REGISTER_HANDLER(PKT_SC_CHAT)
 
 	bool success = true; //mPlayer->GetPlayerName() == chatResult.playername();
 	//mPlayer->ResponseChat(success, chatResult.playername(), chatResult.playermessage());
+}
+
+REGISTER_HANDLER(PKT_SC_LOGOUT)
+{
+	LogoutResult logoutResult;
+	if (false == logoutResult.ParseFromCodedStream(&payloadStream))
+	{
+		return;
+	}
 }

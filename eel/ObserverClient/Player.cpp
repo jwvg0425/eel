@@ -39,38 +39,8 @@ void Player::ResponseLogin(bool success, int pid, float x, float y, float z, con
 		std::string logString = reslog.str();
 		std::cout << logString;
 	}
-	else
-	{
-		//이름 넣어서 새로가입
-		RequestSignIn("USA");
-	}
 }
 
-
-void Player::RequestSignIn(const std::string& playerName)
-{
-	mPlayerName = playerName;
-	MyPacket::CreateResquest createRequest;
-	createRequest.set_playername(playerName);
-
-	GNetworkManager->SendPacket(MyPacket::PKT_CS_CREATE, createRequest);
-}
-
-void Player::ResponseSignIn(bool success, int pid)
-{
-	if(success)
-	{
-		mPlayerId = pid;
-		RequestLogin();
-	}
-	else
-	{
-		std::string logString = "SignIn Fail With Name : " + mPlayerName;
-		std::cout << logString << std::endl;
-
-		RequestSignIn(mPlayerName + "1");
-	}
-}
 
 void Player::PlayerReset()
 {
@@ -139,21 +109,4 @@ void Player::ResponseChat(bool success, const std::string& name, const std::stri
 
 	logString = logStream.str();
 	std::cout << logString;
-}
-
-
-void Player::RandomMove()
-{
-	float newX = (float) ( rand() % 1000 ) / 10.f;
-	float newY = (float) ( rand() % 1000 ) / 10.f;
-	float newZ = (float) ( rand() % 1000 ) / 10.f;
-
-	RequestMove(newX, newY, newZ);
-}
-
-void Player::RandomChat()
-{
-	int randomNum = rand() % 10000;
-	std::string message = std::to_string(randomNum);
-	RequestChat(message);
 }

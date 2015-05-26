@@ -20,9 +20,6 @@ public:
 		return mPlayerName;
 	}
 
-	void RandomMove();
-	void RandomChat();
-
 	void RequestLogin();
 	void ResponseLogin(bool success, int pid, float x, float y, float z, const char* name);
 

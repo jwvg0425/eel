@@ -1,5 +1,8 @@
 #pragma once
 #include "eel.h"
+#include "MovingCamera.h"
+
+extern int GId;
 
 class ObserverApp : public eel::Application
 {
@@ -12,4 +15,3 @@ public:
 
 	void FinishLaunching() override;
 };
-

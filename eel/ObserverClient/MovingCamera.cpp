@@ -1,5 +1,7 @@
 ﻿#include "stdafx.h"
 #include "MovingCamera.h"
+#include "NetworkManager.h"
+#include "observerApp.h"
 
 MovingCamera::MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vector3 up)
 	:PerspectiveCamera(eyePos, targetPos, up)
@@ -32,6 +34,15 @@ void MovingCamera::Update(const eel::UpdateEvent& e)
 	{
 		Strafe(10.0f*e.m_DTime);
 	}
+	auto pos = GetEyePos();
+	MyPacket::MoveRequest packet;
+
+	packet.set_playerid(GId);
+	packet.mutable_playerpos()->set_x(pos.GetX());
+	packet.mutable_playerpos()->set_y(pos.GetY());
+	packet.mutable_playerpos()->set_z(pos.GetZ());
+
+	GNetworkManager->SendPacket(MyPacket::PKT_CS_MOVE, packet);
 }
 
 void MovingCamera::MouseMove(const eel::MouseEvent& e)

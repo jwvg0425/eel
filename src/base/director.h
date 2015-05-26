@@ -31,6 +31,9 @@ public:
 	{
 		return m_MousePos;
 	}
+
+	SPTR<Scene> GetRunningScene(){ return m_RunningScene; }
+
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
 
