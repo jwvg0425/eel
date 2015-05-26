@@ -4,6 +4,8 @@
 Grid::Grid(float width, float depth, int widthBoxNum, int depthBoxNum)
 {
 	InitGrid(width, depth, widthBoxNum, depthBoxNum);
+	eel::Director::GetInstance()
+		->RegisterEvent(eel::EventType::MOUSE_PICK_TRIANGLE, this, &Grid::OnPick);
 }
 
 Grid::Grid(eel::Vector2 boxSize, int widthBoxNum, int depthBoxNum)
@@ -11,6 +13,8 @@ Grid::Grid(eel::Vector2 boxSize, int widthBoxNum, int depthBoxNum)
 	float width = boxSize.GetX() * widthBoxNum;
 	float depth = boxSize.GetY() * depthBoxNum;
 	InitGrid(width, depth, widthBoxNum, depthBoxNum);
+	eel::Director::GetInstance()
+		->RegisterEvent(eel::EventType::MOUSE_PICK_TRIANGLE, this, &Grid::OnPick);
 }
 
 
@@ -46,4 +50,9 @@ void Grid::InitGrid(float width, float depth, int widthBoxNum, int depthBoxNum)
 		effect->SetResourceMember("gDiffuseMap", eel::ShaderResource("resource/texture/Grass.dds"));
 	});
 
+}
+
+void Grid::OnPick(const eel::MousePickTriangleEvent& e)
+{
+	eel::LOG(L"%d번째 삼각형 pick", e.m_TriangleIdx);
 }
