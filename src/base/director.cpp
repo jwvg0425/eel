@@ -1,6 +1,8 @@
 ﻿#include "director.h"
 #include "base/renderer.h"
 #include "base/keyManager.h"
+#include "base/application.h"
+#include "math/mathHelper.h"
 #include <time.h>
 
 USING_NS_EEL;
@@ -69,4 +71,28 @@ void eel::Director::UnregisterAllEvent(Object* object)
 void eel::Director::UpdateMousePos(const MouseEvent& event)
 {
 	m_MousePos = event.m_Position;
+}
+
+eel::Ray eel::Director::GetMouseRay()
+{
+	Matrix4 projection = Renderer::GetInstance()->GetScreenCamera()->GetProjection();
+
+	float vx = (+2.0f*m_MousePos.GetX() / Application::GetInstance()->GetWidth() - 1.0f) / projection(0, 0);
+	float vy = (-2.0f*m_MousePos.GetY() / Application::GetInstance()->GetHeight() + 1.0f) / projection(1, 1);
+
+	Ray ray;
+
+	Point4 origin(0.0f, 0.0f, 0.0f, 1.0f);
+	Vector4 direction(vx, vy, 1.0f, 0.0f);
+
+	Matrix4 view = Renderer::GetInstance()->GetScreenCamera()->GetView();
+	Matrix4 invView = Math::Inverse(view);
+
+	origin = XMVector3TransformCoord(origin, invView);
+	direction = XMVector3TransformNormal(direction, invView);
+
+	ray.SetRayOrigin(origin);
+	ray.SetRayDirection(direction);
+
+	return ray;
 }

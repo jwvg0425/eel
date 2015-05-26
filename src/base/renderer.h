@@ -31,6 +31,8 @@ public:
 
 	Camera* GetCurrentCamera();
 
+	Camera* GetScreenCamera();
+
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;
 
