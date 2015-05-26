@@ -14,3 +14,4 @@
 #include "render/camera/perspectiveCamera.h"
 #include "render/camera/orthographicCamera.h"
 #include "utility/meshGenerator.h"
+#include "utility/log.h"

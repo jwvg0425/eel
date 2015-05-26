@@ -15,7 +15,13 @@ using MaterialTuple = std::tuple < std::string, UPTR<Material>, UINT >;
 class Model : public Component
 {
 public:
+	Model()
+		:m_Effect(nullptr), m_Topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	{
+	};
+
 	using RenderUpdateFunc = std::function < void(const Model*, Effect*) > ;
+
 	template<typename Vertex>
 	Model(std::vector<Vertex> vertices, std::vector<UINT> indices)
 		:m_Effect(nullptr), m_Topology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
@@ -24,6 +30,12 @@ public:
 	}
 	
 	Model(std::string meshFilePath);
+
+	template<typename Vertex>
+	void InitMesh(std::vector<Vertex> vertices, std::vector<UINT> indices)
+	{
+		m_Mesh = std::make_unique<MeshImpl<Vertex>>(vertices, indices);
+	}
 
 	template<typename Vertex>
 	Vertex GetVertex(UINT idx) const

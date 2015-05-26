@@ -12,6 +12,7 @@ namespace MeshGenerator
 	void CreateColorCube(float width, float height, float depth, Color4 color, OUT std::vector<PosColor>& vertices, OUT std::vector<UINT>& indices);
 	void CreateNormalCube(float width, float height, float depth, OUT std::vector<PosNormal>& vertices, OUT std::vector<UINT>& indices);
 	void CreateCube(float width, float height, float depth, OUT std::vector<PosBasic>& vertices, OUT std::vector<UINT>& indices);
+	void CreateGrid(float width, float depth, int widthBoxNum, int depthBoxNum, OUT std::vector<PosBasic>& vertices, OUT std::vector<UINT>& indices);
 };
 
 NS_EEL_END

@@ -240,3 +240,56 @@ void eel::MeshGenerator::CreateCube(float width, float height, float depth, OUT 
 
 	indices.assign(&i[0], &i[36]);
 }
+
+void eel::MeshGenerator::CreateGrid(float width, float depth, int widthBoxNum, int depthBoxNum, 
+									OUT std::vector<PosBasic>& vertices, OUT std::vector<UINT>& indices)
+{
+	UINT vertexCount = ( depthBoxNum + 1 )*( widthBoxNum + 1 );
+	UINT faceCount = depthBoxNum * widthBoxNum * 2;
+
+	float halfWidth = 0.5f*width;
+	float halfDepth = 0.5f*depth;
+
+	float dx = width / widthBoxNum;
+	float dz = depth / depthBoxNum;
+
+	float du = 1.0f / widthBoxNum;
+	float dv = 1.0f / depthBoxNum;
+
+	vertices.resize(vertexCount);
+	for(int i = 0; i < depthBoxNum + 1; ++i)
+	{
+		float z = halfDepth - i*dz;
+		for(int j = 0; j < widthBoxNum + 1; ++j)
+		{
+			float x = -halfWidth + j*dx;
+
+			vertices[i*( widthBoxNum + 1 ) + j].m_Pos = eel::Vector3(x, 0.0f, z);
+			vertices[i*( widthBoxNum + 1 ) + j].m_Normal = eel::Vector3(0.0f, 1.0f, 0.0f);
+
+			// Stretch texture over grid.
+			vertices[i*( widthBoxNum + 1 ) + j].m_Tex.SetX(j*du);
+			vertices[i*( widthBoxNum + 1 ) + j].m_Tex.SetY(i*dv);
+		}
+	}
+
+	indices.resize(faceCount * 3);
+
+	// Iterate over each quad and compute indices.
+	UINT k = 0;
+	for(UINT i = 0; i < depthBoxNum; ++i)
+	{
+		for(UINT j = 0; j < widthBoxNum; ++j)
+		{
+			indices[k] = i*( widthBoxNum + 1 ) + j;
+			indices[k + 1] = i*( widthBoxNum + 1 ) + j + 1;
+			indices[k + 2] = ( i + 1 )*( widthBoxNum + 1 ) + j;
+
+			indices[k + 3] = ( i + 1 )*( widthBoxNum + 1 ) + j;
+			indices[k + 4] = i*( widthBoxNum + 1 ) + j + 1;
+			indices[k + 5] = ( i + 1 )*( widthBoxNum + 1 ) + j + 1;
+
+			k += 6; // next quad
+		}
+	}
+}
