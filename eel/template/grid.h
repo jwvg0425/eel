@@ -13,5 +13,7 @@ public:
 	CREATE_FUNC(Grid);
 
 	void InitGrid(float width, float depth, int widthBoxNum, int depthBoxNum);
+
+	void OnPick(const eel::MousePickTriangleEvent& e);
 };
 

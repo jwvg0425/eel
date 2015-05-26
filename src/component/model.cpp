@@ -66,7 +66,7 @@ UINT eel::Model::GetIndexCount() const
 	return m_Mesh->GetIndexCount();
 }
 
-int eel::Model::CheckWithRay(const Ray& ray) const
+int eel::Model::CheckWithRay(const Ray& ray, OUT float& minDist) const
 {
 	XMMATRIX W = XMLoadFloat4x4(&m_World.GetValue());
 	XMMATRIX invWorld = XMMatrixInverse(&XMMatrixDeterminant(W), W);
@@ -77,7 +77,6 @@ int eel::Model::CheckWithRay(const Ray& ray) const
 	testRay.SetRayDirection(XMVector3TransformCoord(ray.GetRayDirection(), invWorld));
 	testRay.SetRayDirection(testRay.GetRayDirection().Normalize());
 
-	float tmin = Math::INF;
 	int pickedTriangle = -1;
 	for(UINT i = 0; i < m_Mesh->GetIndexCount() / 3; ++i)
 	{
@@ -98,16 +97,22 @@ int eel::Model::CheckWithRay(const Ray& ray) const
 			ray.GetRayDirection(),
 			v0, v1, v2, &t))
 		{
-			if(t < tmin)
+			if(t < minDist)
 			{
 				// This is the new nearest picked triangle.
-				tmin = t;
+				minDist = t;
 				pickedTriangle = i;
 			}
 		}
 	}
 
 	return pickedTriangle;
+}
+
+int eel::Model::CheckWithRay(const Ray& ray) const
+{
+	float minDist = Math::INF;
+	return CheckWithRay(ray, minDist);
 }
 
 void eel::Model::SetPosition(float x, float y, float z)

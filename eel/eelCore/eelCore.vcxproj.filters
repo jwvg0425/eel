@@ -114,6 +114,9 @@
     <ClCompile Include="..\..\src\render\effect.cpp">
       <Filter>render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\base\event\mousePickTriangleEvent.cpp">
+      <Filter>base\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\eel.h" />
@@ -263,6 +266,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\render\effect.h">
       <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\base\event\mousePickTriangleEvent.h">
+      <Filter>base\event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

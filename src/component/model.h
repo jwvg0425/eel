@@ -71,7 +71,8 @@ public:
 	const ShaderResource& GetShaderResource(const std::string& name) const;
 
 	/// if fails it will return -1, or return index of triangle
-	int CheckWithRay(const Ray& ray) const;
+	int CheckWithRay(const Ray& ray, OUT float& minDist) const override;
+	int CheckWithRay(const Ray& ray) const override;
 
 	CREATE_FUNC(Model);
 

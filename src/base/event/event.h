@@ -12,6 +12,7 @@ enum class EventType
 	MOUSE_DOWN,
 	MOUSE_UP,
 	UPDATE,
+	MOUSE_PICK_TRIANGLE
 };
 
 struct Event
@@ -54,5 +55,6 @@ private:
 	Obj* m_Object;
 	Func m_Function;
 };
+
 
 NS_EEL_END

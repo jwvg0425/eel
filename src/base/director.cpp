@@ -3,7 +3,9 @@
 #include "base/keyManager.h"
 #include "base/application.h"
 #include "math/mathHelper.h"
+#include "base/event/mousePickTriangleEvent.h"
 #include <time.h>
+#include <algorithm>
 
 USING_NS_EEL;
 
@@ -12,6 +14,9 @@ void Director::GameLoop()
 	m_Timer.Tick();
 	Renderer::GetInstance()->Render(m_RunningScene);
 	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
+
+	//pick event
+	PickingCheck();
 }
 
 Director::Director()
@@ -95,4 +100,52 @@ eel::Ray eel::Director::GetMouseRay()
 	ray.SetRayDirection(direction);
 
 	return ray;
+}
+
+void eel::Director::PickingCheck()
+{
+	//mouse picking check(in running scene)
+	Ray ray = GetMouseRay();
+	float minDist = Math::INF;
+	static WPTR<Component> prevChild;
+	SPTR<Component> minChild = nullptr;
+
+	int minPick = -1;
+	for (auto child : m_RunningScene->GetAllChilds())
+	{
+		int pick = child->CheckWithRay(ray, minDist);
+
+		if (pick != -1)
+		{
+			minPick = pick;
+			minChild = child;
+		}
+	}
+
+	auto prev = prevChild.lock();
+
+	auto ExecuteRegisteredEvent = [this](SPTR<Component> minChild, const Event& e)
+	{
+		for (auto& entry : m_EventMap[EventType::MOUSE_PICK_TRIANGLE])
+		{
+			if (entry->GetEventObject() == minChild.get())
+			{
+				entry->Excute(e);
+				return;
+			}
+		}
+	};
+
+	Vector3 pickPos = ray.GetRayOrigin() + ray.GetRayDirection() * minDist;
+
+	MousePickTriangleEvent e(-1, minDist, pickPos);
+	if (prev != minChild)
+	{
+		ExecuteRegisteredEvent(prev, e);
+
+		WPTR<Component> weak(minChild);
+		prevChild.swap(weak);
+	}
+	e.m_TriangleIdx = minPick;
+	ExecuteRegisteredEvent(minChild, e);
 }

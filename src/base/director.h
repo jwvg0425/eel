@@ -4,7 +4,8 @@
 #include "utility/singleton.h"
 #include "component/scene.h"
 #include "base/event/mouseEvent.h"
-#include "base/event/UpdateEvent.h"
+#include "base/event/updateEvent.h"
+#include "base/event/mousePickTriangleEvent.h"
 #include "base/timer.h"
 #include "math/vector.h"
 #include "math/ray.h"
@@ -40,6 +41,8 @@ public:
 	Ray GetMouseRay();
 	
 private:
+	void PickingCheck();
+
 	SPTR<Scene> m_RunningScene = nullptr;
 
 	using EventList = std::vector < UPTR<EventEntry> > ;

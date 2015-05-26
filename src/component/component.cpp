@@ -81,3 +81,13 @@ const Component::ChildList& eel::Component::GetAllChilds() const
 {
 	return m_Childs;
 }
+
+int eel::Component::CheckWithRay(const Ray& ray) const
+{
+	return -1;
+}
+
+int eel::Component::CheckWithRay(const Ray& ray, OUT float& minDist) const
+{
+	return -1;
+}

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "base/object.h"
-#include "math/vector.h"
+#include "math/ray.h"
 
 NS_EEL_BEGIN
 
@@ -43,6 +43,9 @@ public:
 	const ChildList& GetAllChilds() const;
 
 	virtual void Render() const = 0;
+
+	virtual int CheckWithRay(const Ray& ray) const;
+	virtual int CheckWithRay(const Ray& ray, OUT float& minDist) const;
 
 private:
 
