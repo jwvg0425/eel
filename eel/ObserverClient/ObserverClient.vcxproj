@@ -148,6 +148,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="gameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MovingCamera.cpp" />
     <ClCompile Include="networkManager.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="..\Protobuf\MyPacket.pb.h" />
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="gameScene.h" />
     <ClInclude Include="MovingCamera.h" />
     <ClInclude Include="networkManager.h" />
     <ClInclude Include="observerApp.h" />

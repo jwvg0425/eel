@@ -41,7 +41,7 @@ bool NetworkManager::InitSocket()
 
 	HWND hWnd = ObserverApp::GetInstance()->GetWindowHandle();
 
-	if(WSAAsyncSelect(mSocket, hWnd, WM_SOCKET, ( FD_CLOSE | FD_READ | FD_WRITE | FD_CONNECT)))
+	if(WSAAsyncSelect(mSocket, hWnd, WM_SOCKET, FD_CONNECT))
 	{
 		eel::LOG(L"NetworkManager::InitSocket() WSAAsyncSelect error: %d\n", GetLastError());
 		return false;

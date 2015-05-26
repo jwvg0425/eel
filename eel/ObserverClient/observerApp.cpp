@@ -3,6 +3,8 @@
 #include "config.h"
 #include "networkManager.h"
 #include "utility/log.h"
+#include "gameScene.h"
+#include "MovingCamera.h"
 
 ObserverApp::ObserverApp()
 {
@@ -44,11 +46,12 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 			GNetworkManager->OnWrite(selectedSocket);
 			break;
 			case FD_CONNECT:
-				if (0 != setsockopt(selectedSocket, IPPROTO_TCP, TCP_NODELAY, (const char*)&opt, sizeof(int)))
+				if (WSAAsyncSelect(selectedSocket, hWnd, WM_SOCKET, FD_READ | FD_WRITE | FD_CLOSE))
 				{
-					eel::LOG(L"NetworkManager::InitSocket() TCP_NODELAY error: %d\n", GetLastError());
-					break;
+					eel::LOG(L"NetworkManager::InitSocket() WSAAsyncSelect error: %d\n", GetLastError());
+					return false;
 				}
+
 				break;
 
 			default:
@@ -64,4 +67,13 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 void ObserverApp::FinishLaunching()
 {
 	GNetworkManager = new NetworkManager;
+
+	eel::Renderer::GetInstance()->
+		SetScreenBackgroundColor(eel::Color4(0.6f, 0.8f, 0.3f, 1.0f));
+
+	eel::Renderer::GetInstance()->
+		SetScreenCamera(MovingCamera::Create(eel::Point3(0.0f, 20.0f, 30.0f), eel::Point3(0.0f, 0.0f, 0.0f), eel::Vector3(0.0f, 1.0f, 0.0f)));
+
+	eel::Director::GetInstance()->
+		RunWithScene(GameScene::Create());
 }
