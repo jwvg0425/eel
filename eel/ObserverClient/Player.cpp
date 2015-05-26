@@ -1,12 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "DummyClientSession.h"
 #include "MyPacket.pb.h"
-#include "Log.h"
-#include "ContentsConfig.h"
+#include "config.h"
+#include "networkMananger.h"
 
-Player::Player(DummyClientSession* session)
-	:mSession(session)
+Player::Player()
 {
 }
 
@@ -23,7 +21,7 @@ void Player::RequestLogin()
 	MyPacket::LoginRequest loginRequest;
 	loginRequest.set_playerid(mPlayerId);
 
-	mSession->SendRequest(MyPacket::PKT_CS_LOGIN, loginRequest);
+	GNetworkMananger->SendPacket(MyPacket::PKT_CS_LOGIN, loginRequest);
 }
 
 void Player::ResponseLogin(bool success, int pid, float x, float y, float z, const char* name)
@@ -39,11 +37,7 @@ void Player::ResponseLogin(bool success, int pid, float x, float y, float z, con
 		std::stringstream reslog;
 		reslog << "LOG: Player Login : PID[" << mPlayerId << "], X[" << mPosX << "], Y[" << mPosY << "], Z[" << mPosZ << "], NAME[" << mPlayerName << "]" << std::endl;
 		std::string logString = reslog.str();
-
-		EVENT_LOG(logString.c_str(), 0);
 		std::cout << logString;
-
-		DoSyncAfter(HEART_BEAT, GetSharedFromThis<Player>(), &Player::OnTick);
 	}
 	else
 	{
@@ -59,7 +53,7 @@ void Player::RequestSignIn(const std::string& playerName)
 	MyPacket::CreateResquest createRequest;
 	createRequest.set_playername(playerName);
 
-	mSession->SendRequest(MyPacket::PKT_CS_CREATE, createRequest);
+	GNetworkMananger->SendPacket(MyPacket::PKT_CS_CREATE, createRequest);
 }
 
 void Player::ResponseSignIn(bool success, int pid)
@@ -72,22 +66,10 @@ void Player::ResponseSignIn(bool success, int pid)
 	else
 	{
 		std::string logString = "SignIn Fail With Name : " + mPlayerName;
-		EVENT_LOG(logString.c_str(), 0);
 		std::cout << logString << std::endl;
 
 		RequestSignIn(mPlayerName + "1");
 	}
-}
-
-void Player::OnTick()
-{
-	if(!IsValid())
-		return;
-
-	RandomMove();
-	RandomChat();
-
-	DoSyncAfter(HEART_BEAT, GetSharedFromThis<Player>(), &Player::OnTick);
 }
 
 void Player::PlayerReset()
@@ -110,7 +92,7 @@ void Player::RequestMove(float x, float y, float z)
 	newPos->set_z(z);
 	moveRequest.set_allocated_playerpos(newPos);
 
-	mSession->SendRequest(MyPacket::PKT_CS_MOVE, moveRequest);
+	GNetworkMananger->SendPacket(MyPacket::PKT_CS_MOVE, moveRequest);
 }
 
 void Player::ResponseMove(bool success, float x, float y, float z)
@@ -131,7 +113,6 @@ void Player::ResponseMove(bool success, float x, float y, float z)
 			<< " fail to move."<< std::endl;
 	}
 	std::string logString = logStream.str();
-	EVENT_LOG(logString.c_str(), 0);
 	std::cout << logString;
 }
 
@@ -140,7 +121,7 @@ void Player::RequestChat(const std::string& message)
 	MyPacket::ChatRequest chatRequest;
 	chatRequest.set_playermessage(message);
 	chatRequest.set_playerid(mPlayerId);
-	mSession->SendRequest(MyPacket::PKT_CS_CHAT, chatRequest);
+	GNetworkMananger->SendPacket(MyPacket::PKT_CS_CHAT, chatRequest);
 }
 
 void Player::ResponseChat(bool success, const std::string& name, const std::string& message)

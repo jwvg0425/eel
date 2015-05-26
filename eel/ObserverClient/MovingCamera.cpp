@@ -1,4 +1,5 @@
-﻿#include "MovingCamera.h"
+﻿#include "stdafx.h"
+#include "MovingCamera.h"
 
 MovingCamera::MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vector3 up)
 	:PerspectiveCamera(eyePos, targetPos, up)

@@ -41,14 +41,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\ozt\Desktop\ozt\git\eel\eel\Protobuf;$(SolutionDir)..\src;C:\DirectXCommon;$(DXSDK_DIR)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\ozt\Desktop\ozt\git\eel\eel\Protobuf\lib_x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -56,6 +57,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libprotobuf-lite-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -76,6 +78,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Protobuf\MyPacket.pb.cc" />
+    <ClCompile Include="CircularBuffer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingCamera.cpp" />
+    <ClCompile Include="networkMananger.cpp" />
+    <ClCompile Include="observerApp.cpp" />
+    <ClCompile Include="PacketHandler.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Protobuf\MyPacket.pb.h" />
+    <ClInclude Include="CircularBuffer.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="MovingCamera.h" />
+    <ClInclude Include="networkMananger.h" />
+    <ClInclude Include="observerApp.h" />
+    <ClInclude Include="PacketInterface.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Protobuf\MyPacket.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

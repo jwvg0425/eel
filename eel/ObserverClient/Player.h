@@ -1,12 +1,10 @@
 #pragma once
-#include "SyncExecutable.h"
-
 class DummyClientSession;
 
-class Player : public SyncExecutable
+class Player
 {
 public:
-	Player(DummyClientSession* session);
+	Player();
 	~Player();
 
 	bool IsValid()
@@ -50,8 +48,5 @@ private:
 	bool mIsValid = false;
 	std::string mPlayerName;
 	std::string mComment;
-
-	DummyClientSession* const mSession;
-	friend class DummyClientSession;
 };
 

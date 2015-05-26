@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "eel.h"
 
 class MovingCamera : public eel::PerspectiveCamera, public eel::MakeCreate<MovingCamera>
 {

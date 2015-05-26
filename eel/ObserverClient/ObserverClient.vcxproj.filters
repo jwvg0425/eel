@@ -13,5 +13,95 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\main">
+      <UniqueIdentifier>{f44af9fa-0ed4-45a3-980e-94f39fa7c98b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\app">
+      <UniqueIdentifier>{95d38bec-5def-4711-ad19-43a2cc2f197a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\network">
+      <UniqueIdentifier>{9995931d-b1f6-4909-bb51-77db7c03c845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\network\util">
+      <UniqueIdentifier>{cbfb27e0-5ae2-4096-90cd-290d1b1218d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\network\contents">
+      <UniqueIdentifier>{00d43508-c222-467b-9192-ca28f5d6b7e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\network\packet">
+      <UniqueIdentifier>{75cf35df-ac84-43df-a69a-f7d3c066b261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\network\packet\protobuf">
+      <UniqueIdentifier>{543acd33-c01d-4956-a0e6-f95a50240dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\render">
+      <UniqueIdentifier>{5a4933cc-a7e8-485b-a88e-6e645a35a5de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Protobuf\MyPacket.pb.cc">
+      <Filter>소스 파일\network\packet\protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="CircularBuffer.cpp">
+      <Filter>소스 파일\network\util</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketHandler.cpp">
+      <Filter>소스 파일\network\packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\network\contents</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일\main</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\main</Filter>
+    </ClCompile>
+    <ClCompile Include="observerApp.cpp">
+      <Filter>소스 파일\app</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingCamera.cpp">
+      <Filter>소스 파일\render</Filter>
+    </ClCompile>
+    <ClCompile Include="networkMananger.cpp">
+      <Filter>소스 파일\network</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Protobuf\MyPacket.pb.h">
+      <Filter>소스 파일\network\packet\protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="CircularBuffer.h">
+      <Filter>소스 파일\network\util</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketInterface.h">
+      <Filter>소스 파일\network\packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\network\contents</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>소스 파일\main</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>소스 파일\main</Filter>
+    </ClInclude>
+    <ClInclude Include="observerApp.h">
+      <Filter>소스 파일\app</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingCamera.h">
+      <Filter>소스 파일\render</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>소스 파일\network\contents</Filter>
+    </ClInclude>
+    <ClInclude Include="networkMananger.h">
+      <Filter>소스 파일\network</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Protobuf\MyPacket.proto">
+      <Filter>소스 파일\network\packet\protobuf</Filter>
+    </None>
   </ItemGroup>
 </Project>

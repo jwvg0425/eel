@@ -1,20 +1,16 @@
 #include "stdafx.h"
-#include "Exception.h"
-#include "Log.h"
 #include "PacketInterface.h"
-#include "DummyClientSession.h"
-
-
+#include "networkMananger.h"
 #include "MyPacket.pb.h"
-
+#include "utility/log.h"
 
 //@{ Handler Helper
 
-typedef void(*HandlerFunc)(DummyClientSession* session, PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream);
+typedef void(*HandlerFunc)(PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream);
 
 static HandlerFunc HandlerTable[MAX_PKT_TYPE];
 
-static void DefaultHandler(DummyClientSession* session, PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream)
+static void DefaultHandler(PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream)
 {
 	
 	printf_s("Default Handler...PKT ID: %d\n", pktBase.mType);
@@ -38,35 +34,37 @@ struct RegisterHandler
 };
 
 #define REGISTER_HANDLER(PKT_TYPE)	\
-	static void Handler_##PKT_TYPE(DummyClientSession* session, PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream); \
+	static void Handler_##PKT_TYPE(PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream); \
 	static RegisterHandler _register_##PKT_TYPE(PKT_TYPE, Handler_##PKT_TYPE); \
-	static void Handler_##PKT_TYPE(DummyClientSession* session, PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream)
+	static void Handler_##PKT_TYPE(PacketHeader& pktBase, protobuf::io::CodedInputStream& payloadStream)
 
 
-//@}
 
-void DummyClientSession::OnReceive(size_t len)
+/// 패킷 파싱하고 처리
+
+void NetworkMananger::RecvPacket()
 {
-	
-	/// 패킷 파싱하고 처리
+	if(mRecvBuffer.GetContiguiousBytes() == 0)
+		return;
+
 	protobuf::io::ArrayInputStream arrayInputStream(mRecvBuffer.GetBufferStart(), mRecvBuffer.GetContiguiousBytes());
 	protobuf::io::CodedInputStream codedInputStream(&arrayInputStream);
 
 	PacketHeader packetheader;
 
-	while (codedInputStream.ReadRaw(&packetheader, HEADER_SIZE))
+	while(codedInputStream.ReadRaw(&packetheader, HEADER_SIZE))
 	{
 		const void* payloadPos = nullptr;
 		int payloadSize = 0;
 
 		codedInputStream.GetDirectBufferPointer(&payloadPos, &payloadSize);
 
-		if ( payloadSize < packetheader.mSize ) ///< 패킷 본체 사이즈 체크
+		if(payloadSize < packetheader.mSize) ///< 패킷 본체 사이즈 체크
 			break;
 
-		if (packetheader.mType >= MAX_PKT_TYPE || packetheader.mType <= 0)
+		if(packetheader.mType >= MAX_PKT_TYPE || packetheader.mType <= 0)
 		{
-			DisconnectRequest(DR_ACTIVE);
+			//연결 처리
 			break;
 		}
 
@@ -75,14 +73,15 @@ void DummyClientSession::OnReceive(size_t len)
 		protobuf::io::CodedInputStream payloadInputStream(&payloadArrayStream);
 
 		/// packet dispatch...
-		HandlerTable[packetheader.mType](this, packetheader, payloadInputStream);
-	
+		HandlerTable[packetheader.mType](packetheader, payloadInputStream);
+
 		/// 읽은 만큼 전진 및 버퍼에서 제거
 		codedInputStream.Skip(packetheader.mSize); ///< readraw에서 헤더 크기만큼 미리 전진했기때문
 		mRecvBuffer.Remove(HEADER_SIZE + packetheader.mSize);
 
 	}
 }
+
 
 /////////////////////////////////////////////////////////////
 
@@ -93,7 +92,7 @@ REGISTER_HANDLER(PKT_SC_LOGIN)
 	LoginResult loginResult;
 	if (false == loginResult.ParseFromCodedStream(&payloadStream))
 	{
-		session->DisconnectRequest(DR_ACTIVE);
+		//Disconnect
 		return;
 	}
 
@@ -101,10 +100,7 @@ REGISTER_HANDLER(PKT_SC_LOGIN)
 
 	const Position& pos = loginResult.playerpos();
 
-	session->mPlayer->ResponseLogin(
-		success, loginResult.playerid(), 
-		pos.x(), pos.y(), pos.z(), 
-		loginResult.playername().c_str());
+	//mPlayer->ResponseLogin(success, loginResult.playerid(),pos.x(), pos.y(), pos.z(), loginResult.playername().c_str());
 }
 
 REGISTER_HANDLER(PKT_SC_CREATE)
@@ -112,13 +108,13 @@ REGISTER_HANDLER(PKT_SC_CREATE)
 	CreateResponse createResult;
 	if(false == createResult.ParseFromCodedStream(&payloadStream))
 	{
-		session->DisconnectRequest(DR_ACTIVE);
+		//Disconnect
 		return;
 	}
 
 	bool success = createResult.playerid() != -1;
 	int id = createResult.playerid();
-	session->mPlayer->ResponseSignIn(success, id);
+	//mPlayer->ResponseSignIn(success, id);
 }
 
 REGISTER_HANDLER(PKT_SC_MOVE)
@@ -126,7 +122,7 @@ REGISTER_HANDLER(PKT_SC_MOVE)
 	MoveResult moveResult;
 	if(false == moveResult.ParseFromCodedStream(&payloadStream))
 	{
-		session->DisconnectRequest(DR_ACTIVE);
+		//Disconnect
 		return;
 	}
 
@@ -134,7 +130,7 @@ REGISTER_HANDLER(PKT_SC_MOVE)
 
 	const Position& pos = moveResult.playerpos();
 
-	session->mPlayer->ResponseMove(success, pos.x(), pos.y(), pos.z());
+	//mPlayer->ResponseMove(success, pos.x(), pos.y(), pos.z());
 }
 
 REGISTER_HANDLER(PKT_SC_CHAT)
@@ -142,10 +138,10 @@ REGISTER_HANDLER(PKT_SC_CHAT)
 	ChatResult chatResult;
 	if(false == chatResult.ParseFromCodedStream(&payloadStream))
 	{
-		session->DisconnectRequest(DR_ACTIVE);
+		//Disconnect
 		return;
 	}
 
-	bool success = session->mPlayer->GetPlayerName() == chatResult.playername();
-	session->mPlayer->ResponseChat(success, chatResult.playername(), chatResult.playermessage());
+	bool success = true; //mPlayer->GetPlayerName() == chatResult.playername();
+	//mPlayer->ResponseChat(success, chatResult.playername(), chatResult.playermessage());
 }
