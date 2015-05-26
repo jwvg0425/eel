@@ -63,7 +63,7 @@
     <ClCompile Include="MovingCamera.cpp">
       <Filter>소스 파일\render</Filter>
     </ClCompile>
-    <ClCompile Include="networkMananger.cpp">
+    <ClCompile Include="networkManager.cpp">
       <Filter>소스 파일\network</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="config.h">
       <Filter>소스 파일\network\contents</Filter>
     </ClInclude>
-    <ClInclude Include="networkMananger.h">
+    <ClInclude Include="networkManager.h">
       <Filter>소스 파일\network</Filter>
     </ClInclude>
   </ItemGroup>

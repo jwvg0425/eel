@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "PacketInterface.h"
-#include "networkMananger.h"
-#include "MyPacket.pb.h"
+#include "networkManager.h"
 #include "utility/log.h"
 
 //@{ Handler Helper
@@ -42,7 +41,7 @@ struct RegisterHandler
 
 /// 패킷 파싱하고 처리
 
-void NetworkMananger::RecvPacket()
+void NetworkManager::RecvPacket()
 {
 	if(mRecvBuffer.GetContiguiousBytes() == 0)
 		return;

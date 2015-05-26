@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "MyPacket.pb.h"
 #include "config.h"
-#include "networkMananger.h"
+#include "networkManager.h"
 
 Player::Player()
 {
@@ -21,7 +21,7 @@ void Player::RequestLogin()
 	MyPacket::LoginRequest loginRequest;
 	loginRequest.set_playerid(mPlayerId);
 
-	GNetworkMananger->SendPacket(MyPacket::PKT_CS_LOGIN, loginRequest);
+	GNetworkManager->SendPacket(MyPacket::PKT_CS_LOGIN, loginRequest);
 }
 
 void Player::ResponseLogin(bool success, int pid, float x, float y, float z, const char* name)
@@ -53,7 +53,7 @@ void Player::RequestSignIn(const std::string& playerName)
 	MyPacket::CreateResquest createRequest;
 	createRequest.set_playername(playerName);
 
-	GNetworkMananger->SendPacket(MyPacket::PKT_CS_CREATE, createRequest);
+	GNetworkManager->SendPacket(MyPacket::PKT_CS_CREATE, createRequest);
 }
 
 void Player::ResponseSignIn(bool success, int pid)
@@ -92,7 +92,7 @@ void Player::RequestMove(float x, float y, float z)
 	newPos->set_z(z);
 	moveRequest.set_allocated_playerpos(newPos);
 
-	GNetworkMananger->SendPacket(MyPacket::PKT_CS_MOVE, moveRequest);
+	GNetworkManager->SendPacket(MyPacket::PKT_CS_MOVE, moveRequest);
 }
 
 void Player::ResponseMove(bool success, float x, float y, float z)
@@ -121,7 +121,7 @@ void Player::RequestChat(const std::string& message)
 	MyPacket::ChatRequest chatRequest;
 	chatRequest.set_playermessage(message);
 	chatRequest.set_playerid(mPlayerId);
-	GNetworkMananger->SendPacket(MyPacket::PKT_CS_CHAT, chatRequest);
+	GNetworkManager->SendPacket(MyPacket::PKT_CS_CHAT, chatRequest);
 }
 
 void Player::ResponseChat(bool success, const std::string& name, const std::string& message)

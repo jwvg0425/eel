@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "observerApp.h"
 #include "config.h"
-#include "networkMananger.h"
+#include "networkManager.h"
+#include "utility/log.h"
 
 ObserverApp::ObserverApp()
 {
@@ -16,6 +17,8 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 {
 	SOCKET selectedSocket = NULL;
 	int errorId = NULL;
+	int opt = 1;
+
 	switch(iMessage)
 	{
 		case WM_CREATE:
@@ -30,16 +33,23 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 		switch(WSAGETSELECTEVENT(lParam))
 		{
 			case FD_READ:
-			GNetworkMananger->RecvPacket(selectedSocket);
+			GNetworkManager->RecvPacket();
 			break;
 
 			case FD_CLOSE:
-			GNetworkMananger->OnClose(selectedSocket);
+			GNetworkManager->OnClose(selectedSocket);
 			break;
 
 			case FD_WRITE:
-			GNetworkMananger->OnWrite(selectedSocket);
+			GNetworkManager->OnWrite(selectedSocket);
 			break;
+			case FD_CONNECT:
+				if (0 != setsockopt(selectedSocket, IPPROTO_TCP, TCP_NODELAY, (const char*)&opt, sizeof(int)))
+				{
+					eel::LOG(L"NetworkManager::InitSocket() TCP_NODELAY error: %d\n", GetLastError());
+					break;
+				}
+				break;
 
 			default:
 			break;
@@ -49,4 +59,9 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 		default:
 		return Application::WndProc(hWnd, iMessage, wParam, lParam);
 	}
+}
+
+void ObserverApp::FinishLaunching()
+{
+	GNetworkManager = new NetworkManager;
 }

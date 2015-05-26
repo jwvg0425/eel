@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "networkMananger.h"
+#include "networkManager.h"
 #include "utility/log.h"
 #include "ObserverApp.h"
 #include "config.h"
 #include "PacketInterface.h"
 
-static NetworkMananger* GNetworkMananger = nullptr;
-char CONNECT_ADDR[32] = {0, };
-unsigned short CONNECT_PORT = 0;
+NetworkManager* GNetworkManager = nullptr;
+char CONNECT_ADDR[32] = "10.73.44.30";
+unsigned short CONNECT_PORT = 41026;
 
-NetworkMananger::NetworkMananger()
+NetworkManager::NetworkManager()
 	:mRecvBuffer(BUF_SIZE), mSendBuffer(BUF_SIZE)
 {
 	if(!InitSocket())
@@ -19,11 +19,11 @@ NetworkMananger::NetworkMananger()
 }
 
 
-NetworkMananger::~NetworkMananger()
+NetworkManager::~NetworkManager()
 {
 }
 
-bool NetworkMananger::InitSocket()
+bool NetworkManager::InitSocket()
 {
 	WSADATA wsaData;
 	if(0 != WSAStartup(( 2, 2 ), &wsaData))
@@ -41,7 +41,7 @@ bool NetworkMananger::InitSocket()
 
 	HWND hWnd = ObserverApp::GetInstance()->GetWindowHandle();
 
-	if(WSAAsyncSelect(mSocket, hWnd, WM_SOCKET, ( FD_CLOSE | FD_READ | FD_WRITE)))
+	if(WSAAsyncSelect(mSocket, hWnd, WM_SOCKET, ( FD_CLOSE | FD_READ | FD_WRITE | FD_CONNECT)))
 	{
 		eel::LOG(L"NetworkManager::InitSocket() WSAAsyncSelect error: %d\n", GetLastError());
 		return false;
@@ -56,21 +56,17 @@ bool NetworkMananger::InitSocket()
 
 	if(0 != connect(mSocket, (LPSOCKADDR) ( &addr ), sizeof(addr)))
 	{
-		eel::LOG(L"NetworkManager::InitSocket() connect error: %d\n", GetLastError());
-		return false;
-	}
-
-	int opt = 1;
-	if(SOCKET_ERROR == setsockopt(mSocket, IPPROTO_TCP, TCP_NODELAY, (const char*) &opt, sizeof(int)))
-	{
-		eel::LOG(L"NetworkManager::InitSocket() TCP_NODELAY error: %d\n", GetLastError());
-		return false;
+		if (WSAGetLastError() != WSAEWOULDBLOCK)
+		{
+			eel::LOG(L"NetworkManager::InitSocket() connect error: %d\n", GetLastError());
+			return false;
+		}
 	}
 
 	return true;
 }
 
-void NetworkMananger::OnClose(SOCKET socket)
+void NetworkManager::OnClose(SOCKET socket)
 {
 	if(socket != mSocket)
 		return;
@@ -78,7 +74,7 @@ void NetworkMananger::OnClose(SOCKET socket)
 	CloseSocketWithReason(CRT_NORMAL);
 }
 
-void NetworkMananger::CloseSocketWithReason(ClosedReasonType reason)
+void NetworkManager::CloseSocketWithReason(ClosedReasonType reason)
 {
 	eel::LOG(L"Connect Closed with %d\n", reason);
 	closesocket(mSocket);
@@ -88,7 +84,7 @@ void NetworkMananger::CloseSocketWithReason(ClosedReasonType reason)
 	SendMessage(hWnd, WM_DESTROY, NULL, NULL);
 }
 
-void NetworkMananger::OnWrite(SOCKET socket)
+void NetworkManager::OnWrite(SOCKET socket)
 {
 	if(socket != mSocket)
 		return;
@@ -99,13 +95,17 @@ void NetworkMananger::OnWrite(SOCKET socket)
 	DWORD sendbytes = send(mSocket, mSendBuffer.GetBufferStart(), mSendBuffer.GetContiguiousBytes(), 0);
 	if(sendbytes == SOCKET_ERROR)
 	{
-		eel::LOG(L"NetworkManager::OnWrite() send error: %d\n", GetLastError());
-		CloseSocketWithReason(CRT_RECV);
-		return;
+		int errorId = WSAGetLastError();
+		if (errorId != WSAEWOULDBLOCK)
+		{
+			eel::LOG(L"NetworkManager::OnWrite() send error: %d\n", GetLastError());
+			CloseSocketWithReason(CRT_RECV);
+			return;
+		}
 	}
 }
 
-bool NetworkMananger::PostSend(const char* data, size_t len)
+bool NetworkManager::PostSend(const char* data, size_t len)
 {
 	if(mSendBuffer.GetFreeSpaceSize() < len)
 		return false;
@@ -117,7 +117,7 @@ bool NetworkMananger::PostSend(const char* data, size_t len)
 	return true;
 }
 
-void NetworkMananger::OnRead(SOCKET socket)
+void NetworkManager::OnRead(SOCKET socket)
 {
 	if(socket != mSocket)
 		return;
@@ -139,7 +139,7 @@ void NetworkMananger::OnRead(SOCKET socket)
 	RecvPacket();
 }
 
-bool NetworkMananger::SendPacket(short packetType, const protobuf::MessageLite& payload)
+bool NetworkManager::SendPacket(short packetType, const protobuf::MessageLite& payload)
 {
 	int totalSize = payload.ByteSize() + HEADER_SIZE;
 	if(mSendBuffer.GetFreeSpaceSize() < totalSize)

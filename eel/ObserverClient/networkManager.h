@@ -1,6 +1,9 @@
 #pragma once
 #include "CircularBuffer.h"
-extern NetworkMananger* GNetworkMananger;
+#include "MyPacket.pb.h"
+
+class NetworkManager;
+extern NetworkManager* GNetworkManager;
 extern char CONNECT_ADDR[32];
 extern unsigned short CONNECT_PORT;
 
@@ -14,11 +17,11 @@ enum ClosedReasonType
 	CRT_MAX,
 };
 
-class NetworkMananger
+class NetworkManager
 {
 public:
-	NetworkMananger();
-	~NetworkMananger();
+	NetworkManager();
+	~NetworkManager();
 
 	bool InitSocket();
 	
@@ -26,7 +29,7 @@ public:
 	void OnClose(SOCKET socket);
 	void OnWrite(SOCKET socket);
 
-	bool SendPacket(short packetType, const protobuf::MessageLite& payload);
+	bool SendPacket(short packetType, const google::protobuf::MessageLite& payload);
 	void RecvPacket();
 	bool PostSend(const char* data, size_t len);
 	void CloseSocketWithReason(ClosedReasonType reason);
