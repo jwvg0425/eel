@@ -1,6 +1,7 @@
 ﻿#include "MyApplication.h"
 #include "FirstScene.h"
 #include "MovingCamera.h"
+#include "boxLand.h"
 
 void MyApplication::FinishLaunching()
 {
@@ -12,4 +13,7 @@ void MyApplication::FinishLaunching()
 
 	eel::Director::GetInstance()->
 		RunWithScene(FirstScene::Create());
+
+	
+	GBoxLand = new BoxLand(eel::Vector3(10.f, 10.f, 10.f),10, 10, 10);
 }

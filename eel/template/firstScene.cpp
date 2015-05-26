@@ -13,6 +13,4 @@ FirstScene::FirstScene()
 	testLight.m_Direction = eel::Vector3(-0.4f);
 
 	eel::DirectionalLight::RegisterLight(testLight);
-	auto grid = Grid::Create(100.f, 100.f, 100, 100);
-	AddChild(grid);
 }

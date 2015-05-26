@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="box.cpp" />
+    <ClCompile Include="boxLand.cpp" />
     <ClCompile Include="firstScene.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.cpp" />
@@ -97,6 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="box.h" />
+    <ClInclude Include="boxLand.h" />
     <ClInclude Include="firstScene.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="MovingCamera.h" />
