@@ -2,17 +2,17 @@
 #include "component/component.h"
 #include "render/mesh.h"
 #include "math/matrix.h"
-#include "utility/makeCreate.h"
 #include "render/light/material.h"
 #include <functional>
 #include "math/ray.h"
+#include "render/shaderResource.h"
 
 NS_EEL_BEGIN
 
 class Effect;
 using MaterialTuple = std::tuple < std::string, UPTR<Material>, UINT >;
 
-class Model : public Component, public MakeCreate<Model>
+class Model : public Component
 {
 public:
 	using RenderUpdateFunc = std::function < void(const Model*, Effect*) > ;
@@ -21,6 +21,11 @@ public:
 		:m_Effect(nullptr)
 	{
 		m_Mesh = std::make_unique<MeshImpl<Vertex>>(vertices, indices);
+	}
+
+	Model()
+	{
+		m_Mesh = nullptr;
 	}
 	
 	Model(std::string meshFilePath);
@@ -31,12 +36,17 @@ public:
 		return static_cast<MeshImpl<Vertex>>(m_Mesh)->GetVertex(idx);
 	}
 
+	template<typename Vertex>
+	void SetMesh(std::vector<Vertex> vertices, std::vector<UINT> indices)
+	{
+		m_Mesh = std::make_unique<MeshImpl<Vertex>>(vertices, indices);
+	}
+	
 	void SetRenderUpdate(RenderUpdateFunc func);
 	void SetTech(const std::string& techName);
 
 	UINT GetIndex(UINT idx) const;
 	UINT GetIndexCount() const;
-	Matrix4 GetWorld() const;
 
 	virtual void Render() const;
 
@@ -53,29 +63,23 @@ public:
 		m_Materials.push_back(std::move(pair));
 	}
 
-	MaterialData GetMaterial(const std::string& name) const
-	{
-		MaterialData res;
-		res.m_Material = nullptr;
-		res.m_Size = 0;
+	MaterialData GetMaterial(const std::string& name) const;
 
-		for (auto& material : m_Materials)
-		{
-			if (std::get<0>(material) == name)
-			{
-				res.m_Material = std::get<1>(material).get();
-				res.m_Size = std::get<2>(material);
+	void AddShaderResource(const std::string& name, const std::string& path);
+	void AddShaderResource(const std::string& name, ShaderResource&& resource);
 
-				return res;
-			}
-		}
+	const ShaderResource& GetShaderResource(const std::string& name) const;
 
-		_ASSERT(false);
-
-		return res;
-	}
 	/// if fails it will return -1, or return index of triangle
 	int CheckWithRay(const Ray& ray) const;
+
+	CREATE_FUNC(Model);
+
+	void SetPosition(float x, float y, float z);
+	void SetScaleRate(float scaleX, float scaleY, float scaleZ);
+	void SetRotateAngle(float angleX, float angleY, float angleZ);
+
+	void UpdateWorld();
 
 private:
 	UPTR<Mesh> m_Mesh = nullptr;
@@ -83,7 +87,18 @@ private:
 	RenderUpdateFunc m_Func = nullptr;
 	std::string m_TechName = "";
 	std::vector<MaterialTuple> m_Materials;
-	Matrix4		m_World;
+
+	using ResourcePair = std::pair < std::string, ShaderResource > ;
+	std::vector<ResourcePair> m_ShaderResources;
+
+	READ_ONLY(Matrix4, World);
+	Matrix4		m_Translation;
+	Matrix4		m_Scaling;
+	Matrix4		m_Rotation;
+
+	READ_ONLY(Vector3, Position);
+	READ_ONLY(Vector3, ScaleRate);
+	READ_ONLY(Vector3, RotateAngle);
 };
 
 NS_EEL_END

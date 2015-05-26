@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "render/camera/camera.h"
-#include "utility/makeCreate.h"
 
 NS_EEL_BEGIN
 
@@ -8,6 +7,8 @@ class PerspectiveCamera : public Camera
 {
 public:
 	PerspectiveCamera(Point3 eyePos, Point3 targetPos, Vector3 up);
+
+	CREATE_FUNC(PerspectiveCamera);
 
 	virtual void SetLens(FLOAT fovAngle, FLOAT aspect, FLOAT nearZ, FLOAT farZ);
 };

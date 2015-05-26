@@ -21,7 +21,7 @@ public:
 
 	void InitScreenRenderTarget();
 	void SetScreenBackgroundColor(Color4 color);
-	void SetScreenCamera(UPTR<Camera> camera);
+	void SetScreenCamera(SPTR<Camera> camera);
 
 	void SetInputLayout(ID3D11InputLayout* inputLayout);
 	void SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY topology);
@@ -30,6 +30,8 @@ public:
 	Effect* GetEffect(const std::string& effectName);
 
 	Camera* GetCurrentCamera();
+	RenderTarget* GetCurrentRenderTarget();
+	Camera* GetScreenCamera();
 
 	ID3D11Device*			GetDevice() const;
 	ID3D11DeviceContext*	GetContext() const;

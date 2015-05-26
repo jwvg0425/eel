@@ -147,17 +147,12 @@ void eel::Renderer::InitScreenRenderTarget()
 	// recreate render target 
 	m_ScreenRenderTarget = 
 		RenderTarget::Create(Texture::Create(backBuffer),
-		Texture::Create(width, height), width, height);
+		Texture::Create(width, height, D3D11_BIND_DEPTH_STENCIL), width, height);
 }
 
 void eel::Renderer::Render(SPTR<Scene> scene)
 {
 	_ASSERT(scene != nullptr);
-
-	m_CurrentRenderTarget = m_ScreenRenderTarget.get();
-	m_ScreenRenderTarget->BeginFrame();
-
-	scene->Render();
 
 	//draw to registered render target
 
@@ -167,6 +162,11 @@ void eel::Renderer::Render(SPTR<Scene> scene)
 		renderTarget->BeginFrame();
 		scene->Render();
 	}
+
+	m_CurrentRenderTarget = m_ScreenRenderTarget.get();
+	m_ScreenRenderTarget->BeginFrame();
+
+	scene->Render();
 
 	HR(m_SwapChain->Present(0, 0));
 }
@@ -191,9 +191,9 @@ void eel::Renderer::SetScreenBackgroundColor(Color4 color)
 	m_ScreenRenderTarget->SetBackground(color);
 }
 
-void eel::Renderer::SetScreenCamera(UPTR<Camera> camera)
+void eel::Renderer::SetScreenCamera(SPTR<Camera> camera)
 {
-	m_ScreenRenderTarget->SetCamera(std::move(camera));
+	m_ScreenRenderTarget->SetCamera(camera);
 }
 
 void eel::Renderer::RegisterEffect(const std::string& effectName, UPTR<Effect> effect)
@@ -232,32 +232,93 @@ void eel::Renderer::RegisterDefaultEffect()
 	RegisterEffect("SimpleColor", std::move(effect));
 
 	//simple light
-	auto rightEffect = Effect::Create(L"fx/light.cso", "Light");
-	InputLayout rightInputLayout;
+	auto lightEffect = Effect::Create(L"fx/light.cso", "Light");
+	InputLayout lightInputLayout;
 
-	rightInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
-	rightInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+	lightInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	lightInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
 
-	rightEffect->AddTech("Light", rightInputLayout);
-	rightEffect->AddMatrixMember("gWorldViewProj");
-	rightEffect->AddMatrixMember("gWorld");
-	rightEffect->AddMatrixMember("gWorldInvTranspose");
+	lightEffect->AddTech("Light", lightInputLayout);
+	lightEffect->AddMatrixMember("gWorldViewProj");
+	lightEffect->AddMatrixMember("gWorld");
+	lightEffect->AddMatrixMember("gWorldInvTranspose");
 
-	rightEffect->AddVectorMember("gEyePosW");
+	lightEffect->AddVectorMember("gEyePosW");
 
-	rightEffect->AddGenericMember("gMaterial");
+	lightEffect->AddGenericMember("gMaterial");
 
-	rightEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
-	rightEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
-	rightEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
+	lightEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
+	lightEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
+	lightEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
 
-	rightEffect->SetUpdateFunc([](Effect* effect)
+	lightEffect->SetUpdateFunc([](Effect* effect)
 	{
 		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
 		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
 	});
 
-	RegisterEffect("SimpleLight", std::move(rightEffect));
+	RegisterEffect("SimpleLight", std::move(lightEffect));
+
+	//basic effect
+	auto basicEffect = Effect::Create(L"fx/basic.cso", "Basic");
+	InputLayout basicInputLayout;
+
+	basicInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	basicInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+	basicInputLayout.AddSemantic("TEXCOORD", 0, SemanticType::RG_FLOAT32);
+
+	basicEffect->AddTech("Basic", basicInputLayout);
+	basicEffect->AddMatrixMember("gWorldViewProj");
+	basicEffect->AddMatrixMember("gWorld");
+	basicEffect->AddMatrixMember("gWorldInvTranspose");
+	basicEffect->AddMatrixMember("gTexTransform");
+
+	basicEffect->AddVectorMember("gEyePosW");
+	basicEffect->AddVectorMember("gFogColor");
+
+	basicEffect->AddGenericMember("gMaterial");
+	basicEffect->AddGenericMember("gFogStart");
+	basicEffect->AddGenericMember("gIsFogEnable");
+	basicEffect->AddGenericMember("gFogRange");
+
+	basicEffect->AddResourceMember("gDiffuseMap");
+	
+	basicEffect->AddLightMember<DirectionalLight>("gDirLight", "gDirLightNum", 3);
+	basicEffect->AddLightMember<PointLight>("gPointLight", "gPointLightNum", 3);
+	basicEffect->AddLightMember<SpotLight>("gSpotLight", "gSpotLightNum", 3);
+
+	basicEffect->SetUpdateFunc([](Effect* effect)
+	{
+		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetCurrentCamera()->GetEyePos();
+		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
+	});
+
+	RegisterEffect("Basic", std::move(basicEffect));
+
+	//mapping effect
+	auto mappingEffect = Effect::Create(L"fx/mapping.cso", "Mapping");
+	InputLayout mappingInputLayout;
+
+	mappingInputLayout.AddSemantic("POSITION", 0, SemanticType::RGB_FLOAT32);
+	mappingInputLayout.AddSemantic("NORMAL", 0, SemanticType::RGB_FLOAT32);
+
+	mappingEffect->AddTech("Mapping", mappingInputLayout);
+	
+	mappingEffect->AddMatrixMember("gWorldViewProj");
+	mappingEffect->AddMatrixMember("gWorld");
+	mappingEffect->AddMatrixMember("gWorldInvTranspose");
+
+	mappingEffect->AddVectorMember("gEyePosW");
+
+	mappingEffect->AddResourceMember("gCubeMap");
+
+	mappingEffect->SetUpdateFunc([](Effect* effect)
+	{
+		eel::Point3 eyePos = eel::Renderer::GetInstance()->GetScreenCamera()->GetEyePos();
+		effect->SetVectorMember("gEyePosW", eel::Vector4(eyePos.GetX(), eyePos.GetY(), eyePos.GetZ(), 1.0f));
+	});
+
+	RegisterEffect("Mapping", std::move(mappingEffect));
 }
 
 void eel::Renderer::SetInputLayout(ID3D11InputLayout* inputLayout)
@@ -294,4 +355,14 @@ bool eel::Renderer::UnregisterRenderTarget(SPTR<RenderTarget> renderTarget)
 	}
 
 	return false;
+}
+
+RenderTarget* eel::Renderer::GetCurrentRenderTarget()
+{
+	return m_CurrentRenderTarget;
+}
+
+Camera* eel::Renderer::GetScreenCamera()
+{
+	return m_ScreenRenderTarget->GetCamera();
 }

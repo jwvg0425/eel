@@ -157,5 +157,20 @@ bool NetworkManager::SendPacket(short packetType, const protobuf::MessageLite& p
 
 	mSendBuffer.Commit(totalSize);
 
+	DWORD sendByte = send(mSocket, mSendBuffer.GetBufferStart(), mSendBuffer.GetContiguiousBytes(), 0);
+
+	if (sendByte == SOCKET_ERROR)
+	{
+		int errorId = WSAGetLastError();
+		if (errorId != WSAEWOULDBLOCK)
+		{
+			eel::LOG(L"NetworkManager::OnSend() recv error: %d\n", GetLastError());
+			CloseSocketWithReason(CRT_SEND);
+			return false;
+		}
+	}
+
+	mSendBuffer.Remove(sendByte);
+
 	return true;
 }

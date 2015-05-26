@@ -17,6 +17,8 @@ public:
 	//first two parameter means (width, height) in orthographic camera and (fovAngleY, aspect) in perspective camera
 	virtual void SetLens(FLOAT angleOrWidth, FLOAT aspectOrHeight, FLOAT nearZ, FLOAT farZ) = 0;
 
+	void LookAt(Point3 eyePos, Point3 targetPos, Vector3 up);
+
 	void Walk(float d);
 	void Strafe(float d);
 	void Pitch(float angle);

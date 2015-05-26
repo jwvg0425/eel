@@ -1,7 +1,7 @@
 #pragma once
 
 #define LISTEN_PORT 9001
-#define BUF_SIZE 4096
+#define BUF_SIZE 40960
 #define NUM_OF_BACK_LOG 100
 #define WM_SOCKET (WM_USER + 1)
 

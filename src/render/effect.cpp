@@ -73,7 +73,7 @@ void eel::Effect::SetVectorMember(const std::string& memberName, const Vector4& 
 	{
 		if (pair.first == memberName)
 		{
-			pair.second->SetRawValue(&value, 0, sizeof(XMFLOAT4));
+			pair.second->SetRawValue(&value, 0, sizeof(XMFLOAT3));
 			return;
 		}
 	}
@@ -91,7 +91,7 @@ void eel::Effect::SetMatrixMember(const std::string& memberName, const Matrix4& 
 	}
 }
 
-void eel::Effect::SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value)
+void eel::Effect::SetResourceMember(const std::string& memberName,const ShaderResource& value)
 {
 	for (auto pair : m_Resources)
 	{

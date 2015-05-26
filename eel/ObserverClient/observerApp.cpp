@@ -36,16 +36,13 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 		switch(WSAGETSELECTEVENT(lParam))
 		{
 			case FD_READ:
-			GNetworkManager->RecvPacket();
+			GNetworkManager->OnRead(selectedSocket);
 			break;
 
 			case FD_CLOSE:
 			GNetworkManager->OnClose(selectedSocket);
 			break;
 
-			case FD_WRITE:
-			GNetworkManager->OnWrite(selectedSocket);
-			break;
 			case FD_CONNECT:
 				if (WSAAsyncSelect(selectedSocket, hWnd, WM_SOCKET, FD_READ | FD_WRITE | FD_CLOSE))
 				{
@@ -53,6 +50,12 @@ LRESULT CALLBACK ObserverApp::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, L
 					return false;
 				}
 
+				{
+					MyPacket::LoginRequest packet;
+
+					packet.set_playerid(256);
+					GNetworkManager->SendPacket(MyPacket::PKT_CS_LOGIN, packet);
+				}
 				break;
 
 			default:

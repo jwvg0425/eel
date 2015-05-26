@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "base/object.h"
 #include "base/event/updateEvent.h"
-#include "utility/makeCreate.h"
 #include <d3dx11Effect.h>
 #include <vector>
 #include <string>
@@ -9,6 +8,7 @@
 #include "math/vector.h"
 #include "math/matrix.h"
 #include "render/inputLayout.h"
+#include "render/shaderResource.h"
 
 NS_EEL_BEGIN
 
@@ -36,7 +36,7 @@ struct TechData
 class Effect;
 using EffectUpdateFunc = std::function < void(Effect*) > ;
 
-class Effect : public Object, public MakeCreate<Effect>
+class Effect : public Object
 {
 public:
 	using TechPair = std::pair < std::string, TechData > ;
@@ -49,11 +49,12 @@ public:
 	Effect(const std::wstring& fileName, const std::string defaultTech);
 	~Effect();
 
+	CREATE_FUNC(Effect);
+
 	void	AddGenericMember(const std::string& memberName);
 	void	AddVectorMember(const std::string& memberName);
 	void	AddMatrixMember(const std::string& memberName);
 	void	AddResourceMember(const std::string& memberName);
-	//TODO : ID3D11InputLayout* -> const InputLayout& (wrapper class)
 	void	AddTech(const std::string& memberName, const InputLayout& inputLayout);
 
 	template<typename L>
@@ -67,8 +68,7 @@ public:
 
 	void	SetVectorMember(const std::string& memberName, const Vector4& value);
 	void	SetMatrixMember(const std::string& memberName, const Matrix4& value);
-	//TODO : ID3D11ShaderResourceView* -> const ShaderResource& (wrapper class)
-	void	SetResourceMember(const std::string& memberName, ID3D11ShaderResourceView* value);
+	void	SetResourceMember(const std::string& memberName, const ShaderResource& value);
 
 	TechData GetTech(const std::string& techName);
 	TechData GetTech();

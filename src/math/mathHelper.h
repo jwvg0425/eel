@@ -10,8 +10,9 @@ namespace Math
 {
 	static const float PI = 3.141592f;
 	static const float INF = FLT_MAX;
+	extern const Matrix4 I;
 
-	Matrix4 inverseTranspose(Matrix4 mat);
+	Matrix4 InverseTranspose(Matrix4 mat);
 	
 	BOOL IntersectRayTriangle(FXMVECTOR Origin, FXMVECTOR Direction, FXMVECTOR V0, CXMVECTOR V1, CXMVECTOR V2,
 		FLOAT* pDist);

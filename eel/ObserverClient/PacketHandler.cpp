@@ -102,7 +102,7 @@ REGISTER_HANDLER(PKT_SC_LOGIN)
 
 	GId = loginResult.playerid();
 
-	eel::Renderer::GetInstance()->GetCurrentCamera()->SetEyePos(eel::Point3(pos.x(), pos.y(), pos.z()));
+	eel::Renderer::GetInstance()->GetScreenCamera()->SetEyePos(eel::Point3(pos.x(), pos.y(), pos.z()));
 
 	//mPlayer->ResponseLogin(success, loginResult.playerid(),pos.x(), pos.y(), pos.z(), loginResult.playername().c_str());
 }
@@ -127,6 +127,55 @@ REGISTER_HANDLER(PKT_SC_MOVE)
 
 	if (player == nullptr)
 	{
+		std::vector<eel::PosNormal> vertex;
+		std::vector<UINT> index;
+
+		eel::MeshGenerator::CreateNormalSphere(0.1f, 20, 20, vertex, index);
+
+		SPTR<eel::Model> model = eel::Model::Create(vertex, index);
+
+		eel::LightMaterial mat;
+
+		mat.m_Ambient = eel::Color4(0.2f);
+		mat.m_Diffuse = eel::Color4(0.7f, 0.2f, 0.2f, 1.0f);
+		mat.m_Specular = eel::Color4(0.5f, 0.5f, 0.5f, 16.0f);
+
+		model->AddMaterial("light", mat);
+
+		model->SetEffect(eel::Renderer::GetInstance()->GetEffect("SimpleLight"));
+
+		model->SetRenderUpdate([](const eel::Model* model, eel::Effect* effect)
+		{
+			auto camera = eel::Renderer::GetInstance()->GetCurrentCamera();
+			effect->SetMatrixMember("gWorldViewProj", model->GetWorld()*camera->GetViewProjection());
+			effect->SetMatrixMember("gWorld", model->GetWorld());
+			effect->SetMatrixMember("gWorldInvTranspose", eel::Math::InverseTranspose(model->GetWorld()));
+			eel::MaterialData mat = model->GetMaterial(("light"));
+
+			effect->SetGenericMember("gMaterial", mat.m_Material, mat.m_Size);
+		});
+
+		model->SetPosition(moveResult.playerpos().x(), moveResult.playerpos().y(), moveResult.playerpos().z());
+
+		eel::Director::GetInstance()->GetRunningScene()->AddChild(model, std::to_string(moveResult.playerid()));
+	}
+	else
+	{
+		auto pos = eel::Renderer::GetInstance()->GetScreenCamera()->GetEyePos();
+		float xDiff = pos.GetX() - moveResult.playerpos().x();
+		float yDiff = pos.GetY() - moveResult.playerpos().y();
+		float zDiff = pos.GetZ() - moveResult.playerpos().z();
+		float diff = xDiff*xDiff + yDiff*yDiff + zDiff*zDiff;
+
+		if (diff > 30.0f)
+		{
+			eel::Director::GetInstance()->GetRunningScene()->RemoveChild(player);
+			return;
+		}
+
+		eel::Model* model = static_cast<eel::Model*>(player.get());
+
+		model->SetPosition(moveResult.playerpos().x(), moveResult.playerpos().y(), moveResult.playerpos().z());
 	}
 
 	//mPlayer->ResponseMove(success, pos.x(), pos.y(), pos.z());
@@ -151,5 +200,14 @@ REGISTER_HANDLER(PKT_SC_LOGOUT)
 	if (false == logoutResult.ParseFromCodedStream(&payloadStream))
 	{
 		return;
+	}
+
+	auto player = eel::Director::GetInstance()->GetRunningScene()->GetChildByName(std::to_string(logoutResult.playerid()));
+
+	eel::LOG(L"%d logout", logoutResult.playerid());
+
+	if (player != nullptr)
+	{
+		eel::Director::GetInstance()->GetRunningScene()->RemoveChild(player);
 	}
 }

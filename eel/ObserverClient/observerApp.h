@@ -1,6 +1,7 @@
 #pragma once
 #include "eel.h"
 #include "MovingCamera.h"
+#include <set>
 
 extern int GId;
 

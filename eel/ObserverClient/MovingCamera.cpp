@@ -15,34 +15,43 @@ MovingCamera::MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vecto
 
 void MovingCamera::Update(const eel::UpdateEvent& e)
 {
+	bool isMove = false;
 	if (eel::KeyManager::GetInstance()->IsKeyState(VK_W, eel::Key::PRESS))
 	{
 		Walk(10.0f*e.m_DTime);
+		isMove = true;
 	}
 
 	if (eel::KeyManager::GetInstance()->IsKeyState(VK_S, eel::Key::PRESS))
 	{
 		Walk(-10.0f*e.m_DTime);
+		isMove = true;
 	}
 
 	if (eel::KeyManager::GetInstance()->IsKeyState(VK_A, eel::Key::PRESS))
 	{
 		Strafe(-10.0f*e.m_DTime);
+		isMove = true;
 	}
 
 	if (eel::KeyManager::GetInstance()->IsKeyState(VK_D, eel::Key::PRESS))
 	{
 		Strafe(10.0f*e.m_DTime);
+		isMove = true;
 	}
-	auto pos = GetEyePos();
-	MyPacket::MoveRequest packet;
 
-	packet.set_playerid(GId);
-	packet.mutable_playerpos()->set_x(pos.GetX());
-	packet.mutable_playerpos()->set_y(pos.GetY());
-	packet.mutable_playerpos()->set_z(pos.GetZ());
+	if (GId != 0 && isMove)
+	{
+		auto pos = GetEyePos();
+		MyPacket::MoveRequest packet;
 
-	GNetworkManager->SendPacket(MyPacket::PKT_CS_MOVE, packet);
+		packet.set_playerid(GId);
+		packet.mutable_playerpos()->set_x(pos.GetX());
+		packet.mutable_playerpos()->set_y(pos.GetY());
+		packet.mutable_playerpos()->set_z(pos.GetZ());
+
+		GNetworkManager->SendPacket(MyPacket::PKT_CS_MOVE, packet);
+	}
 }
 
 void MovingCamera::MouseMove(const eel::MouseEvent& e)

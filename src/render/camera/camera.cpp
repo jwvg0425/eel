@@ -5,15 +5,7 @@ USING_NS_EEL;
 eel::Camera::Camera(Point3 eyePos, Point3 targetPos, Vector3 up)
 	:m_EyePos(eyePos)
 {
-	Vector3 L = Vector3(targetPos - eyePos).Normalize();
-	Vector3 R = up.Cross(L);
-	Vector3 U = L.Cross(R);
-
-	m_Look = L;
-	m_Up = U;
-	m_Right = R;
-
-	UpdateView();
+	LookAt(eyePos, targetPos, up);
 }
 
 eel::Matrix4 eel::Camera::GetViewProjection() const
@@ -108,4 +100,19 @@ void eel::Camera::UpdateView()
 void eel::Camera::UpdateProjection(Matrix4 matrix)
 {
 	m_Projection = matrix;
+}
+
+void eel::Camera::LookAt(Point3 eyePos, Point3 targetPos, Vector3 up)
+{
+	m_EyePos = eyePos;
+
+	Vector3 L = Vector3(targetPos - eyePos).Normalize();
+	Vector3 R = up.Cross(L);
+	Vector3 U = L.Cross(R);
+
+	m_Look = L;
+	m_Up = U;
+	m_Right = R;
+
+	UpdateView();
 }
