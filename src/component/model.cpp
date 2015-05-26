@@ -77,11 +77,10 @@ int eel::Model::CheckWithRay(const Ray& ray) const
 	testRay.SetRayDirection(XMVector3TransformCoord(ray.GetRayDirection(), invWorld));
 	testRay.SetRayDirection(testRay.GetRayDirection().Normalize());
 
-	float tmin = 0.0f;
+	float tmin = Math::INF;
 	int pickedTriangle = -1;
 	for(UINT i = 0; i < m_Mesh->GetIndexCount() / 3; ++i)
 	{
-		tmin = Math::INF;
 		// Indices for this triangle.
 		UINT i0 = m_Mesh->GetIndex(i * 3 + 0);
 		UINT i1 = m_Mesh->GetIndex(i * 3 + 1);

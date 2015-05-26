@@ -331,3 +331,8 @@ bool eel::Renderer::UnregisterRenderTarget(SPTR<RenderTarget> renderTarget)
 
 	return false;
 }
+
+Camera* eel::Renderer::GetScreenCamera()
+{
+	return m_ScreenRenderTarget->GetCamera();
+}

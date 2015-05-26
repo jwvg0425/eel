@@ -7,6 +7,7 @@
 #include "base/event/UpdateEvent.h"
 #include "base/timer.h"
 #include "math/vector.h"
+#include "math/ray.h"
 
 NS_EEL_BEGIN
 
@@ -35,6 +36,9 @@ public:
 	{
 		return m_RunningScene;
 	}
+
+	Ray GetMouseRay();
+	
 private:
 	SPTR<Scene> m_RunningScene = nullptr;
 
