@@ -1,4 +1,5 @@
 ﻿#include "MovingCamera.h"
+#include "boxLand.h"
 
 MovingCamera::MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vector3 up)
 	:PerspectiveCamera(eyePos, targetPos, up)
@@ -31,6 +32,22 @@ void MovingCamera::Update(const eel::UpdateEvent& e)
 	{
 		Strafe(10.0f*e.m_DTime);
 	}
+
+	float dy = m_Gravity*e.m_DTime;
+	auto eyePos = GetEyePos();
+	float currentY = eyePos.GetY();
+	float nextY = currentY;
+	float standardY = m_Height + GBoxLand->LowerLimit(eyePos);
+	if(currentY - dy > standardY)
+	{
+		nextY = currentY - dy;
+	}
+	else
+	{
+		nextY = standardY;
+	}
+	eyePos.SetY(nextY);
+	SetEyePos(eyePos);
 }
 
 void MovingCamera::MouseMove(const eel::MouseEvent& e)

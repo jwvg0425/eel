@@ -15,5 +15,5 @@ void MyApplication::FinishLaunching()
 		RunWithScene(FirstScene::Create());
 
 	
-	GBoxLand = new BoxLand(eel::Vector3(10.f, 10.f, 10.f),10, 10, 10);
+	GBoxLand = new BoxLand(eel::Vector3(10.f, 10.f, 10.f));
 }

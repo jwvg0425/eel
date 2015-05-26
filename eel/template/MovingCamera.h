@@ -15,4 +15,6 @@ public:
 private:
 	bool		m_First = true;
 	eel::Point2 m_LastPos;
+	float		m_Height = 10.f;
+	float		m_Gravity = 20.f;
 };
