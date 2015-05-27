@@ -42,6 +42,7 @@ public:
 	
 private:
 	void PickingCheck();
+	void DeleteEvent();
 
 	SPTR<Scene> m_RunningScene = nullptr;
 

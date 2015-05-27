@@ -15,6 +15,7 @@ void Director::GameLoop()
 	m_Timer.Tick();
 	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
 	Renderer::GetInstance()->Render(m_RunningScene);
+	DeleteEvent();
 
 	//pick event
 	PickingCheck();
@@ -50,15 +51,11 @@ void eel::Director::ExecuteEvent(EventType type, const Event& e)
 
 void eel::Director::UnregisterEvent(EventType type, Object* object)
 {
-	for (auto it = m_EventMap[type].cbegin(); it != m_EventMap[type].cend();)
+	for (auto it = m_EventMap[type].cbegin(); it != m_EventMap[type].cend();++it)
 	{
 		if ((*it)->GetEventObject() == object)
 		{
-			it = m_EventMap[type].erase(it);
-		}
-		else
-		{
-			++it;
+			(*it)->SetRemoved(true);
 		}
 	}
 }
@@ -149,4 +146,25 @@ void eel::Director::PickingCheck()
 	}
 	e.m_TriangleIdx = minPick;
 	ExecuteRegisteredEvent(minChild, e);
+}
+
+void eel::Director::DeleteEvent()
+{
+	if (m_EventMap.size() == 0)
+		return;
+
+	for (auto& eventList : m_EventMap)
+	{
+		for (auto it = m_EventMap[eventList.first].cbegin(); it != m_EventMap[eventList.first].cend();)
+		{
+			if ((*it)->GetRemoved())
+			{
+				it = m_EventMap[eventList.first].erase(it);
+			}
+			else
+			{
+				++it;
+			}
+		}
+	}
 }

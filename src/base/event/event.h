@@ -22,13 +22,18 @@ struct Event
 
 	Event(Event& rhs) = default;
 	Event& operator=(Event& rhs) = default;
+
 };
 
 class EventEntry
 {
 public:
+	EventEntry() : m_Removed(false){}
 	virtual void Excute(const Event& e) = 0;
 	virtual Object* GetEventObject() = 0;
+
+private:
+	PROPERTY(bool, Removed);
 };
 
 template<typename Obj, typename Func, typename E>
