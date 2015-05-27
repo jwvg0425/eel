@@ -111,30 +111,28 @@ void MovingCamera::Update(const eel::UpdateEvent& e)
 
 void MovingCamera::MouseMove(const eel::MouseEvent& e)
 {
-	if (e.m_Position.GetX() != m_LastPos.GetX() &&
-		e.m_Position.GetY() != m_LastPos.GetY())
+	int width = eel::Application::GetInstance()->GetWidth();
+	int height = eel::Application::GetInstance()->GetHeight();
+
+	if (e.m_Position.GetX() != width / 2 &&
+		e.m_Position.GetY() != height / 2)
 	{
 
-		float dx = XMConvertToRadians(0.25f*(e.m_Position.GetX() - m_LastPos.GetX()));
-		float dy = XMConvertToRadians(0.25f*(e.m_Position.GetY() - m_LastPos.GetY()));
-
-		eel::LOG(L"%f %f", dx, dy);
+		float dx = XMConvertToRadians(0.25f*(e.m_Position.GetX() - width / 2));
+		float dy = XMConvertToRadians(0.25f*(e.m_Position.GetY() - height / 2));
 
 		if (!m_First)
 		{
 			Pitch(dy);
 			RotateY(dx);
 		}
-		int width = eel::Application::GetInstance()->GetWidth();
-		int height = eel::Application::GetInstance()->GetHeight();
+		
 
 		POINT p = { width / 2, height / 2 };
 
 		ClientToScreen(eel::Application::GetInstance()->GetWindowHandle(), &p);
 
 		SetCursorPos(p.x, p.y);
-
-		m_LastPos = eel::Point2(width / 2, height / 2);
 		m_First = false;
 	}
 
@@ -146,5 +144,14 @@ void MovingCamera::MouseDown(const eel::MouseEvent& e)
 	if (e.m_State & eel::MouseEvent::LEFT)
 	{
 		GBoxLand->AddBox();
+	}
+	else if (e.m_State & eel::MouseEvent::RIGHT)
+	{
+		auto pos = GBoxLand->m_MousePosForDestroy;
+		int x = pos.GetX();
+		int y = pos.GetY();
+		int z = pos.GetZ();
+
+		GBoxLand->m_BoxStates[x][y][z] = false;
 	}
 }

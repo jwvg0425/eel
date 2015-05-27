@@ -36,6 +36,9 @@
     <ClCompile Include="box.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Cross.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="firstScene.h">
@@ -54,6 +57,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="box.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Cross.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

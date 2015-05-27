@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="box.cpp" />
     <ClCompile Include="boxLand.cpp" />
+    <ClCompile Include="Cross.cpp" />
     <ClCompile Include="firstScene.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="main.cpp" />
@@ -101,6 +102,7 @@
   <ItemGroup>
     <ClInclude Include="box.h" />
     <ClInclude Include="boxLand.h" />
+    <ClInclude Include="Cross.h" />
     <ClInclude Include="firstScene.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="MovingCamera.h" />

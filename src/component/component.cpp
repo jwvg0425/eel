@@ -9,12 +9,17 @@ void eel::Component::AddChild(SPTR<Component> child)
 
 void eel::Component::AddChild(SPTR<Component> child, const std::string& name)
 {
+	if (child == nullptr)
+		return;
+
 	std::hash<std::string> nameHash;
 
 	child->m_Name = name;
 	child->m_NameHash = nameHash(name);
+	child->m_Parent = this;
 
 	m_Childs.push_back(std::move(child));
+	
 }
 
 SPTR<Component> eel::Component::GetChildByName(const std::string& name)
@@ -98,7 +103,7 @@ void eel::Component::RemoveFromParent()
 	{
 		if (it->get() == this)
 		{
-			m_Childs.erase(it);
+			m_Parent->m_Childs.erase(it);
 			return;
 		}
 	}

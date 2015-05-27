@@ -21,6 +21,7 @@ public:
 	{
 		SPTR<Component> sharedChild = std::move(child);
 		AddChild(sharedChild, sharedChild->m_Name);
+		sharedChild->m_Parent = this;
 	}
 
 	template<typename T>
@@ -28,6 +29,7 @@ public:
 	{
 		SPTR<Component> sharedChild = std::move(child);
 		AddChild(sharedChild, name);
+		child->m_Parent = this;
 	}
 
 	void AddChild(SPTR<Component> child);

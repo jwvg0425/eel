@@ -1,6 +1,7 @@
 ﻿#include "firstScene.h"
 #include "eel.h"
 #include "grid.h"
+#include "cross.h"
 
 
 FirstScene::FirstScene()
@@ -12,7 +13,12 @@ FirstScene::FirstScene()
 	testLight.m_Specular = eel::Color4(0.5f);
 	testLight.m_Direction = eel::Vector3(-0.4f);
 
+	auto cross = Cross::Create();
+
+	AddChild(cross);
+
 	ShowCursor(false);
 
 	eel::DirectionalLight::RegisterLight(testLight);
+
 }

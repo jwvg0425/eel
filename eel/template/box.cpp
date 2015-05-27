@@ -68,8 +68,6 @@ void Box::OnPick(const eel::MousePickTriangleEvent& e)
 
 	cross = cross.Normalize();
 
-	eel::LOG(L"%f %f %f", cross.GetX(), cross.GetY(), cross.GetZ());
-
 	GBoxLand->m_MousePosForDestroy = eel::Vector3(m_GridX, m_GridY, m_GridZ);
 	GBoxLand->m_MousePosForCreate = eel::Vector3(m_GridX + cross.GetX(), m_GridY + cross.GetY(), m_GridZ + cross.GetZ());
 }
