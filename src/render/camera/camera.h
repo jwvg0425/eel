@@ -35,7 +35,7 @@ protected:
 	void UpdateProjection(Matrix4 matrix);
 	
 private:
-	Vector3 m_Up;
+	READ_ONLY(Vector3, Up);
 	READ_ONLY(Vector3, Right);
 
 	READ_ONLY(Point3, EyePos);

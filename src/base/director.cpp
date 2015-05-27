@@ -13,8 +13,8 @@ USING_NS_EEL;
 void Director::GameLoop()
 {
 	m_Timer.Tick();
-	Renderer::GetInstance()->Render(m_RunningScene);
 	Director::ExecuteEvent(EventType::UPDATE, UpdateEvent(m_Timer.DeltaTime()));
+	Renderer::GetInstance()->Render(m_RunningScene);
 
 	//pick event
 	PickingCheck();

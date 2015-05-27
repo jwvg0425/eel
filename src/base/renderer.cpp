@@ -148,6 +148,8 @@ void eel::Renderer::InitScreenRenderTarget()
 	m_ScreenRenderTarget = 
 		RenderTarget::Create(Texture::Create(backBuffer),
 		Texture::Create(width, height, D3D11_BIND_DEPTH_STENCIL), width, height);
+
+	m_CurrentRenderTarget = m_ScreenRenderTarget.get();
 }
 
 void eel::Renderer::Render(SPTR<Scene> scene)
@@ -167,6 +169,8 @@ void eel::Renderer::Render(SPTR<Scene> scene)
 		renderTarget->BeginFrame();
 		scene->Render();
 	}
+
+	m_CurrentRenderTarget = m_ScreenRenderTarget.get();
 
 	HR(m_SwapChain->Present(0, 0));
 }
