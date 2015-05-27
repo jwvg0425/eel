@@ -148,6 +148,10 @@ void MovingCamera::MouseDown(const eel::MouseEvent& e)
 		int y = pos.GetY();
 		int z = pos.GetZ();
 
+		if (!GBoxLand->IsInTheLand(eel::Vector3(x, y, z)))
+		{
+			return;
+		}
 		GBoxLand->m_BoxStates[x][y][z] = false;
 	}
 }
