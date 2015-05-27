@@ -31,7 +31,7 @@ template<typename... Args>\
 static UPTR<type> Create(Args&&... args)\
 {\
 	auto ptr = std::make_unique<type>(std::forward<Args>(args)...);\
-	return ptr;\
+	return std::move(ptr);\
 }
 
 #define GETTER(type, val, func)\
