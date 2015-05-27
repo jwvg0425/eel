@@ -17,7 +17,7 @@ FirstScene::FirstScene()
 
 	AddChild(cross);
 
-	ShowCursor(false);
+	//ShowCursor(false);
 
 	eel::DirectionalLight::RegisterLight(testLight);
 

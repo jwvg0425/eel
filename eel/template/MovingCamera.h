@@ -10,7 +10,6 @@ public:
 	~MovingCamera() override = default;
 
 	void Update(const eel::UpdateEvent& e);
-	void MouseMove(const eel::MouseEvent& e);
 	void MouseDown(const eel::MouseEvent& e);
 
 private:

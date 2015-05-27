@@ -8,9 +8,6 @@ MovingCamera::MovingCamera(eel::Point3 eyePos, eel::Point3 targetPos, eel::Vecto
 		RegisterEvent(eel::EventType::UPDATE, this, &MovingCamera::Update);
 
 	eel::Director::GetInstance()->
-		RegisterEvent(eel::EventType::MOUSE_MOVE, this, &MovingCamera::MouseMove);
-
-	eel::Director::GetInstance()->
 		RegisterEvent(eel::EventType::MOUSE_DOWN, this, &MovingCamera::MouseDown);
 }
 
@@ -107,26 +104,27 @@ void MovingCamera::Update(const eel::UpdateEvent& e)
 
 	eyePos.SetY(nextY);
 	SetEyePos(eyePos);
-}
-
-void MovingCamera::MouseMove(const eel::MouseEvent& e)
-{
+	
 	int width = eel::Application::GetInstance()->GetWidth();
 	int height = eel::Application::GetInstance()->GetHeight();
+	POINT mouse;
 
-	if (e.m_Position.GetX() != width / 2 &&
-		e.m_Position.GetY() != height / 2)
+	GetCursorPos(&mouse);
+	ScreenToClient(eel::Application::GetInstance()->GetWindowHandle(), &mouse);
+
+	if (mouse.x != width / 2 &&
+		mouse.y != height / 2)
 	{
 
-		float dx = XMConvertToRadians(0.25f*(e.m_Position.GetX() - width / 2));
-		float dy = XMConvertToRadians(0.25f*(e.m_Position.GetY() - height / 2));
+		float dx = XMConvertToRadians(0.25f*(mouse.x - width / 2));
+		float dy = XMConvertToRadians(0.25f*(mouse.y - height / 2));
 
 		if (!m_First)
 		{
 			Pitch(dy);
 			RotateY(dx);
 		}
-		
+
 
 		POINT p = { width / 2, height / 2 };
 
@@ -135,8 +133,6 @@ void MovingCamera::MouseMove(const eel::MouseEvent& e)
 		SetCursorPos(p.x, p.y);
 		m_First = false;
 	}
-
-	
 }
 
 void MovingCamera::MouseDown(const eel::MouseEvent& e)

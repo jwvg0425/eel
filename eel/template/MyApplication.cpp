@@ -14,6 +14,7 @@ void MyApplication::FinishLaunching()
 	eel::Director::GetInstance()->
 		RunWithScene(FirstScene::Create());
 
+	ShowCursor(false);
 	
 	GBoxLand = new BoxLand(eel::Vector3(10.f, 10.f, 10.f));
 }
